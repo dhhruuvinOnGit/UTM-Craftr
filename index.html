@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="dark_mode_logo.png">
+<link rel="apple-touch-icon" href="dark_mode_logo.png">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Free UTM Builder for GA4 | Urchin Campaign URL Generator</title>
+<meta name="description" content="Build clean UTM tracking links for Google Analytics 4 in seconds. Free UTM campaign URL builder — no signup, no catch.">
+<meta name="keywords" content="utm builder, utm link generator, campaign url builder, ga4 utm tracking, utm parameters, free utm builder">
+<link rel="canonical" href="https://yourdomain.com/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free UTM Builder for GA4 | Urchin">
+<meta property="og:description" content="Build clean UTM tracking links for Google Analytics 4 in seconds. Free, no signup required.">
+<meta property="og:url" content="https://yourdomain.com/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this UTM builder really free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes — free to use, with no signup and no account required." }
+    },
+    {
+      "@type": "Question",
+      "name": "What are UTM parameters?",
+      "acceptedAnswer": { "@type": "Answer", "text": "UTM parameters are small tags added to the end of a URL — source, medium, campaign, term, and content — that tell Google Analytics 4 exactly where a click came from." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do UTM parameters affect my SEO or search rankings?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. UTM parameters are only used for analytics tracking and have no effect on how a page ranks in search results." }
+    },
+    {
+      "@type": "Question",
+      "name": "Should UTM values always be lowercase?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. GA4 treats different capitalizations as different values, so keeping everything lowercase prevents a single channel from splitting into multiple rows." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this for Instagram, Google Ads, Meta Ads, and email campaigns?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes — the built-in presets cover the most common sources and mediums, and you can enter any custom source or medium manually." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my traffic show as (not set) in GA4?",
+      "acceptedAnswer": { "@type": "Answer", "text": "This usually means the link was shared without UTM parameters, or the parameters were malformed. Rebuilding the link with this tool prevents that." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are the links I build saved anywhere?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not in this version — everything runs manually in your browser. A future version will add saved history and shared team presets." }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --font-primary:'PT Serif', Georgia, serif;
+    --font-secondary:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --paper:#FBF9F4;
+    --paper-card:#FFFFFF;
+    --ink:#232A22;
+    --ink-soft:#5E6659;
+    --ink-faint:#9BA292;
+    --forest:#1F4B3F;
+    --forest-deep:#153229;
+    --sage:#EEF2EA;
+    --sage-border:#D7E0D2;
+    --mustard:#D9A441;
+    --line:#E4E1D8;
+    --radius:14px;
+  }
+
+  html{scroll-behavior:smooth;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  body{
+    font-family:var(--font-secondary);
+    color:var(--ink);
+    background:var(--paper);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px;}
+  .display{font-family:var(--font-primary);}
+
+  /* NAV */
+  nav{padding:22px 0;border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;max-width:900px;}
+  .brand{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700;font-family:var(--font-primary);color:var(--forest);}
+  .brand-mark{
+    width:30px;height:30px;border-radius:8px;
+    object-fit:cover;flex-shrink:0;
+  }
+  .nav-links{display:flex;gap:28px;font-size:14px;color:var(--ink-soft);font-weight:500;}
+  .nav-links a{border-bottom:1.5px solid transparent;padding-bottom:2px;transition:border-color 0.15s, color 0.15s;}
+  .nav-links a:hover{border-color:var(--forest);color:var(--ink);}
+
+  /* HERO */
+  .hero{padding:76px 24px 54px;text-align:center;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--sage);color:var(--forest);border:1px solid var(--sage-border);
+    padding:7px 16px;border-radius:100px;
+    font-size:12.5px;font-weight:600;
+    margin-bottom:28px;
+  }
+  h1{font-family:var(--font-primary);font-size:44px;font-weight:400;line-height:1.2;letter-spacing:-0.005em;margin-bottom:20px;max-width:680px;margin-left:auto;margin-right:auto;}
+  .hero p{font-size:17px;color:var(--ink-soft);max-width:520px;margin:0 auto;line-height:1.6;}
+
+  /* TOOL CARD */
+  .card-wrap{max-width:600px;margin:50px auto 100px;}
+  .window{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 20px 50px -20px rgba(31,75,63,0.18), 0 4px 16px rgba(0,0,0,0.04);
+    padding:36px 32px 32px;
+  }
+  .window-title{font-family:var(--font-primary);font-size:21px;font-weight:400;margin-bottom:26px;}
+
+  .field-label{display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:7px;}
+
+  .info-wrap{position:relative;display:inline-flex;align-items:center;}
+  .info-icon{
+    width:16px;height:16px;border-radius:50%;
+    background:var(--sage);color:var(--forest);
+    font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;
+    cursor:help;flex-shrink:0;border:1px solid var(--sage-border);
+  }
+  .info-tooltip{
+    position:absolute;bottom:calc(100% + 9px);left:50%;transform:translateX(-50%) translateY(4px);
+    background:var(--ink);color:var(--paper);
+    font-size:12px;font-weight:400;line-height:1.4;font-family:var(--font-secondary);
+    padding:9px 13px;border-radius:8px;
+    width:205px;text-align:left;
+    opacity:0;visibility:hidden;
+    transition:opacity 0.15s ease, transform 0.15s ease;
+    z-index:20;pointer-events:none;
+    box-shadow:0 8px 20px rgba(0,0,0,0.18);
+  }
+  .info-tooltip::after{
+    content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);
+    border:5px solid transparent;border-top-color:var(--ink);
+  }
+  .info-wrap:hover .info-tooltip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+
+  input[type="text"], select{
+    width:100%;height:40px;padding:0 13px;
+    border-radius:9px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    font-size:14px;color:var(--ink);
+    font-family:var(--font-secondary);
+    outline:none;
+    transition:border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  input[type="text"]:focus, select:focus{
+    border-color:var(--forest);
+    box-shadow:0 0 0 3px rgba(31,75,63,0.12);
+  }
+  input::placeholder{color:var(--ink-faint);}
+
+  .url-row{display:flex;gap:8px;margin-bottom:20px;}
+  .proto-toggle{display:flex;background:var(--sage);border-radius:9px;padding:3px;flex-shrink:0;}
+  .proto-toggle button{
+    border:none;background:transparent;padding:0 11px;height:32px;
+    font-size:13px;font-weight:600;color:var(--ink-soft);border-radius:7px;cursor:pointer;font-family:var(--font-secondary);
+  }
+  .proto-toggle button.active{background:var(--forest);color:var(--paper-card);}
+
+  .presets-label{font-size:11px;font-weight:700;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;}
+  .presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px;}
+  .preset-chip{
+    padding:7px 14px;border-radius:100px;font-size:13px;font-weight:500;
+    background:var(--paper);border:1px solid var(--line);
+    cursor:pointer;transition:all 0.15s ease;font-family:var(--font-secondary);color:var(--ink);
+  }
+  .preset-chip:hover{border-color:var(--forest);background:var(--sage);}
+  .preset-chip.custom{color:var(--forest);font-weight:600;}
+
+  .section-label{font-size:11px;font-weight:700;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.5px;margin:24px 0 12px;}
+  .row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+  .field-group{margin-bottom:16px;}
+
+  .adv-panel{
+    display:flex;flex-direction:column;gap:14px;
+    background:var(--sage);border-radius:11px;
+    padding:16px;margin-top:8px;margin-bottom:8px;
+  }
+  .checkbox-row{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-soft);font-weight:500;}
+  .checkbox-row input{width:auto;height:auto;}
+
+  .generate-btn{
+    width:100%;height:46px;border:none;border-radius:10px;
+    background:var(--forest);
+    color:var(--paper-card);font-size:15px;font-weight:600;cursor:pointer;
+    box-shadow:0 8px 20px -6px rgba(31,75,63,0.5);
+    margin-top:24px;font-family:var(--font-secondary);
+    transition:transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .generate-btn:hover{box-shadow:0 10px 26px -6px rgba(31,75,63,0.55);}
+  .generate-btn:active{transform:scale(0.98);}
+
+  .output{display:none;margin-top:18px;}
+  .output.show{display:block;}
+  .output-row{
+    display:flex;align-items:center;gap:10px;
+    background:var(--sage);border-radius:10px;
+    padding:12px 14px;
+  }
+  .output-text{flex:1;font-size:12.5px;color:var(--forest-deep);word-break:break-all;font-family:"SF Mono","Menlo",monospace;}
+  .copy-btn{
+    flex-shrink:0;padding:0 14px;height:34px;border-radius:8px;border:1px solid var(--sage-border);
+    background:var(--paper-card);cursor:pointer;display:flex;align-items:center;justify-content:center;
+    font-size:13px;color:var(--forest);font-weight:600;transition:background 0.15s ease;
+  }
+  .copy-btn:hover{background:var(--sage);}
+
+  /* CONTENT SECTIONS */
+  .section{padding:0 24px 90px;}
+  .section-narrow{max-width:700px;margin:0 auto;}
+  .section-head{text-align:center;margin-bottom:32px;}
+  .section-head h2{font-family:var(--font-primary);font-size:30px;font-weight:400;margin-bottom:10px;letter-spacing:-0.005em;}
+  .section-head p{font-size:15px;color:var(--ink-soft);}
+  .prose{font-size:15.5px;color:var(--ink-soft);line-height:1.75;}
+  .prose p + p{margin-top:14px;}
+
+  .param-grid{display:flex;flex-direction:column;gap:14px;max-width:700px;margin:0 auto;}
+  .param-row{
+    display:flex;gap:16px;align-items:baseline;
+    background:var(--paper-card);border:1px solid var(--line);border-radius:11px;padding:16px 20px;
+  }
+  .param-name{font-family:'SF Mono',Menlo,monospace;font-size:13px;font-weight:600;color:var(--forest);flex-shrink:0;width:130px;}
+  .param-desc{font-size:14px;color:var(--ink-soft);line-height:1.55;}
+  .param-desc .tag{font-size:11px;color:var(--mustard);font-weight:700;text-transform:uppercase;margin-left:6px;}
+
+  .benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:900px;margin:0 auto;}
+  .benefit-card{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:box-shadow 0.2s ease, transform 0.2s ease;}
+  .benefit-card:hover{box-shadow:0 16px 32px -16px rgba(31,75,63,0.25);transform:translateY(-2px);}
+  .benefit-icon{width:38px;height:38px;border-radius:10px;background:var(--sage);color:var(--forest);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;margin-bottom:14px;}
+  .benefit-card h3{font-family:var(--font-primary);font-size:17px;font-weight:700;margin-bottom:6px;}
+  .benefit-card p{font-size:13px;color:var(--ink-soft);line-height:1.55;}
+
+  .ga4-panel{
+    max-width:900px;margin:0 auto;
+    background:var(--forest);color:var(--paper-card);
+    border-radius:18px;padding:44px 46px;
+    display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;
+  }
+  .ga4-panel h2{font-family:var(--font-primary);font-size:28px;font-weight:400;margin-bottom:14px;}
+  .ga4-panel > div:first-child p{font-size:14px;color:#CBDACE;line-height:1.65;}
+  .ga4-list{display:flex;flex-direction:column;gap:15px;}
+  .ga4-item{display:flex;gap:12px;align-items:flex-start;}
+  .ga4-check{width:20px;height:20px;border-radius:50%;background:var(--mustard);color:var(--forest-deep);font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-weight:700;}
+  .ga4-item p{font-size:13.5px;font-weight:500;}
+
+  .checklist{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:11px;}
+  .checklist-item{display:flex;gap:14px;align-items:flex-start;background:var(--paper-card);border:1px solid var(--line);border-radius:11px;padding:16px 20px;}
+  .checklist-num{
+    width:24px;height:24px;border-radius:50%;background:var(--forest);color:var(--paper-card);
+    font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .checklist-item p{font-size:14px;color:var(--ink);line-height:1.5;}
+  .checklist-item strong{color:var(--forest);}
+
+  .faq-list{max-width:700px;margin:0 auto;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;padding:19px 4px;cursor:pointer;font-size:16.5px;font-weight:700;gap:10px;font-family:var(--font-primary);}
+  .faq-q .plus{font-size:18px;color:var(--ink-faint);transition:transform 0.2s ease;flex-shrink:0;font-family:var(--font-secondary);font-weight:400;}
+  .faq-item.open .plus{transform:rotate(45deg);color:var(--forest);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease, padding 0.3s ease;font-size:13.5px;color:var(--ink-soft);line-height:1.6;}
+  .faq-item.open .faq-a{max-height:200px;padding-bottom:19px;}
+
+  footer{text-align:center;padding:44px 24px 60px;font-size:13px;color:var(--ink-faint);border-top:1px solid var(--line);}
+
+  @media (max-width:720px){
+    h1{font-size:30px;}
+    .benefit-grid{grid-template-columns:1fr;}
+    .ga4-panel{grid-template-columns:1fr;padding:28px;}
+    .row-2{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .param-row{flex-direction:column;gap:4px;}
+    .param-name{width:auto;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><img src="dark_mode_logo.png" alt="Urchin logo" class="brand-mark">Urchin</div>
+    <div class="nav-links">
+      <a href="#tool">Builder</a>
+      <a href="#why">Why it helps</a>
+      <a href="#ga4">GA4</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">Free, no signup, no catch</div>
+  <h1 class="display">Free UTM Builder for Clean GA4 Reporting</h1>
+  <p>Build campaign URLs with consistent UTM parameters — source, medium, campaign, term, and content — so every click shows up correctly in Google Analytics 4.</p>
+</header>
+
+<main>
+
+<div class="wrap" id="tool">
+  <div class="card-wrap">
+    <div class="window">
+      <div class="window-title">New campaign link</div>
+
+      <div class="field-label">Website URL</div>
+      <div class="url-row">
+        <div class="proto-toggle">
+          <button class="active" id="httpsBtn" type="button">https://</button>
+          <button id="httpBtn" type="button">http://</button>
+        </div>
+        <input type="text" id="url" placeholder="rawpurple.in/collections/new">
+      </div>
+
+      <div class="presets-label">Quick presets</div>
+      <div class="presets" id="presets">
+        <button class="preset-chip" data-source="instagram" data-medium="social" type="button">Instagram</button>
+        <button class="preset-chip" data-source="facebook" data-medium="paid_social" type="button">Facebook ads</button>
+        <button class="preset-chip" data-source="google" data-medium="cpc" type="button">Google ads</button>
+        <button class="preset-chip" data-source="klaviyo" data-medium="email" type="button">Klaviyo email</button>
+        <button class="preset-chip custom" data-source="" data-medium="" type="button">Custom</button>
+      </div>
+
+      <div class="section-label">Required</div>
+      <div class="row-2">
+        <div>
+          <div class="field-label">Source
+            <span class="info-wrap">
+              <span class="info-icon">?</span>
+              <span class="info-tooltip">utm_source — where the traffic comes from, e.g. instagram, google</span>
+            </span>
+          </div>
+          <input type="text" id="source" placeholder="e.g. instagram">
+        </div>
+        <div>
+          <div class="field-label">Medium
+            <span class="info-wrap">
+              <span class="info-icon">?</span>
+              <span class="info-tooltip">utm_medium — the channel type, e.g. social, email, cpc</span>
+            </span>
+          </div>
+          <input type="text" id="medium" placeholder="e.g. social">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">Campaign name
+          <span class="info-wrap">
+            <span class="info-icon">?</span>
+            <span class="info-tooltip">utm_campaign — the name of this push, e.g. monsoon-drop-2026</span>
+          </span>
+        </div>
+        <input type="text" id="campaign" placeholder="monsoon-drop-2026">
+      </div>
+
+      <div class="section-label">Optional</div>
+      <div class="adv-panel">
+        <div class="row-2" style="margin-bottom:0;">
+          <div>
+            <div class="field-label" style="font-size:12.5px;">Term</div>
+            <input type="text" id="term" placeholder="streetwear">
+          </div>
+          <div>
+            <div class="field-label" style="font-size:12.5px;">Content</div>
+            <input type="text" id="content" placeholder="story-swipeup">
+          </div>
+        </div>
+        <label class="checkbox-row">
+          <input type="checkbox" id="lowercase"> Force lowercase
+        </label>
+      </div>
+
+      <button class="generate-btn" id="genBtn" type="button">Generate link</button>
+
+      <div class="output" id="output">
+        <div class="output-row">
+          <div class="output-text" id="outputText"></div>
+          <button class="copy-btn" id="copyBtn" type="button">Copy</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<section class="section" id="what-is-utm">
+  <div class="section-narrow">
+    <div class="section-head">
+      <h2 class="display">What is a UTM Builder?</h2>
+    </div>
+    <div class="prose">
+      <p>A UTM builder is a free tool that adds tracking parameters — called UTM parameters — to the end of a URL. When someone clicks that link, Google Analytics 4 reads the parameters and logs exactly where the traffic came from: which platform, which campaign, and which specific post, email, or ad.</p>
+      <p>Without UTM parameters, GA4 can only guess at traffic source using referrer data, which is unreliable for social media, email, and messaging apps. A UTM builder removes the guesswork by letting you set the source, medium, and campaign name yourself, every time.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="parameters">
+  <div class="section-head">
+    <h2 class="display">UTM Parameters Explained</h2>
+  </div>
+  <div class="param-grid">
+    <div class="param-row">
+      <div class="param-name">utm_source</div>
+      <div class="param-desc">Where the traffic is coming from — <em>instagram</em>, <em>google</em>, <em>klaviyo</em>, <em>whatsapp</em>.</div>
+    </div>
+    <div class="param-row">
+      <div class="param-name">utm_medium</div>
+      <div class="param-desc">What kind of channel it is — <em>social</em>, <em>email</em>, <em>cpc</em>, <em>referral</em>.</div>
+    </div>
+    <div class="param-row">
+      <div class="param-name">utm_campaign</div>
+      <div class="param-desc">The name of the specific push this link belongs to — <em>monsoon-drop-2026</em>.</div>
+    </div>
+    <div class="param-row">
+      <div class="param-name">utm_term<span class="tag">optional</span></div>
+      <div class="param-desc">Used mainly for paid search, to record the keyword behind a click.</div>
+    </div>
+    <div class="param-row">
+      <div class="param-name">utm_content<span class="tag">optional</span></div>
+      <div class="param-desc">Distinguishes between multiple links in the same campaign — <em>story-swipeup</em> vs <em>bio-link</em>.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="why">
+  <div class="section-head">
+    <h2 class="display">Why This Helps</h2>
+    <p>Small habit, much cleaner data.</p>
+  </div>
+  <div class="benefit-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon">1</div>
+      <h3>No more guesswork</h3>
+      <p>Every link is tagged with the same source and medium every time, so GA4's channel groupings stay accurate instead of splitting one channel into five inconsistent rows.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">2</div>
+      <h3>Consistent naming across your team</h3>
+      <p>Everyone building links pulls from the same source and medium conventions, so campaign names don't quietly drift apart over time.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">3</div>
+      <h3>Built specifically for GA4</h3>
+      <p>Unlike generic link shorteners, this UTM builder is structured around how GA4 actually reads and groups traffic.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="ga4">
+  <div class="ga4-panel">
+    <div>
+      <h2 class="display">Why UTM Parameters Matter for GA4 Reporting</h2>
+      <p>GA4 groups all incoming traffic into channels — Organic Social, Paid Social, Email, Organic Search, and so on — based entirely on the source and medium values it receives. When a link is missing UTM parameters, or uses inconsistent values, GA4 either mis-groups that traffic or shows it as <strong>(not set)</strong> in acquisition reports.</p>
+    </div>
+    <div class="ga4-list">
+      <div class="ga4-item"><span class="ga4-check">✓</span><p>Accurate channel attribution — knowing whether a sale came from a story or a paid ad, not just "social"</p></div>
+      <div class="ga4-item"><span class="ga4-check">✓</span><p>Campaign-level conversion tracking, not just channel-level</p></div>
+      <div class="ga4-item"><span class="ga4-check">✓</span><p>Reliable month-over-month comparisons</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="mistakes">
+  <div class="section-head">
+    <h2 class="display">Common UTM Mistakes That Break GA4 Reporting</h2>
+  </div>
+  <div class="checklist">
+    <div class="checklist-item">
+      <div class="checklist-num">1</div>
+      <p><strong>Mixed casing</strong> — <em>Instagram</em> and <em>instagram</em> are treated as two different sources in GA4. Keep every value lowercase.</p>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-num">2</div>
+      <p><strong>More than one <code>?</code> in the URL</strong> — only the first one starts the query string; a second one breaks the parameters after it.</p>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-num">3</div>
+      <p><strong>Unescaped spaces and special characters</strong> — these need to be URL-encoded, or the link can silently fail to pass parameters through.</p>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-num">4</div>
+      <p><strong>Inconsistent source/medium naming</strong> — <em>insta</em> one week and <em>instagram</em> the next fragments a single channel into multiple rows.</p>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-num">5</div>
+      <p><strong>Missing utm_campaign</strong> — without it, GA4 still shows source and medium, but you lose the ability to measure that specific push on its own.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="section-head">
+    <h2 class="display">Frequently Asked Questions</h2>
+  </div>
+  <div class="faq-list" id="faqList"></div>
+</section>
+
+</main>
+
+<footer>Built for cleaner GA4 reporting — free to use, always.</footer>
+
+<script>
+  // Smooth scroll from the top nav — target section lands centered in the viewport
+  function scrollToCenter(target){
+    var rect = target.getBoundingClientRect();
+    var absoluteTop = rect.top + window.pageYOffset;
+    var centered = absoluteTop - (window.innerHeight / 2) + (rect.height / 2);
+    window.scrollTo({ top: Math.max(centered, 0), behavior: 'smooth' });
+  }
+  document.querySelectorAll('.nav-links a').forEach(function(link){
+    link.addEventListener('click', function(e){
+      var href = this.getAttribute('href');
+      if(href.charAt(0) !== '#') return;
+      var target = document.getElementById(href.substring(1));
+      if(!target) return;
+      e.preventDefault();
+      scrollToCenter(target);
+    });
+  });
+</script>
+
+<script>
+  document.getElementById('httpsBtn').addEventListener('click', function(){
+    this.classList.add('active');
+    document.getElementById('httpBtn').classList.remove('active');
+  });
+  document.getElementById('httpBtn').addEventListener('click', function(){
+    this.classList.add('active');
+    document.getElementById('httpsBtn').classList.remove('active');
+  });
+
+  document.querySelectorAll('.preset-chip').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(this.classList.contains('custom')){
+        document.getElementById('url').value = '';
+        document.getElementById('source').value = '';
+        document.getElementById('medium').value = '';
+        document.getElementById('campaign').value = '';
+        document.getElementById('term').value = '';
+        document.getElementById('content').value = '';
+        document.getElementById('lowercase').checked = false;
+        document.getElementById('output').classList.remove('show');
+        return;
+      }
+      if(this.dataset.source) document.getElementById('source').value = this.dataset.source;
+      if(this.dataset.medium) document.getElementById('medium').value = this.dataset.medium;
+    });
+  });
+
+  document.getElementById('genBtn').addEventListener('click', function(){
+    var proto = document.getElementById('httpsBtn').classList.contains('active') ? 'https://' : 'http://';
+    var url = (document.getElementById('url').value || 'example.com').replace(/^https?:\/\//,'');
+    var source = document.getElementById('source').value || 'source';
+    var medium = document.getElementById('medium').value || 'medium';
+    var campaign = document.getElementById('campaign').value || 'campaign-name';
+    var term = document.getElementById('term').value;
+    var content = document.getElementById('content').value;
+
+    var link = proto + url + '?utm_source=' + encodeURIComponent(source)
+      + '&utm_medium=' + encodeURIComponent(medium)
+      + '&utm_campaign=' + encodeURIComponent(campaign);
+    if(term) link += '&utm_term=' + encodeURIComponent(term);
+    if(content) link += '&utm_content=' + encodeURIComponent(content);
+    if(document.getElementById('lowercase').checked) link = link.toLowerCase();
+
+    document.getElementById('outputText').textContent = link;
+    document.getElementById('output').classList.add('show');
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', function(){
+    var text = document.getElementById('outputText').textContent;
+    navigator.clipboard.writeText(text);
+    this.textContent = 'Copied';
+    var self = this;
+    setTimeout(function(){ self.textContent = 'Copy'; }, 1200);
+  });
+
+  var faqs = [
+    { q: 'Is this UTM builder really free?', a: 'Yes — free to use, with no signup and no account required.' },
+    { q: 'What are UTM parameters?', a: 'UTM parameters are small tags added to the end of a URL — source, medium, campaign, term, and content — that tell Google Analytics 4 exactly where a click came from.' },
+    { q: 'Do UTM parameters affect my SEO or search rankings?', a: 'No. UTM parameters are only used for analytics tracking and have no effect on how a page ranks in search results.' },
+    { q: 'Should UTM values always be lowercase?', a: 'Yes. GA4 treats different capitalizations as different values, so keeping everything lowercase prevents a single channel from splitting into multiple rows.' },
+    { q: 'Can I use this for Instagram, Google Ads, Meta Ads, and email campaigns?', a: 'Yes — the built-in presets cover the most common sources and mediums, and you can enter any custom source or medium manually.' },
+    { q: 'Why does my traffic show as (not set) in GA4?', a: 'This usually means the link was shared without UTM parameters, or the parameters were malformed. Rebuilding the link with this tool prevents that.' },
+    { q: 'Are the links I build saved anywhere?', a: 'Not in this version — everything runs manually in your browser. A future version will add saved history and shared team presets.' }
+  ];
+  var list = document.getElementById('faqList');
+  faqs.forEach(function(item){
+    var el = document.createElement('div');
+    el.className = 'faq-item';
+    el.innerHTML = '<div class="faq-q"><span>'+item.q+'</span><span class="plus">+</span></div><div class="faq-a">'+item.a+'</div>';
+    el.querySelector('.faq-q').addEventListener('click', function(){
+      el.classList.toggle('open');
+    });
+    list.appendChild(el);
+  });
+</script>
+
+</body>
+</html>
