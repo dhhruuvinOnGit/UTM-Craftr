@@ -90,6 +90,8 @@
     --mustard:#D9A441;
     --line:#E4E1D8;
     --on-accent:#F7FAF6;
+    --error:#C0392B;
+    --error-bg:#FBEAE8;
     --radius:14px;
   }
 
@@ -104,6 +106,8 @@
     --sage-border:#323A2E;
     --mustard:#E8BE5C;
     --line:#2A322B;
+    --error:#F28B7E;
+    --error-bg:#2E1917;
   }
 
   html{transition:background-color 0.25s ease;}
@@ -212,6 +216,7 @@
     box-shadow:0 0 0 3px rgba(31,75,63,0.12);
   }
   input::placeholder{color:var(--ink-faint);}
+  input.invalid{border-color:var(--error);}
 
   .url-row{display:flex;gap:8px;margin-bottom:20px;}
   .proto-toggle{display:flex;background:var(--sage);border-radius:9px;padding:3px;flex-shrink:0;}
@@ -240,9 +245,6 @@
     background:var(--sage);border-radius:11px;
     padding:16px;margin-top:8px;margin-bottom:8px;
   }
-  .checkbox-row{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-soft);font-weight:500;}
-  .checkbox-row input{width:auto;height:auto;}
-
   .generate-btn{
     width:100%;height:46px;border:none;border-radius:10px;
     background:var(--forest);
@@ -268,6 +270,14 @@
     font-size:13px;color:var(--forest);font-weight:600;transition:background 0.15s ease;
   }
   .copy-btn:hover{background:var(--sage);}
+
+  .warning-box{
+    display:none;align-items:center;gap:8px;
+    background:var(--error-bg);color:var(--error);
+    border-radius:9px;padding:10px 14px;
+    font-size:13px;font-weight:500;margin-top:14px;
+  }
+  .warning-box.show{display:flex;}
 
   /* CONTENT SECTIONS */
   .section{padding:0 24px 90px;}
@@ -338,13 +348,13 @@
 </style>
 <!-- Google Analytics 4 -->
 <!-- Replace G-XXXXXXXXXX below with your real Measurement ID from GA4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BPD9QFCNNM"></script>
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-BPD9QFCNNM"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-BPD9QFCNNM');
-</script>
+</script> -->
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -462,12 +472,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <input type="text" id="content" placeholder="story-swipeup">
           </div>
         </div>
-        <label class="checkbox-row">
-          <input type="checkbox" id="lowercase"> Force lowercase
-        </label>
       </div>
 
       <button class="generate-btn" id="genBtn" type="button">Generate link</button>
+
+      <div class="warning-box" id="warningBox">Please fill in the website URL, source, medium, and campaign name.</div>
 
       <div class="output" id="output">
         <div class="output-row">
@@ -598,6 +607,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <footer>Built for cleaner GA4 reporting — free to use, always.</footer>
 
 <script>
+  window.dataLayer = window.dataLayer || [];
+
   // Smooth scroll from the top nav — target section lands centered in the viewport
   function scrollToCenter(target){
     var rect = target.getBoundingClientRect();
@@ -607,6 +618,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   document.querySelectorAll('.nav-links a').forEach(function(link){
     link.addEventListener('click', function(e){
+      window.dataLayer.push({
+        event: 'top_nav',
+        event_action: this.textContent.trim()
+      });
       var href = this.getAttribute('href');
       if(href.charAt(0) !== '#') return;
       var target = document.getElementById(href.substring(1));
@@ -643,8 +658,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         document.getElementById('campaign').value = '';
         document.getElementById('term').value = '';
         document.getElementById('content').value = '';
-        document.getElementById('lowercase').checked = false;
         document.getElementById('output').classList.remove('show');
+        document.getElementById('warningBox').classList.remove('show');
+        document.querySelectorAll('#tool input[type="text"]').forEach(function(i){ i.classList.remove('invalid'); });
         return;
       }
       if(this.dataset.source) document.getElementById('source').value = this.dataset.source;
@@ -652,12 +668,56 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     });
   });
 
+  // form_fill tracking — fires once per distinct fill, not on every blur
+  var trackedFields = ['url', 'source', 'medium', 'campaign', 'term', 'content'];
+  trackedFields.forEach(function(fieldId){
+    var el = document.getElementById(fieldId);
+    var alreadyTracked = false;
+    el.addEventListener('blur', function(){
+      if(this.value.trim() === '' || alreadyTracked) return;
+      alreadyTracked = true;
+      window.dataLayer.push({
+        event: 'form_fill',
+        event_action: 'filled_' + fieldId
+      });
+    });
+    el.addEventListener('input', function(){
+      if(this.value.trim() === '') alreadyTracked = false;
+      this.classList.remove('invalid');
+      document.getElementById('warningBox').classList.remove('show');
+    });
+  });
+
   document.getElementById('genBtn').addEventListener('click', function(){
+    var urlEl = document.getElementById('url');
+    var sourceEl = document.getElementById('source');
+    var mediumEl = document.getElementById('medium');
+    var campaignEl = document.getElementById('campaign');
+
+    var requiredFields = [urlEl, sourceEl, mediumEl, campaignEl];
+    var hasEmpty = false;
+    requiredFields.forEach(function(el){
+      if(el.value.trim() === ''){
+        el.classList.add('invalid');
+        hasEmpty = true;
+      } else {
+        el.classList.remove('invalid');
+      }
+    });
+
+    var warningBox = document.getElementById('warningBox');
+    if(hasEmpty){
+      warningBox.classList.add('show');
+      document.getElementById('output').classList.remove('show');
+      return;
+    }
+    warningBox.classList.remove('show');
+
     var proto = document.getElementById('httpsBtn').classList.contains('active') ? 'https://' : 'http://';
-    var url = (document.getElementById('url').value || 'example.com').replace(/^https?:\/\//,'');
-    var source = document.getElementById('source').value || 'source';
-    var medium = document.getElementById('medium').value || 'medium';
-    var campaign = document.getElementById('campaign').value || 'campaign-name';
+    var url = urlEl.value.replace(/^https?:\/\//,'');
+    var source = sourceEl.value;
+    var medium = mediumEl.value;
+    var campaign = campaignEl.value;
     var term = document.getElementById('term').value;
     var content = document.getElementById('content').value;
 
@@ -666,10 +726,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       + '&utm_campaign=' + encodeURIComponent(campaign);
     if(term) link += '&utm_term=' + encodeURIComponent(term);
     if(content) link += '&utm_content=' + encodeURIComponent(content);
-    if(document.getElementById('lowercase').checked) link = link.toLowerCase();
+    link = link.toLowerCase();
 
     document.getElementById('outputText').textContent = link;
     document.getElementById('output').classList.add('show');
+
+    window.dataLayer.push({
+      event: 'form_fill',
+      event_action: 'generate_link_clicked',
+      utm_source: source.toLowerCase(),
+      utm_medium: medium.toLowerCase(),
+      utm_campaign: campaign.toLowerCase()
+    });
   });
 
   document.getElementById('copyBtn').addEventListener('click', function(){
@@ -678,6 +746,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     this.textContent = 'Copied';
     var self = this;
     setTimeout(function(){ self.textContent = 'Copy'; }, 1200);
+
+    window.dataLayer.push({
+      event: 'form_fill',
+      event_action: 'copy_link_clicked'
+    });
   });
 
   var faqs = [
@@ -696,6 +769,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     el.innerHTML = '<div class="faq-q"><span>'+item.q+'</span><span class="plus">+</span></div><div class="faq-a">'+item.a+'</div>';
     el.querySelector('.faq-q').addEventListener('click', function(){
       el.classList.toggle('open');
+      window.dataLayer.push({
+        event: 'faq',
+        event_action: el.classList.contains('open') ? 'expand' : 'shrink'
+      });
     });
     list.appendChild(el);
   });
