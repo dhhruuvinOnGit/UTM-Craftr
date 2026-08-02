@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <script>
-  // Runs before paint — reads saved preference, or falls back to OS setting
+  // Runs before paint — reads saved preference, or defaults to dark
   (function(){
     var saved = localStorage.getItem('urchin-theme');
-    var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var theme = saved || 'dark';
     document.documentElement.setAttribute('data-theme', theme);
   })();
 </script>
@@ -83,6 +83,7 @@
     --ink:#232A22;
     --ink-soft:#5E6659;
     --ink-faint:#9BA292;
+    --ink-faint1:#3276c5;
     --forest:#1F4B3F;
     --forest-deep:#153229;
     --sage:#EEF2EA;
@@ -347,7 +348,7 @@
   .anatomy-url .a-sep{color:var(--error);font-weight:700;}
   .anatomy-url .a-key{color:var(--forest);}
   .anatomy-url .a-val{color:var(--ink);}
-  .anatomy-url .a-frag{color:var(--ink-faint);}
+  .anatomy-url .a-frag{color:var(--ink-faint1);}
   .anatomy-legend{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;margin-top:16px;font-size:12.5px;color:var(--ink-soft);}
   .anatomy-legend span{display:flex;align-items:center;gap:6px;}
   .anatomy-legend i{width:10px;height:10px;border-radius:3px;display:inline-block;flex-shrink:0;}
@@ -549,7 +550,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <span><i style="background:var(--mustard)"></i>Path</span>
       <span><i style="background:var(--error)"></i>Query separator (<code>?</code> / <code>&amp;</code>)</span>
       <span><i style="background:var(--ink)"></i>Query string</span>
-      <span><i style="background:var(--ink-faint)"></i>Fragment</span>
+      <span><i style="background:var(--ink-faint1)"></i>Fragment</span>
     </div>
     <p class="anatomy-caption">A URL breaks down into a protocol, host, and path, followed by an optional query string that starts after the first <code>?</code> and chains additional parameters with <code>&amp;</code> — this is where UTM parameters live. Anything after a <code>#</code> is a fragment and is never sent to the server.</p>
   </div>
