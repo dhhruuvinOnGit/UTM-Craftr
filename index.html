@@ -334,7 +334,40 @@
   .faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease, padding 0.3s ease;font-size:13.5px;color:var(--ink-soft);line-height:1.6;}
   .faq-item.open .faq-a{max-height:200px;padding-bottom:19px;}
 
+  /* URL ANATOMY */
+  .anatomy{max-width:700px;margin:0 auto 44px;}
+  .anatomy-url{
+    font-family:'SF Mono',Menlo,monospace;font-size:13px;line-height:1.7;
+    background:var(--paper-card);border:1px solid var(--line);border-radius:11px;
+    padding:18px 20px;word-break:break-all;
+  }
+  .anatomy-url .a-proto{color:var(--ink-faint);}
+  .anatomy-url .a-host{color:var(--forest);font-weight:700;}
+  .anatomy-url .a-path{color:var(--mustard);font-weight:700;}
+  .anatomy-url .a-sep{color:var(--error);font-weight:700;}
+  .anatomy-url .a-key{color:var(--forest);}
+  .anatomy-url .a-val{color:var(--ink);}
+  .anatomy-url .a-frag{color:var(--ink-faint);}
+  .anatomy-legend{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;margin-top:16px;font-size:12.5px;color:var(--ink-soft);}
+  .anatomy-legend span{display:flex;align-items:center;gap:6px;}
+  .anatomy-legend i{width:10px;height:10px;border-radius:3px;display:inline-block;flex-shrink:0;}
+  .anatomy-caption{font-size:14px;color:var(--ink-soft);line-height:1.65;text-align:center;margin-top:16px;}
+
+  /* QUICK TESTS */
+  .test-grid{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:11px;}
+  .test-item{background:var(--paper-card);border:1px solid var(--line);border-radius:11px;padding:16px 20px;}
+  .test-item p{font-size:14px;color:var(--ink);line-height:1.5;}
+  .test-item strong{color:var(--forest);}
+  .test-item code{font-family:'SF Mono',Menlo,monospace;font-size:12.5px;background:var(--sage);border-radius:5px;padding:1px 6px;color:var(--ink);}
+  .test-item p.test-ex{font-size:12.5px;margin-top:6px;word-break:break-all;}
+  .test-item p.test-ex.bad{color:var(--error);}
+  .test-item p.test-ex.good{color:var(--forest);}
+  .test-item p.test-ex code{background:transparent;padding:0;color:inherit;}
+
   footer{text-align:center;padding:44px 24px 60px;font-size:13px;color:var(--ink-faint);border-top:1px solid var(--line);}
+  footer a{border-bottom:1px solid var(--ink-faint);padding-bottom:1px;transition:border-color 0.15s ease,color 0.15s ease;}
+  footer a:hover{color:var(--forest);border-color:var(--forest);}
+  footer .foot-sep{margin:0 8px;color:var(--ink-faint);}
 
   @media (max-width:720px){
     h1{font-size:30px;}
@@ -505,6 +538,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="section-head">
     <h2 class="display">UTM Parameters Explained</h2>
   </div>
+
+  <div class="anatomy">
+    <div class="anatomy-url">
+      <span class="a-proto">https://</span><span class="a-host">www.example.com</span><span class="a-path">/best-shoes</span><span class="a-sep">?</span><span class="a-key">utm_source</span><span class="a-sep">=</span><span class="a-val">instagram</span><span class="a-sep">&amp;</span><span class="a-key">utm_medium</span><span class="a-sep">=</span><span class="a-val">social</span><span class="a-sep">&amp;</span><span class="a-key">utm_campaign</span><span class="a-sep">=</span><span class="a-val">sale</span><span class="a-frag">#top</span>
+    </div>
+    <div class="anatomy-legend">
+      <span><i style="background:var(--ink-faint)"></i>Protocol</span>
+      <span><i style="background:var(--forest)"></i>Host</span>
+      <span><i style="background:var(--mustard)"></i>Path</span>
+      <span><i style="background:var(--error)"></i>Query separator (<code>?</code> / <code>&amp;</code>)</span>
+      <span><i style="background:var(--ink)"></i>Query string</span>
+      <span><i style="background:var(--ink-faint)"></i>Fragment</span>
+    </div>
+    <p class="anatomy-caption">A URL breaks down into a protocol, host, and path, followed by an optional query string that starts after the first <code>?</code> and chains additional parameters with <code>&amp;</code> — this is where UTM parameters live. Anything after a <code>#</code> is a fragment and is never sent to the server.</p>
+  </div>
+
   <div class="param-grid">
     <div class="param-row">
       <div class="param-name">utm_source</div>
@@ -567,6 +616,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
 </section>
 
+<section class="section" id="tests">
+  <div class="section-head">
+    <h2 class="display">Quick Tests to Check Your UTM Link Before You Send It</h2>
+  </div>
+  <div class="test-grid">
+    <div class="test-item">
+      <p><strong>Query parameter test</strong> — if the URL already has a <code>?</code>, add UTM params with <code>&amp;</code>, not a second <code>?</code>.</p>
+      <p class="test-ex bad">✗ <code>site.com/shop?ref=abc?utm_source=instagram</code></p>
+      <p class="test-ex good">✓ <code>site.com/shop?ref=abc&amp;utm_source=instagram</code></p>
+    </div>
+    <div class="test-item">
+      <p><strong>Hash fragment test</strong> — UTM params must sit before any <code>#</code>, since browsers never send fragments to the server.</p>
+      <p class="test-ex bad">✗ <code>site.com/shop#featured?utm_source=instagram</code></p>
+      <p class="test-ex good">✓ <code>site.com/shop?utm_source=instagram#featured</code></p>
+    </div>
+    <div class="test-item">
+      <p><strong>Combination hash + query test</strong> — with both, order is path → existing query → UTM params → fragment.</p>
+      <p class="test-ex bad">✗ <code>site.com/shop#featured?ref=abc&amp;utm_source=instagram</code></p>
+      <p class="test-ex good">✓ <code>site.com/shop?ref=abc&amp;utm_source=instagram#featured</code></p>
+    </div>
+    <div class="test-item">
+      <p><strong>Space test</strong> — spaces in values must be encoded, or the link can break or truncate.</p>
+      <p class="test-ex bad">✗ <code>utm_campaign=summer sale</code></p>
+      <p class="test-ex good">✓ <code>utm_campaign=summer%20sale</code></p>
+      <p class="test-ex good">✓ <code>utm_campaign=summer_sale</code> or <code>summer-sale</code></p>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="mistakes">
   <div class="section-head">
     <h2 class="display">Common UTM Mistakes That Break GA4 Reporting</h2>
@@ -604,7 +682,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 </main>
 
-<footer>Built for cleaner GA4 reporting — free to use, always.</footer>
+<footer>
+  Built for cleaner GA4 reporting — free to use, always.<br>
+  <a href="/sitemap.xml">Sitemap</a><span class="foot-sep">·</span>© 2026 UTMCraftr.
+</footer>
 
 <script>
   window.dataLayer = window.dataLayer || [];
