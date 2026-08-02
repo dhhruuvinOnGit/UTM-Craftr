@@ -165,7 +165,7 @@
   .hero p{font-size:17px;color:var(--ink-soft);max-width:520px;margin:0 auto;line-height:1.6;}
 
   /* TOOL CARD */
-  .card-wrap{max-width:600px;margin:50px auto 100px;}
+  .card-wrap{max-width:720px;margin:50px auto 100px;}
   .window{
     background:var(--paper-card);
     border:1px solid var(--line);
@@ -261,9 +261,9 @@
   .output-row{
     display:flex;align-items:center;gap:10px;
     background:var(--sage);border-radius:10px;
-    padding:12px 14px;
+    padding:14px 16px;
   }
-  .output-text{flex:1;font-size:12.5px;color:var(--ink);word-break:break-all;font-family:"SF Mono","Menlo",monospace;}
+  .output-text{flex:1;font-size:14.5px;line-height:1.5;color:var(--ink);word-break:break-all;font-family:var(--font-secondary);font-weight:500;}
   .copy-btn{
     flex-shrink:0;padding:0 14px;height:34px;border-radius:8px;border:1px solid var(--sage-border);
     background:var(--paper-card);cursor:pointer;display:flex;align-items:center;justify-content:center;
@@ -795,18 +795,47 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     warningBox.classList.remove('show');
 
     var proto = document.getElementById('httpsBtn').classList.contains('active') ? 'https://' : 'http://';
-    var url = urlEl.value.replace(/^https?:\/\//,'');
+    var rawUrl = urlEl.value.replace(/^https?:\/\//,'');
     var source = sourceEl.value;
     var medium = mediumEl.value;
     var campaign = campaignEl.value;
     var term = document.getElementById('term').value;
     var content = document.getElementById('content').value;
 
-    var link = proto + url + '?utm_source=' + encodeURIComponent(source)
-      + '&utm_medium=' + encodeURIComponent(medium)
-      + '&utm_campaign=' + encodeURIComponent(campaign);
-    if(term) link += '&utm_term=' + encodeURIComponent(term);
-    if(content) link += '&utm_content=' + encodeURIComponent(content);
+    // Space test — replace whitespace with underscores before encoding
+    function cleanValue(v){
+      return encodeURIComponent(v.trim().replace(/\s+/g, '_'));
+    }
+
+    // Hash fragment test — split off the fragment first so UTM params never land after it
+    var fragment = '';
+    var hashIndex = rawUrl.indexOf('#');
+    if(hashIndex !== -1){
+      fragment = rawUrl.slice(hashIndex);
+      rawUrl = rawUrl.slice(0, hashIndex);
+    }
+
+    // Query parameter test — split off any existing query string so we append with & instead of a second ?
+    var existingQuery = '';
+    var basePath = rawUrl;
+    var qIndex = rawUrl.indexOf('?');
+    if(qIndex !== -1){
+      existingQuery = rawUrl.slice(qIndex + 1);
+      basePath = rawUrl.slice(0, qIndex);
+    }
+
+    var utmParams = [
+      'utm_source=' + cleanValue(source),
+      'utm_medium=' + cleanValue(medium),
+      'utm_campaign=' + cleanValue(campaign)
+    ];
+    if(term) utmParams.push('utm_term=' + cleanValue(term));
+    if(content) utmParams.push('utm_content=' + cleanValue(content));
+    var utmString = utmParams.join('&');
+
+    // Combination test — existing query (if any) + UTM params, then the fragment goes last
+    var queryString = existingQuery ? existingQuery + '&' + utmString : utmString;
+    var link = proto + basePath + '?' + queryString + fragment;
     link = link.toLowerCase();
 
     document.getElementById('outputText').textContent = link;
