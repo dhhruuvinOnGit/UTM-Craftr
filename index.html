@@ -821,9 +821,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     var term = document.getElementById('term').value;
     var content = document.getElementById('content').value;
 
-    // Space test — replace whitespace with underscores before encoding
-    function cleanValue(v){
-      return encodeURIComponent(v.trim().replace(/\s+/g, '_'));
+    // Standardization rule — map common spelling/casing variants of source & medium
+    // to one canonical value, so the same channel never gets split across reports.
+    var MEDIUM_ALIASES = {
+      'email':'email','e-mail':'email','e mail':'email','emails':'email','mail':'email','newsletter':'email',
+      'social':'social','social media':'social','sm':'social','organic social':'social',
+      'paid social':'paid_social','paid_social':'paid_social','paidsocial':'paid_social','social ads':'paid_social','paid social media':'paid_social',
+      'cpc':'cpc','ppc':'cpc','paid search':'cpc','paid-search':'cpc','sem':'cpc','paidsearch':'cpc',
+      'referral':'referral','referrals':'referral',
+      'affiliate':'affiliate','affiliates':'affiliate',
+      'display':'display','banner':'display','banners':'display','display ads':'display',
+      'organic':'organic','seo':'organic'
+    };
+    var SOURCE_ALIASES = {
+      'facebook':'facebook','fb':'facebook','meta':'facebook',
+      'instagram':'instagram','ig':'instagram','insta':'instagram',
+      'google':'google','google ads':'google','adwords':'google','google adwords':'google',
+      'klaviyo':'klaviyo',
+      'twitter':'twitter','x':'twitter',
+      'linkedin':'linkedin',
+      'tiktok':'tiktok','tik tok':'tiktok',
+      'youtube':'youtube','yt':'youtube',
+      'whatsapp':'whatsapp','whats app':'whatsapp'
+    };
+
+    // Normalizes a value against an alias map: lowercases, collapses hyphens/underscores/
+    // extra spaces to single spaces, then looks up the canonical form. Falls through to
+    // the cleaned raw value if there's no known alias (so custom sources/mediums still work).
+    function normalizeAlias(v, map){
+      var key = v.trim().toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
+      return map[key] || null;
+    }
+
+    // Space test — replace whitespace with underscores before encoding.
+    // aliasMap (optional) applies the standardization rule for source & medium.
+    function cleanValue(v, aliasMap){
+      var canonical = aliasMap ? normalizeAlias(v, aliasMap) : null;
+      var base = canonical || v.trim().replace(/\s+/g, '_').toLowerCase();
+      return encodeURIComponent(base);
     }
 
     // Hash fragment test — split off the fragment first so UTM params never land after it
@@ -844,8 +879,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     var utmParams = [
-      'utm_source=' + cleanValue(source),
-      'utm_medium=' + cleanValue(medium),
+      'utm_source=' + cleanValue(source, SOURCE_ALIASES),
+      'utm_medium=' + cleanValue(medium, MEDIUM_ALIASES),
       'utm_campaign=' + cleanValue(campaign)
     ];
     if(term) utmParams.push('utm_term=' + cleanValue(term));
