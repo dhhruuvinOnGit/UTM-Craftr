@@ -149,7 +149,7 @@
 
   /* NAV */
   nav{padding:22px 0;border-bottom:1px solid var(--line);}
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;max-width:900px;}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;max-width:none;width:100%;box-sizing:border-box;padding:0 40px;}
   .brand{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700;font-family:var(--font-primary);color:var(--forest);}
   .brand-mark{
     width:30px;height:30px;border-radius:1px;
@@ -185,6 +185,28 @@
 
   /* TOOL CARD */
   .card-wrap{max-width:720px;margin:50px auto 100px;}
+
+  /* BUILDER + OTHER PRODUCTS SPLIT */
+  #tool{max-width:1040px;}
+  .builder-split{display:flex;align-items:flex-start;gap:36px;margin:50px 0 100px;}
+  .builder-col{flex:0 1 70%;min-width:0;}
+  .builder-col .card-wrap{margin:0;max-width:none;}
+  .split-divider{width:1px;align-self:stretch;background:var(--line);flex-shrink:0;}
+  .products-col{flex:0 1 30%;min-width:0;}
+  .products-panel{position:sticky;top:24px;}
+  .products-panel .section-label{margin-bottom:14px;}
+  .product-card{
+    border:1px solid var(--sage-border);border-radius:var(--radius);
+    padding:20px;background:var(--paper-card);
+  }
+  .product-card-icon{font-size:22px;margin-bottom:10px;}
+  .product-card-name{font-family:var(--font-primary);font-size:17px;font-weight:400;margin-bottom:8px;color:var(--ink);}
+  .product-card-desc{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:14px;}
+  .product-card-badge{
+    display:inline-block;font-size:11.5px;font-weight:600;color:var(--forest);
+    background:var(--sage);padding:4px 10px;border-radius:20px;
+    letter-spacing:0.02em;text-transform:uppercase;
+  }
   .window{
     background:var(--paper-card);
     border:1px solid var(--line);
@@ -298,6 +320,15 @@
   }
   .warning-box.show{display:flex;}
 
+  .channel-preview{
+    display:none;align-items:center;gap:8px;
+    background:var(--sage);color:var(--forest);
+    border-radius:9px;padding:10px 14px;
+    font-size:13px;font-weight:500;margin-top:14px;margin-bottom:16px;
+  }
+  .channel-preview.show{display:flex;}
+  .channel-preview.warn{background:var(--error-bg);color:var(--error);}
+
   /* CONTENT SECTIONS */
   .section{padding:0 24px 90px;}
   .section-narrow{max-width:700px;margin:0 auto;}
@@ -394,8 +425,14 @@
     .ga4-panel{grid-template-columns:1fr;padding:28px;}
     .row-2{grid-template-columns:1fr;}
     .nav-links{display:none;}
+    nav .wrap{padding:0 20px;}
     .param-row{flex-direction:column;gap:4px;}
     .param-name{width:auto;}
+    .builder-split{flex-direction:column;gap:28px;}
+    .split-divider{width:100%;height:1px;}
+    .builder-col{flex:none;width:100%;}
+    .products-col{flex:none;width:100%;}
+    .products-panel{position:static;}
   }
 </style>
 <!-- Google Analytics 4 -->
@@ -458,8 +495,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <main>
 
 <div class="wrap" id="tool">
-  <div class="card-wrap">
-    <div class="window">
+  <div class="builder-split">
+    <div class="builder-col">
+      <div class="card-wrap">
+        <div class="window">
       <div class="window-title">New campaign link</div>
 
       <div class="field-label">Website URL</div>
@@ -502,6 +541,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
       </div>
 
+      <div class="channel-preview" id="channelPreview"></div>
+
       <div class="field-group">
         <div class="field-label">Campaign name
           <span class="info-wrap">
@@ -538,6 +579,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
 
     </div>
+      </div>
+    </div>
+
+    <div class="split-divider"></div>
+
+    <div class="products-col">
+      <div class="products-panel">
+        <div class="section-label">Other tools</div>
+        <div class="product-card">
+          <div class="product-card-icon">📊</div>
+          <div class="product-card-name">Sheet UTM Builder</div>
+          <p class="product-card-desc">Generate and manage UTM links in bulk, right inside Google Sheets — built for teams creating dozens of links at once.</p>
+          <span class="product-card-badge">Coming soon</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -733,6 +791,138 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 
 <script>
+  // Standardization rule — map common spelling/casing variants of source & medium
+  // to one canonical value, so the same channel never gets split across reports.
+  var MEDIUM_ALIASES = {
+    'email':'email','e-mail':'email','e mail':'email','emails':'email','mail':'email','newsletter':'email',
+    'social':'social','social media':'social','sm':'social','organic social':'social',
+    'paid social':'paid_social','paid_social':'paid_social','paidsocial':'paid_social','social ads':'paid_social','paid social media':'paid_social',
+    'cpc':'cpc','ppc':'cpc','paid search':'cpc','paid-search':'cpc','sem':'cpc','paidsearch':'cpc',
+    'referral':'referral','referrals':'referral',
+    'affiliate':'affiliate','affiliates':'affiliate',
+    'display':'display','banner':'display','banners':'display','display ads':'display',
+    'organic':'organic','seo':'organic'
+  };
+  var SOURCE_ALIASES = {
+    'facebook':'facebook','fb':'facebook','meta':'facebook',
+    'instagram':'instagram','ig':'instagram','insta':'instagram',
+    'google':'google','google ads':'google','adwords':'google','google adwords':'google',
+    'klaviyo':'klaviyo',
+    'twitter':'twitter','x':'twitter',
+    'linkedin':'linkedin',
+    'tiktok':'tiktok','tik tok':'tiktok',
+    'youtube':'youtube','yt':'youtube',
+    'whatsapp':'whatsapp','whats app':'whatsapp',
+    'bing':'bing',
+    'yahoo':'yahoo',
+    'duckduckgo':'duckduckgo','duck duck go':'duckduckgo',
+    'pinterest':'pinterest',
+    'snapchat':'snapchat'
+  };
+
+  // Source pools — which platform "type" a canonical source belongs to. This is what
+  // actually drives GA4-style channel attribution: the medium says HOW (paid/organic/email),
+  // the source's pool says WHICH surface (search/social/video), and the two combine into
+  // one channel. This mirrors GA4's own default channel grouping logic instead of hardcoding
+  // every source+medium pair one by one, which wouldn't scale to custom/unlisted sources.
+  var SEARCH_SOURCES = ['google','bing','yahoo','duckduckgo'];
+  var SOCIAL_SOURCES = ['facebook','instagram','linkedin','twitter','tiktok','pinterest','snapchat','whatsapp'];
+  var VIDEO_SOURCES = ['youtube'];
+
+  // Normalizes a value against an alias map: lowercases, collapses hyphens/underscores/
+  // extra spaces to single spaces, then looks up the canonical form. Falls through to
+  // the cleaned raw value if there's no known alias (so custom sources/mediums still work).
+  function normalizeAlias(v, map){
+    var key = v.trim().toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
+    return map[key] || null;
+  }
+
+  // Space test — replace whitespace with underscores before encoding.
+  // aliasMap (optional) applies the standardization rule for source & medium.
+  function cleanValue(v, aliasMap){
+    var canonical = aliasMap ? normalizeAlias(v, aliasMap) : null;
+    var base = canonical || v.trim().replace(/\s+/g, '_').toLowerCase();
+    return encodeURIComponent(base);
+  }
+
+  // Source/medium cross-selection — derives the GA4 channel a given pair would resolve to,
+  // and flags pairs that don't make sense together so a bad entry gets caught before it
+  // ever reaches a report. mediumCanonical decides the "how", the source pool decides the
+  // "where"; unrecognized combinations fall through to null (treated as custom/Unassigned)
+  // rather than being force-mapped to a guess.
+  function getChannel(srcCanonical, medCanonical){
+    var isSearch = SEARCH_SOURCES.indexOf(srcCanonical) !== -1;
+    var isSocial = SOCIAL_SOURCES.indexOf(srcCanonical) !== -1;
+    var isVideo = VIDEO_SOURCES.indexOf(srcCanonical) !== -1;
+
+    switch(medCanonical){
+      case 'cpc':
+        if(isSearch) return 'Paid Search';
+        if(isSocial) return 'Paid Social';
+        if(isVideo) return 'Paid Video';
+        return 'Paid Other';
+      case 'paid_social':
+        return 'Paid Social';
+      case 'social':
+        return 'Organic Social';
+      case 'organic':
+        if(isSearch) return 'Organic Search';
+        if(isSocial) return 'Organic Social';
+        if(isVideo) return 'Organic Video';
+        return 'Unassigned';
+      case 'email':
+        return 'Email';
+      case 'affiliate':
+        return 'Affiliate';
+      case 'referral':
+        return 'Referral';
+      case 'display':
+        return 'Display';
+      default:
+        return null;
+    }
+  }
+
+  // Catches the specific mistake this whole feature exists to prevent: a known source
+  // typed into the medium field (or vice versa) — e.g. source=linkedin, medium=google.
+  // "google" is a real source, not a real medium, so this pair can never attribute
+  // correctly no matter what channel logic runs on top of it.
+  function detectSwap(source, medium){
+    var medLooksLikeSource = normalizeAlias(medium, SOURCE_ALIASES) !== null && normalizeAlias(medium, MEDIUM_ALIASES) === null;
+    var srcLooksLikeMedium = normalizeAlias(source, MEDIUM_ALIASES) !== null && normalizeAlias(source, SOURCE_ALIASES) === null;
+    return medLooksLikeSource || srcLooksLikeMedium;
+  }
+
+  function updateChannelPreview(){
+    var source = document.getElementById('source').value;
+    var medium = document.getElementById('medium').value;
+    var box = document.getElementById('channelPreview');
+
+    if(source.trim() === '' || medium.trim() === ''){
+      box.classList.remove('show', 'warn');
+      return;
+    }
+
+    if(detectSwap(source, medium)){
+      box.textContent = '"' + medium.trim() + '" looks like a source, not a medium — check that source and medium aren\'t swapped.';
+      box.classList.add('show', 'warn');
+      return;
+    }
+
+    var srcCanonical = normalizeAlias(source, SOURCE_ALIASES) || source.trim().toLowerCase();
+    var medCanonical = normalizeAlias(medium, MEDIUM_ALIASES) || medium.trim().toLowerCase();
+    var channel = getChannel(srcCanonical, medCanonical);
+
+    if(channel){
+      box.textContent = 'Channel attribution: ' + channel;
+      box.classList.remove('warn');
+      box.classList.add('show');
+    } else {
+      box.textContent = 'Custom medium — GA4 will likely report this as "Unassigned".';
+      box.classList.add('show', 'warn');
+    }
+  }
+
   document.getElementById('themeToggle').addEventListener('click', function(){
     var current = document.documentElement.getAttribute('data-theme');
     var next = current === 'dark' ? 'light' : 'dark';
@@ -760,11 +950,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         document.getElementById('content').value = '';
         document.getElementById('output').classList.remove('show');
         document.getElementById('warningBox').classList.remove('show');
+        document.getElementById('channelPreview').classList.remove('show', 'warn');
         document.querySelectorAll('#tool input[type="text"]').forEach(function(i){ i.classList.remove('invalid'); });
         return;
       }
       if(this.dataset.source) document.getElementById('source').value = this.dataset.source;
       if(this.dataset.medium) document.getElementById('medium').value = this.dataset.medium;
+      updateChannelPreview();
     });
   });
 
@@ -785,6 +977,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       if(this.value.trim() === '') alreadyTracked = false;
       this.classList.remove('invalid');
       document.getElementById('warningBox').classList.remove('show');
+      if(fieldId === 'source' || fieldId === 'medium') updateChannelPreview();
     });
   });
 
@@ -807,6 +1000,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     var warningBox = document.getElementById('warningBox');
     if(hasEmpty){
+      warningBox.textContent = 'Please fill in the website URL, source, medium, and campaign name.';
+      warningBox.classList.add('show');
+      document.getElementById('output').classList.remove('show');
+      return;
+    }
+
+    // Source/medium cross-check — block generation on a pair that can't attribute
+    // correctly (e.g. source=linkedin, medium=google) instead of only warning after
+    // the fact, since a link like that is wrong the moment it's created.
+    if(detectSwap(sourceEl.value, mediumEl.value)){
+      sourceEl.classList.add('invalid');
+      mediumEl.classList.add('invalid');
+      warningBox.textContent = '"' + mediumEl.value.trim() + '" looks like a source, not a medium — check that source and medium aren\'t swapped.';
       warningBox.classList.add('show');
       document.getElementById('output').classList.remove('show');
       return;
@@ -820,46 +1026,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     var campaign = campaignEl.value;
     var term = document.getElementById('term').value;
     var content = document.getElementById('content').value;
-
-    // Standardization rule — map common spelling/casing variants of source & medium
-    // to one canonical value, so the same channel never gets split across reports.
-    var MEDIUM_ALIASES = {
-      'email':'email','e-mail':'email','e mail':'email','emails':'email','mail':'email','newsletter':'email',
-      'social':'social','social media':'social','sm':'social','organic social':'social',
-      'paid social':'paid_social','paid_social':'paid_social','paidsocial':'paid_social','social ads':'paid_social','paid social media':'paid_social',
-      'cpc':'cpc','ppc':'cpc','paid search':'cpc','paid-search':'cpc','sem':'cpc','paidsearch':'cpc',
-      'referral':'referral','referrals':'referral',
-      'affiliate':'affiliate','affiliates':'affiliate',
-      'display':'display','banner':'display','banners':'display','display ads':'display',
-      'organic':'organic','seo':'organic'
-    };
-    var SOURCE_ALIASES = {
-      'facebook':'facebook','fb':'facebook','meta':'facebook',
-      'instagram':'instagram','ig':'instagram','insta':'instagram',
-      'google':'google','google ads':'google','adwords':'google','google adwords':'google',
-      'klaviyo':'klaviyo',
-      'twitter':'twitter','x':'twitter',
-      'linkedin':'linkedin',
-      'tiktok':'tiktok','tik tok':'tiktok',
-      'youtube':'youtube','yt':'youtube',
-      'whatsapp':'whatsapp','whats app':'whatsapp'
-    };
-
-    // Normalizes a value against an alias map: lowercases, collapses hyphens/underscores/
-    // extra spaces to single spaces, then looks up the canonical form. Falls through to
-    // the cleaned raw value if there's no known alias (so custom sources/mediums still work).
-    function normalizeAlias(v, map){
-      var key = v.trim().toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
-      return map[key] || null;
-    }
-
-    // Space test — replace whitespace with underscores before encoding.
-    // aliasMap (optional) applies the standardization rule for source & medium.
-    function cleanValue(v, aliasMap){
-      var canonical = aliasMap ? normalizeAlias(v, aliasMap) : null;
-      var base = canonical || v.trim().replace(/\s+/g, '_').toLowerCase();
-      return encodeURIComponent(base);
-    }
 
     // Hash fragment test — split off the fragment first so UTM params never land after it
     var fragment = '';
