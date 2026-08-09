@@ -883,7 +883,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     if(trackAsClosed && !modalJustSubmitted){
       window.dataLayer.push({
         event: 'product_access_form',
-        event_action: 'Closed'
+        event_action: 'Closed',
+        product_name: modalCurrentProduct
       });
     }
   }
@@ -939,7 +940,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       modalJustSubmitted = true;
       window.dataLayer.push({
         event: 'product_access_form',
-        event_action: 'Submit'
+        event_action: 'Submit',
+        product_name: modalCurrentProduct
       });
       modalSubmitBtn.disabled = false;
       modalSubmitBtn.textContent = 'Submit';
