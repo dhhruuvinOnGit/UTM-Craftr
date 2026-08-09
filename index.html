@@ -397,9 +397,9 @@
   /* URL ANATOMY */
   .anatomy{max-width:700px;margin:0 auto 44px;}
   .anatomy-url{
-    font-family:'SF Mono',Menlo,monospace;font-size:13px;line-height:1.7;
+    font-family:'SF Mono',Menlo,monospace;font-size:15.5px;line-height:1.8;
     background:var(--paper-card);border:1px solid var(--line);border-radius:11px;
-    padding:18px 20px;word-break:break-all;
+    padding:20px 22px;word-break:break-all;
   }
   .anatomy-url .a-proto{color:var(--ink-faint);}
   .anatomy-url .a-host{color:var(--forest);font-weight:700;}
@@ -958,6 +958,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     document.getElementById('httpsBtn').classList.remove('active');
   });
 
+  // form_fill tracking — fires once per distinct fill, not on every blur.
+  // fieldTracked/trackFieldFill are shared (not per-field closures) so the
+  // preset-chip handler below can also mark a field as tracked when it fills
+  // source/medium programmatically, not just on manual blur.
+  var trackedFields = ['url', 'source', 'medium', 'campaign', 'term', 'content'];
+  var fieldTracked = {};
+  function trackFieldFill(fieldId){
+    if(fieldTracked[fieldId]) return;
+    fieldTracked[fieldId] = true;
+    window.dataLayer.push({
+      event: 'form_fill',
+      event_action: 'filled_' + fieldId
+    });
+  }
+  trackedFields.forEach(function(fieldId){
+    var el = document.getElementById(fieldId);
+    fieldTracked[fieldId] = false;
+    el.addEventListener('blur', function(){
+      if(this.value.trim() === '') return;
+      trackFieldFill(fieldId);
+    });
+    el.addEventListener('input', function(){
+      if(this.value.trim() === '') fieldTracked[fieldId] = false;
+      this.classList.remove('invalid');
+      document.getElementById('warningBox').classList.remove('show');
+      if(fieldId === 'source' || fieldId === 'medium') updateChannelPreview();
+    });
+  });
+
   document.querySelectorAll('.preset-chip').forEach(function(btn){
     btn.addEventListener('click', function(){
       if(this.classList.contains('custom')){
@@ -971,32 +1000,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         document.getElementById('warningBox').classList.remove('show');
         document.getElementById('channelPreview').classList.remove('show', 'warn');
         document.querySelectorAll('#tool input[type="text"]').forEach(function(i){ i.classList.remove('invalid'); });
+        trackedFields.forEach(function(fieldId){ fieldTracked[fieldId] = false; });
         return;
       }
-      if(this.dataset.source) document.getElementById('source').value = this.dataset.source;
-      if(this.dataset.medium) document.getElementById('medium').value = this.dataset.medium;
+      if(this.dataset.source){
+        document.getElementById('source').value = this.dataset.source;
+        trackFieldFill('source');
+      }
+      if(this.dataset.medium){
+        document.getElementById('medium').value = this.dataset.medium;
+        trackFieldFill('medium');
+      }
       updateChannelPreview();
-    });
-  });
-
-  // form_fill tracking — fires once per distinct fill, not on every blur
-  var trackedFields = ['url', 'source', 'medium', 'campaign', 'term', 'content'];
-  trackedFields.forEach(function(fieldId){
-    var el = document.getElementById(fieldId);
-    var alreadyTracked = false;
-    el.addEventListener('blur', function(){
-      if(this.value.trim() === '' || alreadyTracked) return;
-      alreadyTracked = true;
-      window.dataLayer.push({
-        event: 'form_fill',
-        event_action: 'filled_' + fieldId
-      });
-    });
-    el.addEventListener('input', function(){
-      if(this.value.trim() === '') alreadyTracked = false;
-      this.classList.remove('invalid');
-      document.getElementById('warningBox').classList.remove('show');
-      if(fieldId === 'source' || fieldId === 'medium') updateChannelPreview();
     });
   });
 
