@@ -1213,6 +1213,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     warningBox.classList.remove('show');
 
+    // Duplicate query-string test — more than one literal "?" in the entered
+    // URL almost always means a paste error or an already-tagged URL pasted
+    // twice; a second "?" wouldn't start a new query string per URL syntax,
+    // it'd just sit inside the first one as a stray character, so catch it
+    // before generating instead of producing a confusing link.
+    var qMarkCount = (urlEl.value.match(/\?/g) || []).length;
+    if(qMarkCount > 1){
+      urlEl.classList.add('invalid');
+      warningBox.textContent = 'The website URL has more than one "?" — check it only has a single query string.';
+      warningBox.classList.add('show');
+      document.getElementById('output').classList.remove('show');
+      return;
+    }
+
     var proto = document.getElementById('httpsBtn').classList.contains('active') ? 'https://' : 'http://';
     var rawUrl = urlEl.value.replace(/^https?:\/\//,'');
     var source = sourceEl.value;
@@ -1237,6 +1251,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       existingQuery = rawUrl.slice(qIndex + 1);
       basePath = rawUrl.slice(0, qIndex);
     }
+
+    // Stray-slash-in-query test — a "/" right after "?" (e.g. someone typed
+    // "?/" instead of just "?") isn't a real query parameter, it's noise.
+    // Strip leading slashes so it doesn't get glued onto the UTM string as
+    // "?/&utm_source=...". A real query never legitimately starts with "/".
+    existingQuery = existingQuery.replace(/^\/+/, '');
+
+    // Trailing slash test — a "/" right before "?" is redundant for a root
+    // URL (example.com/? and example.com? resolve identically) and, when
+    // present on a deeper path, still produces a working link on the vast
+    // majority of sites; strip it so the generated URL stays clean.
+    basePath = basePath.replace(/\/+$/, '');
 
     var utmParams = [
       'utm_source=' + cleanValue(source, SOURCE_ALIASES),
