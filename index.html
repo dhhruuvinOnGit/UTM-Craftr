@@ -1,42 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <script>
-    // Runs before paint — reads saved preference, or defaults to dark
-    (function () {
-      var saved = localStorage.getItem('urchin-theme');
-      var theme = saved || 'dark';
-      document.documentElement.setAttribute('data-theme', theme);
-    })();
-  </script>
-  <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="light_mode_logo.png">
-  <link rel="apple-touch-icon" href="light_mode_logo.png">
+<script>
+  // Runs before paint — reads saved preference, or defaults to dark
+  (function(){
+    var saved = localStorage.getItem('urchin-theme');
+    var theme = saved || 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="light_mode_logo.png">
+<link rel="apple-touch-icon" href="light_mode_logo.png">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Free UTM Builder for GA4 | Campaign URL Generator</title>
-  <meta name="description"
-    content="Build clean UTM tracking links for Google Analytics 4 in seconds. Free UTM campaign URL builder — no signup, no catch.">
-  <meta name="keywords"
-    content="utm builder, utm link generator, campaign url builder, ga4 utm tracking, utm parameters, free utm builder">
-  <link rel="canonical" href="https://utm-craftr.vercel.app/">
+<title>Free UTM Builder for GA4 | Campaign URL Generator</title>
+<meta name="description" content="Build clean UTM tracking links for Google Analytics 4 in seconds. Free UTM campaign URL builder — no signup, no catch.">
+<meta name="keywords" content="utm builder, utm link generator, campaign url builder, ga4 utm tracking, utm parameters, free utm builder">
+<link rel="canonical" href="https://utm-craftr.vercel.app/">
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Free UTM Builder for GA4 | UTMCraftr">
-  <meta property="og:description"
-    content="Build clean UTM tracking links for Google Analytics 4 in seconds. Free, no signup required.">
-  <meta property="og:url" content="https://utm-craftr.vercel.app/">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free UTM Builder for GA4 | UTMCraftr">
+<meta property="og:description" content="Build clean UTM tracking links for Google Analytics 4 in seconds. Free, no signup required.">
+<meta property="og:url" content="https://utm-craftr.vercel.app/">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -80,7 +74,7 @@
 }
 </script>
 
-  <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -98,1306 +92,405 @@
 }
 </script>
 
-  <style>
-    :root {
-      --font-primary: 'PT Serif', Georgia, serif;
-      --font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --paper: #F6F5FA;
-      --paper-card: #FFFFFF;
-      --ink: #1E1B2E;
-      --ink-soft: #6A6775;
-      --ink-faint: #A09EA8;
-      --ink-faint1: #3276c5;
-      --forest: #3730A3;
-      --forest-deep: #1E1B2E;
-      --sage: #EFEEF8;
-      --sage-border: #C7C5E5;
-      --mustard: #FF6B4A;
-      --line: #E4E1F0;
-      --on-accent: #FFFFFF;
-      --panel-soft: #B9B7DF;
-      --error: #B04F40;
-      --error-bg: #FFEDE9;
-      --radius: 14px;
-    }
-
-    html[data-theme="dark"] {
-      --paper: #1A1730;
-      --paper-card: #221E3D;
-      --ink: #F1EFF8;
-      --ink-soft: #9B99A8;
-      --ink-faint: #7B788A;
-      --forest: #918DCC;
-      --forest-deep: #1E1B2E;
-      --sage: #2F2C4C;
-      --sage-border: #47446B;
-      --mustard: #FF6B4A;
-      --line: #1F1B38;
-      --on-accent: #1E1B2E;
-      --panel-soft: #3B3856;
-      --error: #FF6B4A;
-      --error-bg: #3A2334;
-    }
-
-    html {
-      transition: background-color 0.25s ease;
-    }
-
-    body {
-      transition: background-color 0.25s ease, color 0.25s ease;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: var(--font-secondary);
-      color: var(--ink);
-      background: var(--paper);
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .wrap {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .display {
-      font-family: var(--font-primary);
-    }
-
-    /* NAV */
-    nav {
-      padding: 22px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    nav .wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: none;
-      width: 100%;
-      box-sizing: border-box;
-      padding: 0 40px;
-    }
-
-    /* .brand{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700;font-family:var(--font-primary);color:var(--forest);} */
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 18px;
-      font-weight: 700;
-      font-family: var(--font-primary);
-      color: #1E1B2E;
-      /* Navy blue in light mode */
-    }
-
-    html[data-theme="dark"] .brand {
-      color: #FFFFFF;
-      /* White in dark mode */
-    }
-
-    .brand-mark {
-      width: 30px;
-      height: 30px;
-      border-radius: 1px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      font-size: 14px;
-      color: var(--ink-soft);
-      font-weight: 500;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .theme-toggle {
-      width: 34px;
-      height: 34px;
-      border-radius: 9px;
-      border: 1px solid var(--line);
-      background: var(--paper-card);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--ink-soft);
-      transition: border-color 0.15s ease, color 0.15s ease;
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--forest);
-      color: var(--forest);
-    }
-
-    .theme-toggle svg {
-      width: 17px;
-      height: 17px;
-    }
-
-    .theme-toggle .icon-moon {
-      display: none;
-    }
-
-    html[data-theme="dark"] .theme-toggle .icon-sun {
-      display: none;
-    }
-
-    html[data-theme="dark"] .theme-toggle .icon-moon {
-      display: block;
-    }
-
-    .nav-links a {
-      border-bottom: 1.5px solid transparent;
-      padding-bottom: 2px;
-      transition: border-color 0.15s, color 0.15s;
-    }
-
-    .nav-links a:hover {
-      border-color: var(--forest);
-      color: var(--ink);
-    }
-
-    /* HERO */
-    .hero {
-      padding: 76px 24px 54px;
-      text-align: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--sage);
-      color: var(--forest);
-      border: 1px solid var(--sage-border);
-      padding: 7px 16px;
-      border-radius: 100px;
-      font-size: 12.5px;
-      font-weight: 600;
-      margin-bottom: 28px;
-    }
-
-    h1 {
-      font-family: var(--font-primary);
-      font-size: 44px;
-      font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: -0.005em;
-      margin-bottom: 20px;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero p {
-      font-size: 17px;
-      color: var(--ink-soft);
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    /* TOOL CARD */
-    .card-wrap {
-      max-width: 720px;
-      margin: 50px auto 100px;
-    }
-
-    /* BUILDER + OTHER PRODUCTS SPLIT */
-    #tool {
-      max-width: 1040px;
-    }
-
-    .builder-split {
-      display: flex;
-      align-items: flex-start;
-      gap: 36px;
-      margin: 50px 0 100px;
-    }
-
-    .builder-col {
-      flex: 0 1 70%;
-      min-width: 0;
-    }
-
-    .builder-col .card-wrap {
-      margin: 0;
-      max-width: none;
-    }
-
-    .split-divider {
-      width: 3px;
-      align-self: stretch;
-      background: var(--line);
-      flex-shrink: 0;
-      border-radius: 2px;
-    }
-
-    .products-col {
-      flex: 0 1 30%;
-      min-width: 0;
-    }
-
-    .products-panel {
-      position: sticky;
-      top: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .products-panel .section-label {
-      margin-bottom: 14px;
-      font-size: 15px;
-      letter-spacing: 0.2px;
-      color: var(--ink);
-    }
-
-    .product-card {
-      border: 1px solid var(--sage-border);
-      border-radius: var(--radius);
-      padding: 20px;
-      background: var(--paper-card);
-    }
-
-    .product-card-icon {
-      width: 28px;
-      height: 28px;
-      margin-bottom: 10px;
-      display: block;
-    }
-
-    .product-card-name {
-      font-family: var(--font-primary);
-      font-size: 17px;
-      font-weight: 400;
-      margin-bottom: 8px;
-      color: var(--ink);
-    }
-
-    .product-card-desc {
-      font-size: 13.5px;
-      color: var(--ink-soft);
-      line-height: 1.55;
-      margin-bottom: 14px;
-    }
-
-    .product-card-badge {
-      display: inline-block;
-      font-size: 11.5px;
-      font-weight: 600;
-      color: var(--forest);
-      background: var(--sage);
-      padding: 4px 10px;
-      border-radius: 20px;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-    }
-
-    .product-card-cta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 16px;
-      padding: 11px 14px;
-      border-radius: 9px;
-      border: none;
-      background: var(--forest);
-      color: var(--on-accent);
-      font-size: 13.5px;
-      font-weight: 600;
-      font-family: var(--font-secondary);
-      text-decoration: none;
-      cursor: pointer;
-      width: 100%;
-      box-sizing: border-box;
-      transition: opacity 0.15s ease, transform 0.12s ease;
-    }
-
-    .product-card-cta:hover {
-      opacity: 0.88;
-    }
-
-    .product-card-cta:active {
-      transform: scale(0.98);
-    }
-
-    /* PRODUCT ACCESS MODAL */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-
-    .modal-overlay.show {
-      display: flex;
-    }
-
-    .modal-box {
-      background: var(--paper-card);
-      border-radius: var(--radius);
-      padding: 32px;
-      max-width: 400px;
-      width: 100%;
-      position: relative;
-      box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.35);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 14px;
-      right: 16px;
-      background: none;
-      border: none;
-      font-size: 22px;
-      line-height: 1;
-      color: var(--ink-faint);
-      cursor: pointer;
-      padding: 4px;
-    }
-
-    .modal-close:hover {
-      color: var(--ink);
-    }
-
-    .modal-title {
-      font-family: var(--font-primary);
-      font-size: 22px;
-      font-weight: 400;
-      margin-bottom: 8px;
-      color: var(--ink);
-    }
-
-    .modal-sub {
-      font-size: 13.5px;
-      color: var(--ink-soft);
-      margin-bottom: 22px;
-      line-height: 1.5;
-    }
-
-    .modal-box .field-group {
-      margin-bottom: 14px;
-    }
-
-    .modal-box label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: var(--ink);
-    }
-
-    .modal-box input {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 11px 13px;
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      background: var(--paper);
-      color: var(--ink);
-      font-size: 14px;
-      font-family: var(--font-secondary);
-    }
-
-    .modal-box input:focus {
-      outline: none;
-      border-color: var(--forest);
-    }
-
-    .modal-submit {
-      width: 100%;
-      margin-top: 6px;
-      padding: 12px 14px;
-      border: none;
-      border-radius: 9px;
-      background: var(--forest);
-      color: var(--on-accent);
-      font-size: 14.5px;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: var(--font-secondary);
-      transition: opacity 0.15s ease, transform 0.12s ease;
-    }
-
-    .modal-submit:hover {
-      opacity: 0.9;
-    }
-
-    .modal-submit:active {
-      transform: scale(0.98);
-    }
-
-    .modal-submit:disabled {
-      opacity: 0.6;
-      cursor: default;
-    }
-
-    .window {
-      background: var(--paper-card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: 0 20px 50px -20px rgba(31, 75, 63, 0.18), 0 4px 16px rgba(0, 0, 0, 0.04);
-      padding: 36px 32px 32px;
-    }
-
-    .window-title {
-      font-family: var(--font-primary);
-      font-size: 21px;
-      font-weight: 400;
-      margin-bottom: 26px;
-    }
-
-    .field-label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13.5px;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 7px;
-    }
-
-    .info-wrap {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .info-icon {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: var(--sage);
-      color: var(--forest);
-      font-size: 10px;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: help;
-      flex-shrink: 0;
-      border: 1px solid var(--sage-border);
-    }
-
-    .info-tooltip {
-      position: absolute;
-      bottom: calc(100% + 9px);
-      left: 50%;
-      transform: translateX(-50%) translateY(4px);
-      background: var(--ink);
-      color: var(--paper);
-      font-size: 12px;
-      font-weight: 400;
-      line-height: 1.4;
-      font-family: var(--font-secondary);
-      padding: 9px 13px;
-      border-radius: 8px;
-      width: 205px;
-      text-align: left;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.15s ease, transform 0.15s ease;
-      z-index: 20;
-      pointer-events: none;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-    }
-
-    .info-tooltip::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border: 5px solid transparent;
-      border-top-color: var(--ink);
-    }
-
-    .info-wrap:hover .info-tooltip {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    input[type="text"],
-    select {
-      width: 100%;
-      height: 40px;
-      padding: 0 13px;
-      border-radius: 9px;
-      border: 1px solid var(--line);
-      background: var(--paper);
-      font-size: 14px;
-      color: var(--ink);
-      font-family: var(--font-secondary);
-      outline: none;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    input[type="text"]:focus,
-    select:focus {
-      border-color: var(--forest);
-      box-shadow: 0 0 0 3px rgba(31, 75, 63, 0.12);
-    }
-
-    input::placeholder {
-      color: var(--ink-faint);
-    }
-
-    input.invalid {
-      border-color: var(--error);
-    }
-
-    .url-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .proto-toggle {
-      display: flex;
-      background: var(--sage);
-      border-radius: 9px;
-      padding: 3px;
-      flex-shrink: 0;
-    }
-
-    .proto-toggle button {
-      border: none;
-      background: transparent;
-      padding: 0 11px;
-      height: 32px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink-soft);
-      border-radius: 7px;
-      cursor: pointer;
-      font-family: var(--font-secondary);
-    }
-
-    .proto-toggle button.active {
-      background: var(--forest);
-      color: var(--on-accent);
-    }
-
-    .presets-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--ink-faint);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 10px;
-    }
-
-    .presets {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 26px;
-    }
-
-    .preset-chip {
-      padding: 7px 14px;
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 500;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      cursor: pointer;
-      transition: all 0.15s ease;
-      font-family: var(--font-secondary);
-      color: var(--ink);
-    }
-
-    .preset-chip:hover {
-      border-color: var(--forest);
-      background: var(--sage);
-    }
-
-    .preset-chip.custom {
-      color: var(--forest);
-      font-weight: 600;
-    }
-
-    .section-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--ink-faint);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin: 24px 0 12px;
-    }
-
-    .row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 16px;
-    }
-
-    .field-group {
-      margin-bottom: 16px;
-    }
-
-    .adv-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      background: var(--sage);
-      border-radius: 11px;
-      padding: 16px;
-      margin-top: 8px;
-      margin-bottom: 8px;
-    }
-
-    .generate-btn {
-      width: 100%;
-      height: 46px;
-      border: none;
-      border-radius: 10px;
-      background: var(--forest);
-      color: var(--on-accent);
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 8px 20px -6px rgba(31, 75, 63, 0.5);
-      margin-top: 24px;
-      font-family: var(--font-secondary);
-      transition: transform 0.12s ease, box-shadow 0.12s ease;
-    }
-
-    .generate-btn:hover {
-      box-shadow: 0 10px 26px -6px rgba(31, 75, 63, 0.55);
-    }
-
-    .generate-btn:active {
-      transform: scale(0.98);
-    }
-
-    .output {
-      display: none;
-      margin-top: 18px;
-    }
-
-    .output.show {
-      display: block;
-    }
-
-    .output-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--sage);
-      border-radius: 10px;
-      padding: 14px 16px;
-    }
-
-    .output-text {
-      flex: 1;
-      font-size: 14.5px;
-      line-height: 1.5;
-      color: var(--ink);
-      word-break: break-all;
-      font-family: var(--font-secondary);
-      font-weight: 500;
-    }
-
-    .copy-btn {
-      flex-shrink: 0;
-      padding: 0 14px;
-      height: 34px;
-      border-radius: 8px;
-      border: 1px solid var(--sage-border);
-      background: var(--paper-card);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      color: var(--forest);
-      font-weight: 600;
-      transition: background 0.15s ease;
-    }
-
-    .copy-btn:hover {
-      background: var(--sage);
-    }
-
-    .warning-box {
-      display: none;
-      align-items: center;
-      gap: 8px;
-      background: var(--error-bg);
-      color: var(--error);
-      border-radius: 9px;
-      padding: 10px 14px;
-      font-size: 13px;
-      font-weight: 500;
-      margin-top: 14px;
-    }
-
-    .warning-box.show {
-      display: flex;
-    }
-
-    .channel-preview {
-      display: none;
-      align-items: center;
-      gap: 8px;
-      background: var(--sage);
-      color: var(--forest);
-      border-radius: 9px;
-      padding: 10px 14px;
-      font-size: 13px;
-      font-weight: 500;
-      margin-top: 14px;
-      margin-bottom: 16px;
-    }
-
-    .channel-preview.show {
-      display: flex;
-    }
-
-    .channel-preview.warn {
-      background: var(--error-bg);
-      color: var(--error);
-    }
-
-    /* CONTENT SECTIONS */
-    .section {
-      padding: 0 24px 90px;
-    }
-
-    .section-narrow {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .section-head {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-
-    .section-head h2 {
-      font-family: var(--font-primary);
-      font-size: 30px;
-      font-weight: 400;
-      margin-bottom: 10px;
-      letter-spacing: -0.005em;
-    }
-
-    .section-head p {
-      font-size: 15px;
-      color: var(--ink-soft);
-    }
-
-    .prose {
-      font-size: 15.5px;
-      color: var(--ink-soft);
-      line-height: 1.75;
-    }
-
-    .prose p+p {
-      margin-top: 14px;
-    }
-
-    .param-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .param-row {
-      display: flex;
-      gap: 16px;
-      align-items: baseline;
-      background: var(--paper-card);
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      padding: 16px 20px;
-    }
-
-    .param-name {
-      font-family: 'SF Mono', Menlo, monospace;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--forest);
-      flex-shrink: 0;
-      width: 130px;
-    }
-
-    .param-desc {
-      font-size: 14px;
-      color: var(--ink-soft);
-      line-height: 1.55;
-    }
-
-    .param-desc .tag {
-      font-size: 11px;
-      color: var(--error);
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-left: 6px;
-    }
-
-    .benefit-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .benefit-card {
-      background: var(--paper-card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
-    }
-
-    .benefit-card:hover {
-      box-shadow: 0 16px 32px -16px rgba(31, 75, 63, 0.25);
-      transform: translateY(-2px);
-    }
-
-    .benefit-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: var(--sage);
-      color: var(--forest);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 14px;
-    }
-
-    .benefit-card h3 {
-      font-family: var(--font-primary);
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .benefit-card p {
-      font-size: 13px;
-      color: var(--ink-soft);
-      line-height: 1.55;
-    }
-
-    .ga4-panel {
-      max-width: 900px;
-      margin: 0 auto;
-      background: var(--forest);
-      color: #FFFFFF;
-      border-radius: 18px;
-      padding: 44px 46px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 36px;
-      align-items: center;
-    }
-
-    .ga4-panel h2,
-    .ga4-panel p,
-    .ga4-panel .ga4-item p {
-      color: #FFFFFF;
-    }
-
-    .ga4-panel h2 {
-      font-family: var(--font-primary);
-      font-size: 28px;
-      font-weight: 400;
-      margin-bottom: 14px;
-    }
-
-    .ga4-panel>div:first-child p {
-      font-size: 14px;
-      color: #FFFFFF;
-      line-height: 1.65;
-    }
-
-    .ga4-list {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .ga4-item {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-
-    .ga4-check {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--mustard);
-      color: var(--forest-deep);
-      font-size: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
-      font-weight: 700;
-    }
-
-    .ga4-item p {
-      font-size: 13.5px;
-      font-weight: 500;
-    }
-
-    .checklist {
-      max-width: 700px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 11px;
-    }
-
-    .checklist-item {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      background: var(--paper-card);
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      padding: 16px 20px;
-    }
-
-    .checklist-num {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--forest);
-      color: var(--on-accent);
-      font-size: 12px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .checklist-item p {
-      font-size: 14px;
-      color: var(--ink);
-      line-height: 1.5;
-    }
-
-    .checklist-item strong {
-      color: var(--forest);
-    }
-
-    .faq-list {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .faq-item {
-      border-bottom: 1px solid var(--line);
-    }
-
-    .faq-q {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 19px 4px;
-      cursor: pointer;
-      font-size: 16.5px;
-      font-weight: 700;
-      gap: 10px;
-      font-family: var(--font-primary);
-    }
-
-    .faq-q .plus {
-      font-size: 18px;
-      color: var(--ink-faint);
-      transition: transform 0.2s ease;
-      flex-shrink: 0;
-      font-family: var(--font-secondary);
-      font-weight: 400;
-    }
-
-    .faq-item.open .plus {
-      transform: rotate(45deg);
-      color: var(--forest);
-    }
-
-    .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s ease;
-      font-size: 13.5px;
-      color: var(--ink-soft);
-      line-height: 1.6;
-    }
-
-    .faq-item.open .faq-a {
-      max-height: 200px;
-      padding-bottom: 19px;
-    }
-
-    /* URL ANATOMY */
-    .anatomy {
-      max-width: 700px;
-      margin: 0 auto 44px;
-    }
-
-    .anatomy-url {
-      font-family: 'SF Mono', Menlo, monospace;
-      font-size: 15.5px;
-      line-height: 1.8;
-      background: var(--paper-card);
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      padding: 20px 22px;
-      word-break: break-all;
-    }
-
-    .anatomy-url .a-proto {
-      color: var(--ink-faint);
-    }
-
-    .anatomy-url .a-host {
-      color: var(--forest);
-      font-weight: 700;
-    }
-
-    .anatomy-url .a-path {
-      color: var(--ink-soft);
-      font-weight: 700;
-    }
-
-    .anatomy-url .a-sep {
-      color: var(--error);
-      font-weight: 700;
-    }
-
-    .anatomy-url .a-key {
-      color: var(--forest);
-    }
-
-    .anatomy-url .a-val {
-      color: var(--ink);
-    }
-
-    .anatomy-url .a-frag {
-      color: var(--ink-faint1);
-    }
-
-    .anatomy-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 22px;
-      justify-content: center;
-      margin-top: 16px;
-      font-size: 12.5px;
-      color: var(--ink-soft);
-    }
-
-    .anatomy-legend span {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .anatomy-legend i {
-      width: 10px;
-      height: 10px;
-      border-radius: 3px;
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
-    .anatomy-caption {
-      font-size: 14px;
-      color: var(--ink-soft);
-      line-height: 1.65;
-      text-align: center;
-      margin-top: 16px;
-    }
-
-    /* QUICK TESTS */
-    .test-grid {
-      max-width: 700px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 11px;
-    }
-
-    .test-item {
-      background: var(--paper-card);
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      padding: 16px 20px;
-    }
-
-    .test-item p {
-      font-size: 14px;
-      color: var(--ink);
-      line-height: 1.5;
-    }
-
-    .test-item strong {
-      color: var(--forest);
-    }
-
-    .test-item code {
-      font-family: 'SF Mono', Menlo, monospace;
-      font-size: 12.5px;
-      background: var(--sage);
-      border-radius: 5px;
-      padding: 1px 6px;
-      color: var(--ink);
-    }
-
-    .test-item p.test-ex {
-      font-size: 12.5px;
-      margin-top: 6px;
-      word-break: break-all;
-    }
-
-    .test-item p.test-ex.bad {
-      color: var(--error);
-    }
-
-    .test-item p.test-ex.good {
-      color: var(--forest);
-    }
-
-    .test-item p.test-ex code {
-      background: transparent;
-      padding: 0;
-      color: inherit;
-    }
-
-    footer {
-      text-align: center;
-      padding: 44px 24px 60px;
-      font-size: 13px;
-      color: var(--ink-faint);
-      border-top: 1px solid var(--line);
-    }
-
-    footer a {
-      border-bottom: 1px solid var(--ink-faint);
-      padding-bottom: 1px;
-      transition: border-color 0.15s ease, color 0.15s ease;
-    }
-
-    footer a:hover {
-      color: var(--forest);
-      border-color: var(--forest);
-    }
-
-    footer .foot-sep {
-      margin: 0 8px;
-      color: var(--ink-faint);
-    }
-
-    @media (max-width:720px) {
-      h1 {
-        font-size: 30px;
-      }
-
-      .benefit-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .ga4-panel {
-        grid-template-columns: 1fr;
-        padding: 28px;
-      }
-
-      .row-2 {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      nav .wrap {
-        padding: 0 20px;
-      }
-
-      .param-row {
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .param-name {
-        width: auto;
-      }
-
-      .builder-split {
-        flex-direction: column;
-        gap: 28px;
-      }
-
-      .split-divider {
-        width: 100%;
-        height: 3px;
-      }
-
-      .builder-col {
-        flex: none;
-        width: 100%;
-      }
-
-      .products-col {
-        flex: none;
-        width: 100%;
-      }
-
-      .products-panel {
-        position: static;
-      }
-    }
-  </style>
-  <!-- Google Analytics 4 -->
-  <!-- Replace G-XXXXXXXXXX below with your real Measurement ID from GA4 -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-BPD9QFCNNM"></script>
+<style>
+  :root{
+    --font-primary:'PT Serif', Georgia, serif;
+    --font-secondary:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --paper:#F5F6F8;
+    --paper-card:#FFFFFF;
+    --ink:#1F2937;
+    --ink-soft:#64748B;
+    --ink-faint:#94A3B8;
+    --ink-faint1:#6D6BEA;
+    --forest:#5B5BD6;
+    --forest-deep:#1F2937;
+    --sage:#EEF0F4;
+    --sage-border:#D5DAE2;
+    --mustard:#8B86E8;
+    --line:#E2E6EC;
+    --on-accent:#FFFFFF;
+    --panel-soft:#CBD1DB;
+    --error:#D65A5A;
+    --error-bg:#FFF0F0;
+    --radius:14px;
+  }
+
+  html[data-theme="dark"]{
+    --paper:#171D28;
+    --paper-card:#222B38;
+    --ink:#F8FAFC;
+    --ink-soft:#B4BFCE;
+    --ink-faint:#7E8A9A;
+    --forest:#7C78E8;
+    --forest-deep:#0F141C;
+    --sage:#2A3443;
+    --sage-border:#3B4758;
+    --mustard:#A09CF2;
+    --line:#2A3442;
+    --on-accent:#FFFFFF;
+    --panel-soft:#AEB8C7;
+    --error:#FF7B7B;
+    --error-bg:#3A2730;
+  }
+
+  html{transition:background-color 0.25s ease;}
+  body{transition:background-color 0.25s ease, color 0.25s ease;}
+
+  html{scroll-behavior:smooth;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  body{
+    font-family:var(--font-secondary);
+    color:var(--ink);
+    background:var(--paper);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px;}
+  .display{font-family:var(--font-primary);}
+
+  /* NAV */
+  nav{padding:22px 0;border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;max-width:none;width:100%;box-sizing:border-box;padding:0 40px;}
+  .brand{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700;font-family:var(--font-primary);color:var(--forest-deep);}
+html[data-theme="dark"] .brand{color:#FFFFFF;}
+  .brand-mark{
+    width:30px;height:30px;border-radius:1px;
+    object-fit:cover;flex-shrink:0;
+  }
+  .nav-links{display:flex;gap:28px;font-size:14px;color:var(--ink-soft);font-weight:500;}
+  .nav-right{display:flex;align-items:center;gap:24px;}
+  .theme-toggle{
+    width:34px;height:34px;border-radius:9px;border:1px solid var(--line);
+    background:var(--paper-card);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--ink-soft);transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .theme-toggle:hover{border-color:var(--forest);color:var(--forest);}
+  .theme-toggle svg{width:17px;height:17px;}
+  .theme-toggle .icon-moon{display:none;}
+  html[data-theme="dark"] .theme-toggle .icon-sun{display:none;}
+  html[data-theme="dark"] .theme-toggle .icon-moon{display:block;}
+  .nav-links a{border-bottom:1.5px solid transparent;padding-bottom:2px;transition:border-color 0.15s, color 0.15s;}
+  .nav-links a:hover{border-color:var(--forest);color:var(--ink);}
+
+  /* HERO */
+  .hero{padding:76px 24px 54px;text-align:center;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--sage);color:var(--forest);border:1px solid var(--sage-border);
+    padding:7px 16px;border-radius:100px;
+    font-size:12.5px;font-weight:600;
+    margin-bottom:28px;
+  }
+  h1{font-family:var(--font-primary);font-size:44px;font-weight:400;line-height:1.2;letter-spacing:-0.005em;margin-bottom:20px;max-width:900px;margin-left:auto;margin-right:auto;}
+  .hero p{font-size:17px;color:var(--ink-soft);max-width:520px;margin:0 auto;line-height:1.6;}
+
+  /* TOOL CARD */
+  .card-wrap{max-width:720px;margin:50px auto 100px;}
+
+  /* BUILDER + OTHER PRODUCTS SPLIT */
+  #tool{max-width:1040px;}
+  .builder-split{display:flex;align-items:flex-start;gap:36px;margin:50px 0 100px;}
+  .builder-col{flex:0 1 70%;min-width:0;}
+  .builder-col .card-wrap{margin:0;max-width:none;}
+  .split-divider{width:3px;align-self:stretch;background:var(--line);flex-shrink:0;border-radius:2px;}
+  .products-col{flex:0 1 30%;min-width:0;}
+  .products-panel{position:sticky;top:24px;display:flex;flex-direction:column;gap:20px;}
+  .products-panel .section-label{margin-bottom:14px;font-size:15px;letter-spacing:0.2px;color:var(--ink);}
+  .product-card{
+    border:1px solid var(--sage-border);border-radius:var(--radius);
+    padding:20px;background:var(--paper-card);
+  }
+  .product-card-icon{width:28px;height:28px;margin-bottom:10px;display:block;}
+  .product-card-name{font-family:var(--font-primary);font-size:17px;font-weight:400;margin-bottom:8px;color:var(--ink);}
+  .product-card-desc{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:14px;}
+  .product-card-badge{
+    display:inline-block;font-size:11.5px;font-weight:600;color:var(--forest);
+    background:var(--sage);padding:4px 10px;border-radius:20px;
+    letter-spacing:0.02em;text-transform:uppercase;
+  }
+  .product-card-cta{
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    margin-top:16px;padding:11px 14px;border-radius:9px;border:none;
+    background:var(--forest);color:var(--on-accent);
+    font-size:13.5px;font-weight:600;font-family:var(--font-secondary);
+    text-decoration:none;cursor:pointer;width:100%;box-sizing:border-box;
+    transition:opacity 0.15s ease, transform 0.12s ease;
+  }
+  .product-card-cta:hover{opacity:0.88;}
+  .product-card-cta:active{transform:scale(0.98);}
+
+  /* PRODUCT ACCESS MODAL */
+  .modal-overlay{
+    display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);
+    align-items:center;justify-content:center;z-index:999;padding:20px;box-sizing:border-box;
+  }
+  .modal-overlay.show{display:flex;}
+  .modal-box{
+    background:var(--paper-card);border-radius:var(--radius);padding:32px;
+    max-width:400px;width:100%;position:relative;
+    box-shadow:0 24px 60px -12px rgba(0,0,0,0.35);
+  }
+  .modal-close{
+    position:absolute;top:14px;right:16px;background:none;border:none;
+    font-size:22px;line-height:1;color:var(--ink-faint);cursor:pointer;padding:4px;
+  }
+  .modal-close:hover{color:var(--ink);}
+  .modal-title{font-family:var(--font-primary);font-size:22px;font-weight:400;margin-bottom:8px;color:var(--ink);}
+  .modal-sub{font-size:13.5px;color:var(--ink-soft);margin-bottom:22px;line-height:1.5;}
+  .modal-box .field-group{margin-bottom:14px;}
+  .modal-box label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink);}
+  .modal-box input{
+    width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid var(--line);
+    border-radius:9px;background:var(--paper);color:var(--ink);
+    font-size:14px;font-family:var(--font-secondary);
+  }
+  .modal-box input:focus{outline:none;border-color:var(--forest);}
+  .modal-submit{
+    width:100%;margin-top:6px;padding:12px 14px;border:none;border-radius:9px;
+    background:var(--forest);color:var(--on-accent);font-size:14.5px;font-weight:600;
+    cursor:pointer;font-family:var(--font-secondary);
+    transition:opacity 0.15s ease, transform 0.12s ease;
+  }
+  .modal-submit:hover{opacity:0.9;}
+  .modal-submit:active{transform:scale(0.98);}
+  .modal-submit:disabled{opacity:0.6;cursor:default;}
+
+  .window{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 20px 50px -20px rgba(31,75,63,0.18), 0 4px 16px rgba(0,0,0,0.04);
+    padding:36px 32px 32px;
+  }
+  .window-title{font-family:var(--font-primary);font-size:21px;font-weight:400;margin-bottom:26px;}
+
+  .field-label{display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:7px;}
+
+  .info-wrap{position:relative;display:inline-flex;align-items:center;}
+  .info-icon{
+    width:16px;height:16px;border-radius:50%;
+    background:var(--sage);color:var(--forest);
+    font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;
+    cursor:help;flex-shrink:0;border:1px solid var(--sage-border);
+  }
+  .info-tooltip{
+    position:absolute;bottom:calc(100% + 9px);left:50%;transform:translateX(-50%) translateY(4px);
+    background:var(--ink);color:var(--paper);
+    font-size:12px;font-weight:400;line-height:1.4;font-family:var(--font-secondary);
+    padding:9px 13px;border-radius:8px;
+    width:205px;text-align:left;
+    opacity:0;visibility:hidden;
+    transition:opacity 0.15s ease, transform 0.15s ease;
+    z-index:20;pointer-events:none;
+    box-shadow:0 8px 20px rgba(0,0,0,0.18);
+  }
+  .info-tooltip::after{
+    content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);
+    border:5px solid transparent;border-top-color:var(--ink);
+  }
+  .info-wrap:hover .info-tooltip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+
+  input[type="text"], select{
+    width:100%;height:40px;padding:0 13px;
+    border-radius:9px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    font-size:14px;color:var(--ink);
+    font-family:var(--font-secondary);
+    outline:none;
+    transition:border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  input[type="text"]:focus, select:focus{
+    border-color:var(--forest);
+    box-shadow:0 0 0 3px rgba(31,75,63,0.12);
+  }
+  input::placeholder{color:var(--ink-faint);}
+  input.invalid{border-color:var(--error);}
+
+  .url-row{display:flex;gap:8px;margin-bottom:20px;}
+  .proto-toggle{display:flex;background:var(--sage);border-radius:9px;padding:3px;flex-shrink:0;}
+  .proto-toggle button{
+    border:none;background:transparent;padding:0 11px;height:32px;
+    font-size:13px;font-weight:600;color:var(--ink-soft);border-radius:7px;cursor:pointer;font-family:var(--font-secondary);
+  }
+  .proto-toggle button.active{background:var(--forest);color:var(--on-accent);}
+
+  .presets-label{font-size:11px;font-weight:700;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;}
+  .presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px;}
+  .preset-chip{
+    padding:7px 14px;border-radius:100px;font-size:13px;font-weight:500;
+    background:var(--paper);border:1px solid var(--line);
+    cursor:pointer;transition:all 0.15s ease;font-family:var(--font-secondary);color:var(--ink);
+  }
+  .preset-chip:hover{border-color:var(--forest);background:var(--sage);}
+  .preset-chip.custom{color:var(--forest);font-weight:600;}
+
+  .section-label{font-size:11px;font-weight:700;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.5px;margin:24px 0 12px;}
+  .row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+  .field-group{margin-bottom:16px;}
+
+  .adv-panel{
+    display:flex;flex-direction:column;gap:14px;
+    background:var(--sage);border-radius:11px;
+    padding:16px;margin-top:8px;margin-bottom:8px;
+  }
+  .generate-btn{
+    width:100%;height:46px;border:none;border-radius:10px;
+    background:var(--forest);
+    color:var(--on-accent);font-size:15px;font-weight:600;cursor:pointer;
+    box-shadow:0 8px 20px -6px rgba(31,75,63,0.5);
+    margin-top:24px;font-family:var(--font-secondary);
+    transition:transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .generate-btn:hover{box-shadow:0 10px 26px -6px rgba(31,75,63,0.55);}
+  .generate-btn:active{transform:scale(0.98);}
+
+  .output{display:none;margin-top:18px;}
+  .output.show{display:block;}
+  .output-row{
+    display:flex;align-items:center;gap:10px;
+    background:var(--sage);border-radius:10px;
+    padding:14px 16px;
+  }
+  .output-text{flex:1;font-size:14.5px;line-height:1.5;color:var(--ink);word-break:break-all;font-family:var(--font-secondary);font-weight:500;}
+  .copy-btn{
+    flex-shrink:0;padding:0 14px;height:34px;border-radius:8px;border:1px solid var(--sage-border);
+    background:var(--paper-card);cursor:pointer;display:flex;align-items:center;justify-content:center;
+    font-size:13px;color:var(--forest);font-weight:600;transition:background 0.15s ease;
+  }
+  .copy-btn:hover{background:var(--sage);}
+
+  .warning-box{
+    display:none;align-items:center;gap:8px;
+    background:var(--error-bg);color:var(--error);
+    border-radius:9px;padding:10px 14px;
+    font-size:13px;font-weight:500;margin-top:14px;
+  }
+  .warning-box.show{display:flex;}
+
+  .channel-preview{
+    display:none;align-items:center;gap:8px;
+    background:var(--sage);color:var(--forest);
+    border-radius:9px;padding:10px 14px;
+    font-size:13px;font-weight:500;margin-top:14px;margin-bottom:16px;
+  }
+  .channel-preview.show{display:flex;}
+  .channel-preview.warn{background:var(--error-bg);color:var(--error);}
+
+  /* CONTENT SECTIONS */
+  .section{padding:0 24px 90px;}
+  .section-narrow{max-width:700px;margin:0 auto;}
+  .section-head{text-align:center;margin-bottom:32px;}
+  .section-head h2{font-family:var(--font-primary);font-size:30px;font-weight:400;margin-bottom:10px;letter-spacing:-0.005em;}
+  .section-head p{font-size:15px;color:var(--ink-soft);}
+  .prose{font-size:15.5px;color:var(--ink-soft);line-height:1.75;}
+  .prose p + p{margin-top:14px;}
+
+  .param-grid{display:flex;flex-direction:column;gap:14px;max-width:700px;margin:0 auto;}
+  .param-row{
+    display:flex;gap:16px;align-items:baseline;
+    background:var(--paper-card);border:1px solid var(--line);border-radius:11px;padding:16px 20px;
+  }
+  .param-name{font-family:'SF Mono',Menlo,monospace;font-size:13px;font-weight:600;color:var(--forest);flex-shrink:0;width:130px;}
+  .param-desc{font-size:14px;color:var(--ink-soft);line-height:1.55;}
+  .param-desc .tag{font-size:11px;color:var(--error);font-weight:700;text-transform:uppercase;margin-left:6px;}
+
+  .benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:900px;margin:0 auto;}
+  .benefit-card{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:box-shadow 0.2s ease, transform 0.2s ease;}
+  .benefit-card:hover{box-shadow:0 16px 32px -16px rgba(31,75,63,0.25);transform:translateY(-2px);}
+  .benefit-icon{width:38px;height:38px;border-radius:10px;background:var(--sage);color:var(--forest);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;margin-bottom:14px;}
+  .benefit-card h3{font-family:var(--font-primary);font-size:17px;font-weight:700;margin-bottom:6px;}
+  .benefit-card p{font-size:13px;color:var(--ink-soft);line-height:1.55;}
+
+  .ga4-panel{
+    max-width:900px;margin:0 auto;
+    background:var(--forest);color:var(--on-accent);
+    border-radius:18px;padding:44px 46px;
+    display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;
+  }
+  .ga4-panel h2{font-family:var(--font-primary);font-size:28px;font-weight:400;margin-bottom:14px;color:#FFFFFF;}
+  .ga4-panel p{color:#FFFFFF;}
+  .ga4-panel > div:first-child p{font-size:14px;color:#FFFFFF;line-height:1.65;}
+  .ga4-list{display:flex;flex-direction:column;gap:15px;}
+  .ga4-item{display:flex;gap:12px;align-items:flex-start;}
+  .ga4-check{width:20px;height:20px;border-radius:50%;background:var(--mustard);color:var(--forest-deep);font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-weight:700;}
+  .ga4-item p{font-size:13.5px;font-weight:500;}
+
+  .checklist{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:11px;}
+  .checklist-item{display:flex;gap:14px;align-items:flex-start;background:var(--paper-card);border:1px solid var(--line);border-radius:11px;padding:16px 20px;}
+  .checklist-num{
+    width:24px;height:24px;border-radius:50%;background:var(--forest);color:var(--on-accent);
+    font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .checklist-item p{font-size:14px;color:var(--ink);line-height:1.5;}
+  .checklist-item strong{color:var(--forest);}
+
+  .faq-list{max-width:700px;margin:0 auto;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;padding:19px 4px;cursor:pointer;font-size:16.5px;font-weight:700;gap:10px;font-family:var(--font-primary);}
+  .faq-q .plus{font-size:18px;color:var(--ink-faint);transition:transform 0.2s ease;flex-shrink:0;font-family:var(--font-secondary);font-weight:400;}
+  .faq-item.open .plus{transform:rotate(45deg);color:var(--forest);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease, padding 0.3s ease;font-size:13.5px;color:var(--ink-soft);line-height:1.6;}
+  .faq-item.open .faq-a{max-height:200px;padding-bottom:19px;}
+
+  /* URL ANATOMY */
+  .anatomy{max-width:700px;margin:0 auto 44px;}
+  .anatomy-url{
+    font-family:'SF Mono',Menlo,monospace;font-size:15.5px;line-height:1.8;
+    background:var(--paper-card);border:1px solid var(--line);border-radius:11px;
+    padding:20px 22px;word-break:break-all;
+  }
+  .anatomy-url .a-proto{color:var(--ink-faint);}
+  .anatomy-url .a-host{color:var(--forest);font-weight:700;}
+  .anatomy-url .a-path{color:var(--ink-soft);font-weight:700;}
+  .anatomy-url .a-sep{color:var(--error);font-weight:700;}
+  .anatomy-url .a-key{color:var(--forest);}
+  .anatomy-url .a-val{color:var(--ink);}
+  .anatomy-url .a-frag{color:var(--ink-faint1);}
+  .anatomy-legend{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;margin-top:16px;font-size:12.5px;color:var(--ink-soft);}
+  .anatomy-legend span{display:flex;align-items:center;gap:6px;}
+  .anatomy-legend i{width:10px;height:10px;border-radius:3px;display:inline-block;flex-shrink:0;}
+  .anatomy-caption{font-size:14px;color:var(--ink-soft);line-height:1.65;text-align:center;margin-top:16px;}
+
+  /* QUICK TESTS */
+  .test-grid{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:11px;}
+  .test-item{background:var(--paper-card);border:1px solid var(--line);border-radius:11px;padding:16px 20px;}
+  .test-item p{font-size:14px;color:var(--ink);line-height:1.5;}
+  .test-item strong{color:var(--forest);}
+  .test-item code{font-family:'SF Mono',Menlo,monospace;font-size:12.5px;background:var(--sage);border-radius:5px;padding:1px 6px;color:var(--ink);}
+  .test-item p.test-ex{font-size:12.5px;margin-top:6px;word-break:break-all;}
+  .test-item p.test-ex.bad{color:var(--error);}
+  .test-item p.test-ex.good{color:var(--forest);}
+  .test-item p.test-ex code{background:transparent;padding:0;color:inherit;}
+
+  footer{text-align:center;padding:44px 24px 60px;font-size:13px;color:var(--ink-faint);border-top:1px solid var(--line);}
+  footer a{border-bottom:1px solid var(--ink-faint);padding-bottom:1px;transition:border-color 0.15s ease,color 0.15s ease;}
+  footer a:hover{color:var(--forest);border-color:var(--forest);}
+  footer .foot-sep{margin:0 8px;color:var(--ink-faint);}
+
+  @media (max-width:720px){
+    h1{font-size:30px;}
+    .benefit-grid{grid-template-columns:1fr;}
+    .ga4-panel{grid-template-columns:1fr;padding:28px;}
+    .row-2{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    nav .wrap{padding:0 20px;}
+    .param-row{flex-direction:column;gap:4px;}
+    .param-name{width:auto;}
+    .builder-split{flex-direction:column;gap:28px;}
+    .split-divider{width:100%;height:3px;}
+    .builder-col{flex:none;width:100%;}
+    .products-col{flex:none;width:100%;}
+    .products-panel{position:static;}
+  }
+</style>
+<!-- Google Analytics 4 -->
+<!-- Replace G-XXXXXXXXXX below with your real Measurement ID from GA4 -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-BPD9QFCNNM"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -1405,905 +498,846 @@
   gtag('config', 'G-BPD9QFCNNM');
 </script> -->
 
-  <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-5LT6PRVF');</script>
-  <!-- End Google Tag Manager -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5LT6PRVF');</script>
+<!-- End Google Tag Manager -->
 
 </head>
-
 <body>
 
-  <nav>
-    <div class="wrap">
-      <div class="brand"><img src="dark_mode_logo.png" alt="UTMCraftr logo" class="brand-mark">UTMCraftr</div>
-      <div class="nav-right">
-        <div class="nav-links">
-          <a href="#tool">Builder</a>
-          <a href="#why">Why it helps</a>
-          <a href="#ga4">GA4</a>
-          <a href="#faq">FAQ</a>
-        </div>
-        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
-          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="4"></circle>
-            <line x1="12" y1="2" x2="12" y2="4"></line>
-            <line x1="12" y1="20" x2="12" y2="22"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="2" y1="12" x2="4" y2="12"></line>
-            <line x1="20" y1="12" x2="22" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </button>
+<nav>
+  <div class="wrap">
+    <div class="brand"><img src="dark_mode_logo.png" alt="UTMCraftr logo" class="brand-mark">UTMCraftr</div>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#tool">Builder</a>
+        <a href="#why">Why it helps</a>
+        <a href="#ga4">GA4</a>
+        <a href="#faq">FAQ</a>
       </div>
-    </div>
-  </nav>
-
-  <header class="hero">
-    <div class="eyebrow">Free, no signup, no catch</div>
-    <h1 class="display">Free UTM Builder for Clean GA4 Reporting</h1>
-    <p>Build campaign URLs with consistent UTM parameters — source, medium, campaign, term, and content — so every click
-      shows up correctly in Google Analytics 4.</p>
-  </header>
-
-  <main>
-
-    <div class="wrap" id="tool">
-      <div class="builder-split">
-        <div class="builder-col">
-          <div class="card-wrap">
-            <div class="window">
-              <div class="window-title">New campaign link</div>
-
-              <div class="field-label">Website URL</div>
-              <div class="url-row">
-                <div class="proto-toggle">
-                  <button class="active" id="httpsBtn" type="button">https://</button>
-                  <button id="httpBtn" type="button">http://</button>
-                </div>
-                <input type="text" id="url" placeholder="rawpurple.in/collections/new">
-              </div>
-
-              <div class="presets-label">Quick presets</div>
-              <div class="presets" id="presets">
-                <button class="preset-chip" data-source="instagram" data-medium="paid_social"
-                  type="button">Instagram</button>
-                <button class="preset-chip" data-source="facebook" data-medium="paid_social" type="button">Facebook
-                  ads</button>
-                <button class="preset-chip" data-source="google" data-medium="cpc" type="button">Google ads</button>
-                <button class="preset-chip" data-source="klaviyo" data-medium="email" type="button">Klaviyo
-                  email</button>
-                <button class="preset-chip custom" data-source="" data-medium="" type="button">Custom</button>
-              </div>
-
-              <div class="section-label">Required</div>
-              <div class="row-2">
-                <div>
-                  <div class="field-label">Source
-                    <span class="info-wrap">
-                      <span class="info-icon">?</span>
-                      <span class="info-tooltip">utm_source — where the traffic comes from, e.g. instagram,
-                        google</span>
-                    </span>
-                  </div>
-                  <input type="text" id="source" placeholder="e.g. instagram">
-                </div>
-                <div>
-                  <div class="field-label">Medium
-                    <span class="info-wrap">
-                      <span class="info-icon">?</span>
-                      <span class="info-tooltip">utm_medium — the channel type, e.g. social, email, cpc</span>
-                    </span>
-                  </div>
-                  <input type="text" id="medium" placeholder="e.g. social">
-                </div>
-              </div>
-
-              <div class="channel-preview" id="channelPreview"></div>
-
-              <div class="field-group">
-                <div class="field-label">Campaign name
-                  <span class="info-wrap">
-                    <span class="info-icon">?</span>
-                    <span class="info-tooltip">utm_campaign — the name of this push, e.g. monsoon-drop-2026</span>
-                  </span>
-                </div>
-                <input type="text" id="campaign" placeholder="monsoon-drop-2026">
-              </div>
-
-              <div class="section-label">Optional</div>
-              <div class="adv-panel">
-                <div class="row-2" style="margin-bottom:0;">
-                  <div>
-                    <div class="field-label" style="font-size:12.5px;">Term</div>
-                    <input type="text" id="term" placeholder="streetwear">
-                  </div>
-                  <div>
-                    <div class="field-label" style="font-size:12.5px;">Content</div>
-                    <input type="text" id="content" placeholder="story-swipeup">
-                  </div>
-                </div>
-              </div>
-
-              <button class="generate-btn" id="genBtn" type="button">Generate link</button>
-
-              <div class="warning-box" id="warningBox">Please fill in the website URL, source, medium, and campaign
-                name.</div>
-
-              <div class="output" id="output">
-                <div class="output-row">
-                  <div class="output-text" id="outputText"></div>
-                  <button class="copy-btn" id="copyBtn" type="button">Copy</button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="split-divider"></div>
-
-        <div class="products-col">
-          <div class="products-panel">
-            <div class="section-label">Our other products</div>
-            <div class="product-card">
-              <img class="product-card-icon" alt="Google Sheets"
-                src="data:image/png;base64,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">
-              <div class="product-card-name">Sheet UTM Builder</div>
-              <p class="product-card-desc">Generate and manage UTM links in bulk, right inside Google Sheets — built for
-                teams creating dozens of links at once.</p>
-              <a class="product-card-cta" href="#" data-product="Sheet UTM Builder"
-                data-redirect="https://docs.google.com/spreadsheets/d/1U9OtSK5Q2eKvWUbW_Hz-bYUeajluLJ0QmH4s_Jnd-EU/edit?usp=sharing">Access
-                now</a>
-            </div>
-
-            <div class="product-card">
-              <svg class="product-card-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true">
-                <rect x="3" y="4" width="18" height="4" rx="1.5" stroke="var(--forest)" stroke-width="1.6" />
-                <rect x="3" y="10" width="18" height="4" rx="1.5" stroke="var(--forest)" stroke-width="1.6" />
-                <rect x="3" y="16" width="18" height="4" rx="1.5" stroke="var(--forest)" stroke-width="1.6" />
-              </svg>
-              <div class="product-card-name">Bulk UTM Builder</div>
-              <p class="product-card-desc">Paste a list of URLs and generate hundreds of tagged campaign links in one
-                pass — built for large-scale campaign launches.</p>
-              <span class="product-card-badge">Coming soon</span>
-              <a class="product-card-cta" href="#" data-product="Bulk UTM Builder">Join the waitlist</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <section class="section" id="what-is-utm">
-      <div class="section-narrow">
-        <div class="section-head">
-          <h2 class="display">What is a UTM Builder?</h2>
-        </div>
-        <div class="prose">
-          <p>A UTM builder is a free tool that adds tracking parameters — called UTM parameters — to the end of a URL.
-            When someone clicks that link, Google Analytics 4 reads the parameters and logs exactly where the traffic
-            came from: which platform, which campaign, and which specific post, email, or ad.</p>
-          <p>Without UTM parameters, GA4 can only guess at traffic source using referrer data, which is unreliable for
-            social media, email, and messaging apps. A UTM builder removes the guesswork by letting you set the source,
-            medium, and campaign name yourself, every time.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="parameters">
-      <div class="section-head">
-        <h2 class="display">UTM Parameters Explained</h2>
-      </div>
-
-      <div class="anatomy">
-        <div class="anatomy-url">
-          <span class="a-proto">https://</span><span class="a-host">www.example.com</span><span
-            class="a-path">/best-shoes</span><span class="a-sep">?</span><span class="a-key">utm_source</span><span
-            class="a-sep">=</span><span class="a-val">instagram</span><span class="a-sep">&amp;</span><span
-            class="a-key">utm_medium</span><span class="a-sep">=</span><span class="a-val">social</span><span
-            class="a-sep">&amp;</span><span class="a-key">utm_campaign</span><span class="a-sep">=</span><span
-            class="a-val">sale</span><span class="a-frag">#top</span>
-        </div>
-        <div class="anatomy-legend">
-          <span><i style="background:var(--ink-faint)"></i>Protocol</span>
-          <span><i style="background:var(--forest)"></i>Host</span>
-          <span><i style="background:var(--mustard)"></i>Path</span>
-          <span><i style="background:var(--error)"></i>Query separator (<code>?</code> / <code>&amp;</code>)</span>
-          <span><i style="background:var(--ink)"></i>Query string</span>
-          <span><i style="background:var(--ink-faint1)"></i>Fragment</span>
-        </div>
-        <p class="anatomy-caption">A URL breaks down into a protocol, host, and path, followed by an optional query
-          string that starts after the first <code>?</code> and chains additional parameters with <code>&amp;</code> —
-          this is where UTM parameters live. Anything after a <code>#</code> is a fragment and is never sent to the
-          server.</p>
-      </div>
-
-      <div class="param-grid">
-        <div class="param-row">
-          <div class="param-name">utm_source</div>
-          <div class="param-desc">Where the traffic is coming from — <em>instagram</em>, <em>google</em>,
-            <em>klaviyo</em>, <em>whatsapp</em>.
-          </div>
-        </div>
-        <div class="param-row">
-          <div class="param-name">utm_medium</div>
-          <div class="param-desc">What kind of channel it is — <em>social</em>, <em>email</em>, <em>cpc</em>,
-            <em>referral</em>.
-          </div>
-        </div>
-        <div class="param-row">
-          <div class="param-name">utm_campaign</div>
-          <div class="param-desc">The name of the specific push this link belongs to — <em>monsoon-drop-2026</em>.</div>
-        </div>
-        <div class="param-row">
-          <div class="param-name">utm_term<span class="tag"> (optional)</span></div>
-          <div class="param-desc">Used mainly for paid search, to record the keyword behind a click.</div>
-        </div>
-        <div class="param-row">
-          <div class="param-name">utm_content<span class="tag"> (optional)</span></div>
-          <div class="param-desc">Distinguishes between multiple links in the same campaign — <em>story-swipeup</em> vs
-            <em>bio-link</em>.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="why">
-      <div class="section-head">
-        <h2 class="display">Why This Helps</h2>
-        <p>Small habit, much cleaner data.</p>
-      </div>
-      <div class="benefit-grid">
-        <div class="benefit-card">
-          <div class="benefit-icon">1</div>
-          <h3>No more guesswork</h3>
-          <p>Every link is tagged with the same source and medium every time, so GA4's channel groupings stay accurate
-            instead of splitting one channel into five inconsistent rows.</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">2</div>
-          <h3>Consistent naming across your team</h3>
-          <p>Everyone building links pulls from the same source and medium conventions, so campaign names don't quietly
-            drift apart over time.</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">3</div>
-          <h3>Built specifically for GA4</h3>
-          <p>Unlike generic link shorteners, this UTM builder is structured around how GA4 actually reads and groups
-            traffic.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="ga4">
-      <div class="ga4-panel">
-        <div>
-          <h2 class="display">Why UTM Parameters Matter for <strong>GA4 Reporting</strong></h2>
-          <p>GA4 groups all incoming traffic into channels — Organic Social, Paid Social, Email, Organic Search, and so
-            on — based entirely on the source and medium values it receives. When a link is missing UTM parameters, or
-            uses inconsistent values, GA4 either mis-groups that traffic or shows it as <strong>(not set)</strong> in
-            acquisition reports.</p>
-        </div>
-        <div class="ga4-list">
-          <div class="ga4-item"><span class="ga4-check">✓</span>
-            <p>Accurate channel attribution — knowing whether a sale came from a story or a paid ad, not just "social"
-            </p>
-          </div>
-          <div class="ga4-item"><span class="ga4-check">✓</span>
-            <p>Campaign-level conversion tracking, not just channel-level</p>
-          </div>
-          <div class="ga4-item"><span class="ga4-check">✓</span>
-            <p>Reliable month-over-month comparisons</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="tests">
-      <div class="section-head">
-        <h2 class="display">Quick Tests to Check Your UTM Link Before You Send It</h2>
-      </div>
-      <div class="test-grid">
-        <div class="test-item">
-          <p><strong>Query parameter test</strong> — if the URL already has a <code>?</code>, add UTM params with
-            <code>&amp;</code>, not a second <code>?</code>.
-          </p>
-          <p class="test-ex bad">✗ <code>site.com/shop?ref=abc?utm_source=instagram</code></p>
-          <p class="test-ex good">✓ <code>site.com/shop?ref=abc&amp;utm_source=instagram</code></p>
-        </div>
-        <div class="test-item">
-          <p><strong>Hash fragment test</strong> — UTM params must sit before any <code>#</code>, since browsers never
-            send fragments to the server.</p>
-          <p class="test-ex bad">✗ <code>site.com/shop#featured?utm_source=instagram</code></p>
-          <p class="test-ex good">✓ <code>site.com/shop?utm_source=instagram#featured</code></p>
-        </div>
-        <div class="test-item">
-          <p><strong>Combination hash + query test</strong> — with both, order is path → existing query → UTM params →
-            fragment.</p>
-          <p class="test-ex bad">✗ <code>site.com/shop#featured?ref=abc&amp;utm_source=instagram</code></p>
-          <p class="test-ex good">✓ <code>site.com/shop?ref=abc&amp;utm_source=instagram#featured</code></p>
-        </div>
-        <div class="test-item">
-          <p><strong>Space test</strong> — spaces in values must be encoded, or the link can break or truncate.</p>
-          <p class="test-ex bad">✗ <code>utm_campaign=summer sale</code></p>
-          <p class="test-ex good">✓ <code>utm_campaign=summer%20sale</code></p>
-          <p class="test-ex good">✓ <code>utm_campaign=summer_sale</code> or <code>summer-sale</code></p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="mistakes">
-      <div class="section-head">
-        <h2 class="display">Common UTM Mistakes That Break GA4 Reporting</h2>
-      </div>
-      <div class="checklist">
-        <div class="checklist-item">
-          <div class="checklist-num">1</div>
-          <p><strong>Mixed casing</strong> — <em>Instagram</em> and <em>instagram</em> are treated as two different
-            sources in GA4. Keep every value lowercase.</p>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-num">2</div>
-          <p><strong>More than one <code>?</code> in the URL</strong> — only the first one starts the query string; a
-            second one breaks the parameters after it.</p>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-num">3</div>
-          <p><strong>Unescaped spaces and special characters</strong> — these need to be URL-encoded, or the link can
-            silently fail to pass parameters through.</p>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-num">4</div>
-          <p><strong>Inconsistent source/medium naming</strong> — <em>insta</em> one week and <em>instagram</em> the
-            next fragments a single channel into multiple rows.</p>
-        </div>
-        <div class="checklist-item">
-          <div class="checklist-num">5</div>
-          <p><strong>Missing utm_campaign</strong> — without it, GA4 still shows source and medium, but you lose the
-            ability to measure that specific push on its own.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="faq">
-      <div class="section-head">
-        <h2 class="display">Frequently Asked Questions</h2>
-      </div>
-      <div class="faq-list" id="faqList"></div>
-    </section>
-
-  </main>
-
-  <footer>
-    Built for cleaner GA4 reporting — free to use, always.<br>
-    <a href="/sitemap.xml">Sitemap</a><span class="foot-sep">·</span>© 2026 UTMCraftr.
-  </footer>
-
-  <div class="modal-overlay" id="accessModal">
-    <div class="modal-box">
-      <button type="button" class="modal-close" id="modalClose" aria-label="Close">&times;</button>
-      <h3 class="modal-title">Get access</h3>
-      <p class="modal-sub" id="modalSub">Enter your details to continue.</p>
-      <p class="modal-sub" id="modalSub">Don't worry, we won't send unnecessary emails.</p>
-      <form id="accessForm">
-        <div class="field-group">
-          <label for="accessName">Name</label>
-          <input type="text" id="accessName" required>
-        </div>
-        <div class="field-group">
-          <label for="accessEmail">Email</label>
-          <input type="email" id="accessEmail" required>
-        </div>
-        <div class="field-group">
-          <label for="accessCompany">Company</label>
-          <input type="text" id="accessCompany" required>
-        </div>
-        <button type="submit" class="modal-submit" id="modalSubmitBtn">Submit</button>
-      </form>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"></circle>
+          <line x1="12" y1="2" x2="12" y2="4"></line>
+          <line x1="12" y1="20" x2="12" y2="22"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="2" y1="12" x2="4" y2="12"></line>
+          <line x1="20" y1="12" x2="22" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
     </div>
   </div>
+</nav>
 
-  <script>
-    window.dataLayer = window.dataLayer || [];
+<header class="hero">
+  <div class="eyebrow">Free, no signup, no catch</div>
+  <h1 class="display">Free UTM Builder for Clean GA4 Reporting</h1>
+  <p>Build campaign URLs with consistent UTM parameters — source, medium, campaign, term, and content — so every click shows up correctly in Google Analytics 4.</p>
+</header>
 
-    // Smooth scroll from the top nav — target section lands centered in the viewport
-    function scrollToCenter(target) {
-      var rect = target.getBoundingClientRect();
-      var absoluteTop = rect.top + window.pageYOffset;
-      var centered = absoluteTop - (window.innerHeight / 2) + (rect.height / 2);
-      window.scrollTo({ top: Math.max(centered, 0), behavior: 'smooth' });
-    }
-    // ---- Product access modal ----
-    // Fill in your deployed Google Apps Script Web App URL here (see setup notes).
-    var PRODUCT_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwXi-Yui13M0ui-RHhzoDXP5Xvo4ginxIDvwbQJdihIdFqXr3FozF3HIzQm-g_7qiJr/exec';
+<main>
 
-    var accessModal = document.getElementById('accessModal');
-    var accessForm = document.getElementById('accessForm');
-    var modalSub = document.getElementById('modalSub');
-    var modalSubmitBtn = document.getElementById('modalSubmitBtn');
-    var modalCurrentProduct = null;
-    var modalCurrentRedirect = null;
-    var modalJustSubmitted = false;
+<div class="wrap" id="tool">
+  <div class="builder-split">
+    <div class="builder-col">
+      <div class="card-wrap">
+        <div class="window">
+      <div class="window-title">New campaign link</div>
 
-    function openAccessModal(product, redirectUrl) {
-      modalCurrentProduct = product;
-      modalCurrentRedirect = redirectUrl || null;
-      modalJustSubmitted = false;
-      modalSub.textContent = 'Enter your details to access ' + product + '.';
-      accessForm.reset();
-      accessModal.classList.add('show');
-      document.getElementById('accessName').focus();
-    }
+      <div class="field-label">Website URL</div>
+      <div class="url-row">
+        <div class="proto-toggle">
+          <button class="active" id="httpsBtn" type="button">https://</button>
+          <button id="httpBtn" type="button">http://</button>
+        </div>
+        <input type="text" id="url" placeholder="rawpurple.in/collections/new">
+      </div>
 
-    function closeAccessModal(trackAsClosed) {
-      accessModal.classList.remove('show');
-      if (trackAsClosed && !modalJustSubmitted) {
-        window.dataLayer.push({
-          event: 'product_access_form',
-          event_action: 'Closed',
-          product_name: modalCurrentProduct
-        });
-      }
-    }
+      <div class="presets-label">Quick presets</div>
+      <div class="presets" id="presets">
+        <button class="preset-chip" data-source="instagram" data-medium="paid_social" type="button">Instagram</button>
+        <button class="preset-chip" data-source="facebook" data-medium="paid_social" type="button">Facebook ads</button>
+        <button class="preset-chip" data-source="google" data-medium="cpc" type="button">Google ads</button>
+        <button class="preset-chip" data-source="klaviyo" data-medium="email" type="button">Klaviyo email</button>
+        <button class="preset-chip custom" data-source="" data-medium="" type="button">Custom</button>
+      </div>
 
-    document.querySelectorAll('.product-card-cta').forEach(function (cta) {
-      cta.addEventListener('click', function (e) {
-        e.preventDefault();
-        var product = this.dataset.product;
-        window.dataLayer.push({
-          event: 'product_card_cta',
-          event_action: product
-        });
-        openAccessModal(product, this.dataset.redirect);
+      <div class="section-label">Required</div>
+      <div class="row-2">
+        <div>
+          <div class="field-label">Source
+            <span class="info-wrap">
+              <span class="info-icon">?</span>
+              <span class="info-tooltip">utm_source — where the traffic comes from, e.g. instagram, google</span>
+            </span>
+          </div>
+          <input type="text" id="source" placeholder="e.g. instagram">
+        </div>
+        <div>
+          <div class="field-label">Medium
+            <span class="info-wrap">
+              <span class="info-icon">?</span>
+              <span class="info-tooltip">utm_medium — the channel type, e.g. social, email, cpc</span>
+            </span>
+          </div>
+          <input type="text" id="medium" placeholder="e.g. social">
+        </div>
+      </div>
+
+      <div class="channel-preview" id="channelPreview"></div>
+
+      <div class="field-group">
+        <div class="field-label">Campaign name
+          <span class="info-wrap">
+            <span class="info-icon">?</span>
+            <span class="info-tooltip">utm_campaign — the name of this push, e.g. monsoon-drop-2026</span>
+          </span>
+        </div>
+        <input type="text" id="campaign" placeholder="monsoon-drop-2026">
+      </div>
+
+      <div class="section-label">Optional</div>
+      <div class="adv-panel">
+        <div class="row-2" style="margin-bottom:0;">
+          <div>
+            <div class="field-label" style="font-size:12.5px;">Term</div>
+            <input type="text" id="term" placeholder="streetwear">
+          </div>
+          <div>
+            <div class="field-label" style="font-size:12.5px;">Content</div>
+            <input type="text" id="content" placeholder="story-swipeup">
+          </div>
+        </div>
+      </div>
+
+      <button class="generate-btn" id="genBtn" type="button">Generate link</button>
+
+      <div class="warning-box" id="warningBox">Please fill in the website URL, source, medium, and campaign name.</div>
+
+      <div class="output" id="output">
+        <div class="output-row">
+          <div class="output-text" id="outputText"></div>
+          <button class="copy-btn" id="copyBtn" type="button">Copy</button>
+        </div>
+      </div>
+
+    </div>
+      </div>
+    </div>
+
+    <div class="split-divider"></div>
+
+    <div class="products-col">
+      <div class="products-panel">
+        <div class="section-label">Our other products</div>
+        <div class="product-card">
+          <img class="product-card-icon" alt="Google Sheets" src="data:image/png;base64,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">
+          <div class="product-card-name">Sheet UTM Builder</div>
+          <p class="product-card-desc">Generate and manage UTM links in bulk, right inside Google Sheets — built for teams creating dozens of links at once.</p>
+          <a class="product-card-cta" href="#" data-product="Sheet UTM Builder" data-redirect="https://docs.google.com/spreadsheets/d/1U9OtSK5Q2eKvWUbW_Hz-bYUeajluLJ0QmH4s_Jnd-EU/edit?usp=sharing">Access now</a>
+        </div>
+
+        <div class="product-card">
+          <svg class="product-card-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="4" rx="1.5" stroke="var(--forest)" stroke-width="1.6"/>
+            <rect x="3" y="10" width="18" height="4" rx="1.5" stroke="var(--forest)" stroke-width="1.6"/>
+            <rect x="3" y="16" width="18" height="4" rx="1.5" stroke="var(--forest)" stroke-width="1.6"/>
+          </svg>
+          <div class="product-card-name">Bulk UTM Builder</div>
+          <p class="product-card-desc">Paste a list of URLs and generate hundreds of tagged campaign links in one pass — built for large-scale campaign launches.</p>
+          <span class="product-card-badge">Coming soon</span>
+          <a class="product-card-cta" href="#" data-product="Bulk UTM Builder">Join the waitlist</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<section class="section" id="what-is-utm">
+  <div class="section-narrow">
+    <div class="section-head">
+      <h2 class="display">What is a UTM Builder?</h2>
+    </div>
+    <div class="prose">
+      <p>A UTM builder is a free tool that adds tracking parameters — called UTM parameters — to the end of a URL. When someone clicks that link, Google Analytics 4 reads the parameters and logs exactly where the traffic came from: which platform, which campaign, and which specific post, email, or ad.</p>
+      <p>Without UTM parameters, GA4 can only guess at traffic source using referrer data, which is unreliable for social media, email, and messaging apps. A UTM builder removes the guesswork by letting you set the source, medium, and campaign name yourself, every time.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="parameters">
+  <div class="section-head">
+    <h2 class="display">UTM Parameters Explained</h2>
+  </div>
+
+  <div class="anatomy">
+    <div class="anatomy-url">
+      <span class="a-proto">https://</span><span class="a-host">www.example.com</span><span class="a-path">/best-shoes</span><span class="a-sep">?</span><span class="a-key">utm_source</span><span class="a-sep">=</span><span class="a-val">instagram</span><span class="a-sep">&amp;</span><span class="a-key">utm_medium</span><span class="a-sep">=</span><span class="a-val">social</span><span class="a-sep">&amp;</span><span class="a-key">utm_campaign</span><span class="a-sep">=</span><span class="a-val">sale</span><span class="a-frag">#top</span>
+    </div>
+    <div class="anatomy-legend">
+      <span><i style="background:var(--ink-faint)"></i>Protocol</span>
+      <span><i style="background:var(--forest)"></i>Host</span>
+      <span><i style="background:var(--mustard)"></i>Path</span>
+      <span><i style="background:var(--error)"></i>Query separator (<code>?</code> / <code>&amp;</code>)</span>
+      <span><i style="background:var(--ink)"></i>Query string</span>
+      <span><i style="background:var(--ink-faint1)"></i>Fragment</span>
+    </div>
+    <p class="anatomy-caption">A URL breaks down into a protocol, host, and path, followed by an optional query string that starts after the first <code>?</code> and chains additional parameters with <code>&amp;</code> — this is where UTM parameters live. Anything after a <code>#</code> is a fragment and is never sent to the server.</p>
+  </div>
+
+  <div class="param-grid">
+    <div class="param-row">
+      <div class="param-name">utm_source</div>
+      <div class="param-desc">Where the traffic is coming from — <em>instagram</em>, <em>google</em>, <em>klaviyo</em>, <em>whatsapp</em>.</div>
+    </div>
+    <div class="param-row">
+      <div class="param-name">utm_medium</div>
+      <div class="param-desc">What kind of channel it is — <em>social</em>, <em>email</em>, <em>cpc</em>, <em>referral</em>.</div>
+    </div>
+    <div class="param-row">
+      <div class="param-name">utm_campaign</div>
+      <div class="param-desc">The name of the specific push this link belongs to — <em>monsoon-drop-2026</em>.</div>
+    </div>
+    <div class="param-row">
+      <div class="param-name">utm_term<span class="tag"> (optional)</span></div>
+      <div class="param-desc">Used mainly for paid search, to record the keyword behind a click.</div>
+    </div>
+    <div class="param-row">
+      <div class="param-name">utm_content<span class="tag"> (optional)</span></div>
+      <div class="param-desc">Distinguishes between multiple links in the same campaign — <em>story-swipeup</em> vs <em>bio-link</em>.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="why">
+  <div class="section-head">
+    <h2 class="display">Why This Helps</h2>
+    <p>Small habit, much cleaner data.</p>
+  </div>
+  <div class="benefit-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon">1</div>
+      <h3>No more guesswork</h3>
+      <p>Every link is tagged with the same source and medium every time, so GA4's channel groupings stay accurate instead of splitting one channel into five inconsistent rows.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">2</div>
+      <h3>Consistent naming across your team</h3>
+      <p>Everyone building links pulls from the same source and medium conventions, so campaign names don't quietly drift apart over time.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">3</div>
+      <h3>Built specifically for GA4</h3>
+      <p>Unlike generic link shorteners, this UTM builder is structured around how GA4 actually reads and groups traffic.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="ga4">
+  <div class="ga4-panel">
+    <div>
+      <h2 class="display">Why UTM Parameters Matter for <strong>GA4 Reporting</strong></h2>
+      <p>GA4 groups all incoming traffic into channels — Organic Social, Paid Social, Email, Organic Search, and so on — based entirely on the source and medium values it receives. When a link is missing UTM parameters, or uses inconsistent values, GA4 either mis-groups that traffic or shows it as <strong>(not set)</strong> in acquisition reports.</p>
+    </div>
+    <div class="ga4-list">
+      <div class="ga4-item"><span class="ga4-check">✓</span><p>Accurate channel attribution — knowing whether a sale came from a story or a paid ad, not just "social"</p></div>
+      <div class="ga4-item"><span class="ga4-check">✓</span><p>Campaign-level conversion tracking, not just channel-level</p></div>
+      <div class="ga4-item"><span class="ga4-check">✓</span><p>Reliable month-over-month comparisons</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="tests">
+  <div class="section-head">
+    <h2 class="display">Quick Tests to Check Your UTM Link Before You Send It</h2>
+  </div>
+  <div class="test-grid">
+    <div class="test-item">
+      <p><strong>Query parameter test</strong> — if the URL already has a <code>?</code>, add UTM params with <code>&amp;</code>, not a second <code>?</code>.</p>
+      <p class="test-ex bad">✗ <code>site.com/shop?ref=abc?utm_source=instagram</code></p>
+      <p class="test-ex good">✓ <code>site.com/shop?ref=abc&amp;utm_source=instagram</code></p>
+    </div>
+    <div class="test-item">
+      <p><strong>Hash fragment test</strong> — UTM params must sit before any <code>#</code>, since browsers never send fragments to the server.</p>
+      <p class="test-ex bad">✗ <code>site.com/shop#featured?utm_source=instagram</code></p>
+      <p class="test-ex good">✓ <code>site.com/shop?utm_source=instagram#featured</code></p>
+    </div>
+    <div class="test-item">
+      <p><strong>Combination hash + query test</strong> — with both, order is path → existing query → UTM params → fragment.</p>
+      <p class="test-ex bad">✗ <code>site.com/shop#featured?ref=abc&amp;utm_source=instagram</code></p>
+      <p class="test-ex good">✓ <code>site.com/shop?ref=abc&amp;utm_source=instagram#featured</code></p>
+    </div>
+    <div class="test-item">
+      <p><strong>Space test</strong> — spaces in values must be encoded, or the link can break or truncate.</p>
+      <p class="test-ex bad">✗ <code>utm_campaign=summer sale</code></p>
+      <p class="test-ex good">✓ <code>utm_campaign=summer%20sale</code></p>
+      <p class="test-ex good">✓ <code>utm_campaign=summer_sale</code> or <code>summer-sale</code></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="mistakes">
+  <div class="section-head">
+    <h2 class="display">Common UTM Mistakes That Break GA4 Reporting</h2>
+  </div>
+  <div class="checklist">
+    <div class="checklist-item">
+      <div class="checklist-num">1</div>
+      <p><strong>Mixed casing</strong> — <em>Instagram</em> and <em>instagram</em> are treated as two different sources in GA4. Keep every value lowercase.</p>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-num">2</div>
+      <p><strong>More than one <code>?</code> in the URL</strong> — only the first one starts the query string; a second one breaks the parameters after it.</p>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-num">3</div>
+      <p><strong>Unescaped spaces and special characters</strong> — these need to be URL-encoded, or the link can silently fail to pass parameters through.</p>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-num">4</div>
+      <p><strong>Inconsistent source/medium naming</strong> — <em>insta</em> one week and <em>instagram</em> the next fragments a single channel into multiple rows.</p>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-num">5</div>
+      <p><strong>Missing utm_campaign</strong> — without it, GA4 still shows source and medium, but you lose the ability to measure that specific push on its own.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="section-head">
+    <h2 class="display">Frequently Asked Questions</h2>
+  </div>
+  <div class="faq-list" id="faqList"></div>
+</section>
+
+</main>
+
+<footer>
+  Built for cleaner GA4 reporting — free to use, always.<br>
+  <a href="/sitemap.xml">Sitemap</a><span class="foot-sep">·</span>© 2026 UTMCraftr.
+</footer>
+
+<div class="modal-overlay" id="accessModal">
+  <div class="modal-box">
+    <button type="button" class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+    <h3 class="modal-title">Get access</h3>
+    <p class="modal-sub" id="modalSub">Enter your details to continue.</p>
+    <p class="modal-sub" id="modalSub">Don't worry, we won't send unnecessary emails.</p>
+    <form id="accessForm">
+      <div class="field-group">
+        <label for="accessName">Name</label>
+        <input type="text" id="accessName" required>
+      </div>
+      <div class="field-group">
+        <label for="accessEmail">Email</label>
+        <input type="email" id="accessEmail" required>
+      </div>
+      <div class="field-group">
+        <label for="accessCompany">Company</label>
+        <input type="text" id="accessCompany" required>
+      </div>
+      <button type="submit" class="modal-submit" id="modalSubmitBtn">Submit</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  // Smooth scroll from the top nav — target section lands centered in the viewport
+  function scrollToCenter(target){
+    var rect = target.getBoundingClientRect();
+    var absoluteTop = rect.top + window.pageYOffset;
+    var centered = absoluteTop - (window.innerHeight / 2) + (rect.height / 2);
+    window.scrollTo({ top: Math.max(centered, 0), behavior: 'smooth' });
+  }
+  // ---- Product access modal ----
+  // Fill in your deployed Google Apps Script Web App URL here (see setup notes).
+  var PRODUCT_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwXi-Yui13M0ui-RHhzoDXP5Xvo4ginxIDvwbQJdihIdFqXr3FozF3HIzQm-g_7qiJr/exec';
+
+  var accessModal = document.getElementById('accessModal');
+  var accessForm = document.getElementById('accessForm');
+  var modalSub = document.getElementById('modalSub');
+  var modalSubmitBtn = document.getElementById('modalSubmitBtn');
+  var modalCurrentProduct = null;
+  var modalCurrentRedirect = null;
+  var modalJustSubmitted = false;
+
+  function openAccessModal(product, redirectUrl){
+    modalCurrentProduct = product;
+    modalCurrentRedirect = redirectUrl || null;
+    modalJustSubmitted = false;
+    modalSub.textContent = 'Enter your details to access ' + product + '.';
+    accessForm.reset();
+    accessModal.classList.add('show');
+    document.getElementById('accessName').focus();
+  }
+
+  function closeAccessModal(trackAsClosed){
+    accessModal.classList.remove('show');
+    if(trackAsClosed && !modalJustSubmitted){
+      window.dataLayer.push({
+        event: 'product_access_form',
+        event_action: 'Closed',
+        product_name: modalCurrentProduct
       });
-    });
+    }
+  }
 
-    document.getElementById('modalClose').addEventListener('click', function () {
-      closeAccessModal(true);
-    });
-    accessModal.addEventListener('click', function (e) {
-      if (e.target === accessModal) closeAccessModal(true);
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && accessModal.classList.contains('show')) closeAccessModal(true);
-    });
-
-    accessForm.addEventListener('submit', function (e) {
+  document.querySelectorAll('.product-card-cta').forEach(function(cta){
+    cta.addEventListener('click', function(e){
       e.preventDefault();
-      var name = document.getElementById('accessName').value.trim();
-      var email = document.getElementById('accessEmail').value.trim();
-      var company = document.getElementById('accessCompany').value.trim();
-      if (!name || !email || !company) return;
-
-      modalSubmitBtn.disabled = true;
-      modalSubmitBtn.textContent = 'Submitting...';
-
-      var formData = new FormData();
-      formData.append('name', name);
-      formData.append('email', email);
-      formData.append('company', company);
-      formData.append('product', modalCurrentProduct);
-
-      // no-cors: the Apps Script endpoint doesn't return CORS headers, so the
-      // response is opaque — we can't read it, but the request still reaches
-      // the script and appends the row.
-      fetch(PRODUCT_FORM_ENDPOINT, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: formData
-      }).catch(function (err) {
-        console.error('Product access form submission error:', err);
-      }).finally(function () {
-        modalJustSubmitted = true;
-        window.dataLayer.push({
-          event: 'product_access_form',
-          event_action: 'Submit',
-          product_name: modalCurrentProduct
-        });
-        modalSubmitBtn.disabled = false;
-        modalSubmitBtn.textContent = 'Submit';
-        closeAccessModal(false);
-        if (modalCurrentRedirect) {
-          window.location.href = modalCurrentRedirect;
-        }
-      });
-    });
-
-    document.querySelectorAll('.nav-links a').forEach(function (link) {
-      link.addEventListener('click', function (e) {
-        window.dataLayer.push({
-          event: 'top_nav',
-          event_action: this.textContent.trim()
-        });
-        var href = this.getAttribute('href');
-        if (href.charAt(0) !== '#') return;
-        var target = document.getElementById(href.substring(1));
-        if (!target) return;
-        e.preventDefault();
-        scrollToCenter(target);
-      });
-    });
-  </script>
-
-  <script>
-    // Standardization rule — map common spelling/casing variants of source & medium
-    // to one canonical value, so the same channel never gets split across reports.
-    var MEDIUM_ALIASES = {
-      'email': 'email', 'e-mail': 'email', 'e mail': 'email', 'emails': 'email', 'mail': 'email', 'newsletter': 'email',
-      'social': 'social', 'social media': 'social', 'sm': 'social', 'organic social': 'social',
-      'paid social': 'paid_social', 'paid_social': 'paid_social', 'paidsocial': 'paid_social', 'social ads': 'paid_social', 'paid social media': 'paid_social',
-      'cpc': 'cpc', 'ppc': 'cpc', 'paid search': 'cpc', 'paid-search': 'cpc', 'sem': 'cpc', 'paidsearch': 'cpc',
-      'referral': 'referral', 'referrals': 'referral',
-      'affiliate': 'affiliate', 'affiliates': 'affiliate',
-      'display': 'display', 'banner': 'display', 'banners': 'display', 'display ads': 'display',
-      'organic': 'organic', 'seo': 'organic'
-    };
-    var SOURCE_ALIASES = {
-      'facebook': 'facebook', 'fb': 'facebook', 'meta': 'facebook',
-      'instagram': 'instagram', 'ig': 'instagram', 'insta': 'instagram',
-      'google': 'google', 'google ads': 'google', 'adwords': 'google', 'google adwords': 'google',
-      'klaviyo': 'klaviyo',
-      'twitter': 'twitter', 'x': 'twitter',
-      'linkedin': 'linkedin',
-      'tiktok': 'tiktok', 'tik tok': 'tiktok',
-      'youtube': 'youtube', 'yt': 'youtube',
-      'whatsapp': 'whatsapp', 'whats app': 'whatsapp',
-      'bing': 'bing',
-      'yahoo': 'yahoo',
-      'duckduckgo': 'duckduckgo', 'duck duck go': 'duckduckgo',
-      'pinterest': 'pinterest',
-      'snapchat': 'snapchat'
-    };
-
-    // Source pools — which platform "type" a canonical source belongs to. This is what
-    // actually drives GA4-style channel attribution: the medium says HOW (paid/organic/email),
-    // the source's pool says WHICH surface (search/social/video), and the two combine into
-    // one channel. This mirrors GA4's own default channel grouping logic instead of hardcoding
-    // every source+medium pair one by one, which wouldn't scale to custom/unlisted sources.
-    var SEARCH_SOURCES = ['google', 'bing', 'yahoo', 'duckduckgo'];
-    var SOCIAL_SOURCES = ['facebook', 'instagram', 'linkedin', 'twitter', 'tiktok', 'pinterest', 'snapchat', 'whatsapp'];
-    var VIDEO_SOURCES = ['youtube'];
-
-    // Normalizes a value against an alias map: lowercases, collapses hyphens/underscores/
-    // extra spaces to single spaces, then looks up the canonical form. Falls through to
-    // the cleaned raw value if there's no known alias (so custom sources/mediums still work).
-    function normalizeAlias(v, map) {
-      var key = v.trim().toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
-      return map[key] || null;
-    }
-
-    // Space test — replace whitespace with underscores before encoding.
-    // aliasMap (optional) applies the standardization rule for source & medium.
-    function cleanValue(v, aliasMap) {
-      var canonical = aliasMap ? normalizeAlias(v, aliasMap) : null;
-      var base = canonical || v.trim().replace(/\s+/g, '_').toLowerCase();
-      return encodeURIComponent(base);
-    }
-
-    // Source/medium cross-selection — derives the GA4 channel a given pair would resolve to,
-    // and flags pairs that don't make sense together so a bad entry gets caught before it
-    // ever reaches a report. mediumCanonical decides the "how", the source pool decides the
-    // "where"; unrecognized combinations fall through to null (treated as custom/Unassigned)
-    // rather than being force-mapped to a guess.
-    function getChannel(srcCanonical, medCanonical) {
-      var isSearch = SEARCH_SOURCES.indexOf(srcCanonical) !== -1;
-      var isSocial = SOCIAL_SOURCES.indexOf(srcCanonical) !== -1;
-      var isVideo = VIDEO_SOURCES.indexOf(srcCanonical) !== -1;
-
-      switch (medCanonical) {
-        case 'cpc':
-          if (isSearch) return 'Paid Search';
-          if (isSocial) return 'Paid Social';
-          if (isVideo) return 'Paid Video';
-          return 'Paid Other';
-        case 'paid_social':
-          return 'Paid Social';
-        case 'social':
-          return 'Organic Social';
-        case 'organic':
-          if (isSearch) return 'Organic Search';
-          if (isSocial) return 'Organic Social';
-          if (isVideo) return 'Organic Video';
-          return 'Unassigned';
-        case 'email':
-          return 'Email';
-        case 'affiliate':
-          return 'Affiliate';
-        case 'referral':
-          return 'Referral';
-        case 'display':
-          return 'Display';
-        default:
-          return null;
-      }
-    }
-
-    // Catches the specific mistake this whole feature exists to prevent: a known source
-    // typed into the medium field (or vice versa) — e.g. source=linkedin, medium=google.
-    // "google" is a real source, not a real medium, so this pair can never attribute
-    // correctly no matter what channel logic runs on top of it.
-    function detectSwap(source, medium) {
-      var medLooksLikeSource = normalizeAlias(medium, SOURCE_ALIASES) !== null && normalizeAlias(medium, MEDIUM_ALIASES) === null;
-      var srcLooksLikeMedium = normalizeAlias(source, MEDIUM_ALIASES) !== null && normalizeAlias(source, SOURCE_ALIASES) === null;
-      return medLooksLikeSource || srcLooksLikeMedium;
-    }
-
-    function updateChannelPreview() {
-      var source = document.getElementById('source').value;
-      var medium = document.getElementById('medium').value;
-      var box = document.getElementById('channelPreview');
-
-      if (source.trim() === '' || medium.trim() === '') {
-        box.classList.remove('show', 'warn');
-        return;
-      }
-
-      if (detectSwap(source, medium)) {
-        box.textContent = '"' + medium.trim() + '" looks like a source, not a medium — check that source and medium aren\'t swapped.';
-        box.classList.add('show', 'warn');
-        return;
-      }
-
-      var srcCanonical = normalizeAlias(source, SOURCE_ALIASES) || source.trim().toLowerCase();
-      var medCanonical = normalizeAlias(medium, MEDIUM_ALIASES) || medium.trim().toLowerCase();
-      var channel = getChannel(srcCanonical, medCanonical);
-
-      if (channel) {
-        box.textContent = 'Channel attribution: ' + channel;
-        box.classList.remove('warn');
-        box.classList.add('show');
-      } else {
-        box.textContent = 'Custom medium — GA4 will likely report this as "Unassigned".';
-        box.classList.add('show', 'warn');
-      }
-    }
-
-    document.getElementById('themeToggle').addEventListener('click', function () {
-      var current = document.documentElement.getAttribute('data-theme');
-      var next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('urchin-theme', next);
-    });
-
-    document.getElementById('httpsBtn').addEventListener('click', function () {
-      this.classList.add('active');
-      document.getElementById('httpBtn').classList.remove('active');
-    });
-    document.getElementById('httpBtn').addEventListener('click', function () {
-      this.classList.add('active');
-      document.getElementById('httpsBtn').classList.remove('active');
-    });
-
-    // form_fill tracking — fires once per distinct fill, not on every blur.
-    // fieldTracked/trackFieldFill are shared (not per-field closures) so the
-    // preset-chip handler below can also mark a field as tracked when it fills
-    // source/medium programmatically, not just on manual blur.
-    var trackedFields = ['url', 'source', 'medium', 'campaign', 'term', 'content'];
-    var fieldTracked = {};
-    function trackFieldFill(fieldId) {
-      if (fieldTracked[fieldId]) return;
-      fieldTracked[fieldId] = true;
+      var product = this.dataset.product;
       window.dataLayer.push({
-        event: 'form_fill',
-        event_action: 'filled_' + fieldId
+        event: 'product_card_cta',
+        event_action: product
       });
+      openAccessModal(product, this.dataset.redirect);
+    });
+  });
+
+  document.getElementById('modalClose').addEventListener('click', function(){
+    closeAccessModal(true);
+  });
+  accessModal.addEventListener('click', function(e){
+    if(e.target === accessModal) closeAccessModal(true);
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && accessModal.classList.contains('show')) closeAccessModal(true);
+  });
+
+  accessForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('accessName').value.trim();
+    var email = document.getElementById('accessEmail').value.trim();
+    var company = document.getElementById('accessCompany').value.trim();
+    if(!name || !email || !company) return;
+
+    modalSubmitBtn.disabled = true;
+    modalSubmitBtn.textContent = 'Submitting...';
+
+    var formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('company', company);
+    formData.append('product', modalCurrentProduct);
+
+    // no-cors: the Apps Script endpoint doesn't return CORS headers, so the
+    // response is opaque — we can't read it, but the request still reaches
+    // the script and appends the row.
+    fetch(PRODUCT_FORM_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: formData
+    }).catch(function(err){
+      console.error('Product access form submission error:', err);
+    }).finally(function(){
+      modalJustSubmitted = true;
+      window.dataLayer.push({
+        event: 'product_access_form',
+        event_action: 'Submit',
+        product_name: modalCurrentProduct
+      });
+      modalSubmitBtn.disabled = false;
+      modalSubmitBtn.textContent = 'Submit';
+      closeAccessModal(false);
+      if(modalCurrentRedirect){
+        window.location.href = modalCurrentRedirect;
+      }
+    });
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(function(link){
+    link.addEventListener('click', function(e){
+      window.dataLayer.push({
+        event: 'top_nav',
+        event_action: this.textContent.trim()
+      });
+      var href = this.getAttribute('href');
+      if(href.charAt(0) !== '#') return;
+      var target = document.getElementById(href.substring(1));
+      if(!target) return;
+      e.preventDefault();
+      scrollToCenter(target);
+    });
+  });
+</script>
+
+<script>
+  // Standardization rule — map common spelling/casing variants of source & medium
+  // to one canonical value, so the same channel never gets split across reports.
+  var MEDIUM_ALIASES = {
+    'email':'email','e-mail':'email','e mail':'email','emails':'email','mail':'email','newsletter':'email',
+    'social':'social','social media':'social','sm':'social','organic social':'social',
+    'paid social':'paid_social','paid_social':'paid_social','paidsocial':'paid_social','social ads':'paid_social','paid social media':'paid_social',
+    'cpc':'cpc','ppc':'cpc','paid search':'cpc','paid-search':'cpc','sem':'cpc','paidsearch':'cpc',
+    'referral':'referral','referrals':'referral',
+    'affiliate':'affiliate','affiliates':'affiliate',
+    'display':'display','banner':'display','banners':'display','display ads':'display',
+    'organic':'organic','seo':'organic'
+  };
+  var SOURCE_ALIASES = {
+    'facebook':'facebook','fb':'facebook','meta':'facebook',
+    'instagram':'instagram','ig':'instagram','insta':'instagram',
+    'google':'google','google ads':'google','adwords':'google','google adwords':'google',
+    'klaviyo':'klaviyo',
+    'twitter':'twitter','x':'twitter',
+    'linkedin':'linkedin',
+    'tiktok':'tiktok','tik tok':'tiktok',
+    'youtube':'youtube','yt':'youtube',
+    'whatsapp':'whatsapp','whats app':'whatsapp',
+    'bing':'bing',
+    'yahoo':'yahoo',
+    'duckduckgo':'duckduckgo','duck duck go':'duckduckgo',
+    'pinterest':'pinterest',
+    'snapchat':'snapchat'
+  };
+
+  // Source pools — which platform "type" a canonical source belongs to. This is what
+  // actually drives GA4-style channel attribution: the medium says HOW (paid/organic/email),
+  // the source's pool says WHICH surface (search/social/video), and the two combine into
+  // one channel. This mirrors GA4's own default channel grouping logic instead of hardcoding
+  // every source+medium pair one by one, which wouldn't scale to custom/unlisted sources.
+  var SEARCH_SOURCES = ['google','bing','yahoo','duckduckgo'];
+  var SOCIAL_SOURCES = ['facebook','instagram','linkedin','twitter','tiktok','pinterest','snapchat','whatsapp'];
+  var VIDEO_SOURCES = ['youtube'];
+
+  // Normalizes a value against an alias map: lowercases, collapses hyphens/underscores/
+  // extra spaces to single spaces, then looks up the canonical form. Falls through to
+  // the cleaned raw value if there's no known alias (so custom sources/mediums still work).
+  function normalizeAlias(v, map){
+    var key = v.trim().toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
+    return map[key] || null;
+  }
+
+  // Space test — replace whitespace with underscores before encoding.
+  // aliasMap (optional) applies the standardization rule for source & medium.
+  function cleanValue(v, aliasMap){
+    var canonical = aliasMap ? normalizeAlias(v, aliasMap) : null;
+    var base = canonical || v.trim().replace(/\s+/g, '_').toLowerCase();
+    return encodeURIComponent(base);
+  }
+
+  // Source/medium cross-selection — derives the GA4 channel a given pair would resolve to,
+  // and flags pairs that don't make sense together so a bad entry gets caught before it
+  // ever reaches a report. mediumCanonical decides the "how", the source pool decides the
+  // "where"; unrecognized combinations fall through to null (treated as custom/Unassigned)
+  // rather than being force-mapped to a guess.
+  function getChannel(srcCanonical, medCanonical){
+    var isSearch = SEARCH_SOURCES.indexOf(srcCanonical) !== -1;
+    var isSocial = SOCIAL_SOURCES.indexOf(srcCanonical) !== -1;
+    var isVideo = VIDEO_SOURCES.indexOf(srcCanonical) !== -1;
+
+    switch(medCanonical){
+      case 'cpc':
+        if(isSearch) return 'Paid Search';
+        if(isSocial) return 'Paid Social';
+        if(isVideo) return 'Paid Video';
+        return 'Paid Other';
+      case 'paid_social':
+        return 'Paid Social';
+      case 'social':
+        return 'Organic Social';
+      case 'organic':
+        if(isSearch) return 'Organic Search';
+        if(isSocial) return 'Organic Social';
+        if(isVideo) return 'Organic Video';
+        return 'Unassigned';
+      case 'email':
+        return 'Email';
+      case 'affiliate':
+        return 'Affiliate';
+      case 'referral':
+        return 'Referral';
+      case 'display':
+        return 'Display';
+      default:
+        return null;
     }
-    trackedFields.forEach(function (fieldId) {
-      var el = document.getElementById(fieldId);
-      fieldTracked[fieldId] = false;
-      el.addEventListener('blur', function () {
-        if (this.value.trim() === '') return;
-        trackFieldFill(fieldId);
-      });
-      el.addEventListener('input', function () {
-        if (this.value.trim() === '') fieldTracked[fieldId] = false;
-        this.classList.remove('invalid');
+  }
+
+  // Catches the specific mistake this whole feature exists to prevent: a known source
+  // typed into the medium field (or vice versa) — e.g. source=linkedin, medium=google.
+  // "google" is a real source, not a real medium, so this pair can never attribute
+  // correctly no matter what channel logic runs on top of it.
+  function detectSwap(source, medium){
+    var medLooksLikeSource = normalizeAlias(medium, SOURCE_ALIASES) !== null && normalizeAlias(medium, MEDIUM_ALIASES) === null;
+    var srcLooksLikeMedium = normalizeAlias(source, MEDIUM_ALIASES) !== null && normalizeAlias(source, SOURCE_ALIASES) === null;
+    return medLooksLikeSource || srcLooksLikeMedium;
+  }
+
+  function updateChannelPreview(){
+    var source = document.getElementById('source').value;
+    var medium = document.getElementById('medium').value;
+    var box = document.getElementById('channelPreview');
+
+    if(source.trim() === '' || medium.trim() === ''){
+      box.classList.remove('show', 'warn');
+      return;
+    }
+
+    if(detectSwap(source, medium)){
+      box.textContent = '"' + medium.trim() + '" looks like a source, not a medium — check that source and medium aren\'t swapped.';
+      box.classList.add('show', 'warn');
+      return;
+    }
+
+    var srcCanonical = normalizeAlias(source, SOURCE_ALIASES) || source.trim().toLowerCase();
+    var medCanonical = normalizeAlias(medium, MEDIUM_ALIASES) || medium.trim().toLowerCase();
+    var channel = getChannel(srcCanonical, medCanonical);
+
+    if(channel){
+      box.textContent = 'Channel attribution: ' + channel;
+      box.classList.remove('warn');
+      box.classList.add('show');
+    } else {
+      box.textContent = 'Custom medium — GA4 will likely report this as "Unassigned".';
+      box.classList.add('show', 'warn');
+    }
+  }
+
+  document.getElementById('themeToggle').addEventListener('click', function(){
+    var current = document.documentElement.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('urchin-theme', next);
+  });
+
+  document.getElementById('httpsBtn').addEventListener('click', function(){
+    this.classList.add('active');
+    document.getElementById('httpBtn').classList.remove('active');
+  });
+  document.getElementById('httpBtn').addEventListener('click', function(){
+    this.classList.add('active');
+    document.getElementById('httpsBtn').classList.remove('active');
+  });
+
+  // form_fill tracking — fires once per distinct fill, not on every blur.
+  // fieldTracked/trackFieldFill are shared (not per-field closures) so the
+  // preset-chip handler below can also mark a field as tracked when it fills
+  // source/medium programmatically, not just on manual blur.
+  var trackedFields = ['url', 'source', 'medium', 'campaign', 'term', 'content'];
+  var fieldTracked = {};
+  function trackFieldFill(fieldId){
+    if(fieldTracked[fieldId]) return;
+    fieldTracked[fieldId] = true;
+    window.dataLayer.push({
+      event: 'form_fill',
+      event_action: 'filled_' + fieldId
+    });
+  }
+  trackedFields.forEach(function(fieldId){
+    var el = document.getElementById(fieldId);
+    fieldTracked[fieldId] = false;
+    el.addEventListener('blur', function(){
+      if(this.value.trim() === '') return;
+      trackFieldFill(fieldId);
+    });
+    el.addEventListener('input', function(){
+      if(this.value.trim() === '') fieldTracked[fieldId] = false;
+      this.classList.remove('invalid');
+      document.getElementById('warningBox').classList.remove('show');
+      if(fieldId === 'source' || fieldId === 'medium') updateChannelPreview();
+    });
+  });
+
+  document.querySelectorAll('.preset-chip').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(this.classList.contains('custom')){
+        document.getElementById('url').value = '';
+        document.getElementById('source').value = '';
+        document.getElementById('medium').value = '';
+        document.getElementById('campaign').value = '';
+        document.getElementById('term').value = '';
+        document.getElementById('content').value = '';
+        document.getElementById('output').classList.remove('show');
         document.getElementById('warningBox').classList.remove('show');
-        if (fieldId === 'source' || fieldId === 'medium') updateChannelPreview();
-      });
-    });
-
-    document.querySelectorAll('.preset-chip').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        if (this.classList.contains('custom')) {
-          document.getElementById('url').value = '';
-          document.getElementById('source').value = '';
-          document.getElementById('medium').value = '';
-          document.getElementById('campaign').value = '';
-          document.getElementById('term').value = '';
-          document.getElementById('content').value = '';
-          document.getElementById('output').classList.remove('show');
-          document.getElementById('warningBox').classList.remove('show');
-          document.getElementById('channelPreview').classList.remove('show', 'warn');
-          document.querySelectorAll('#tool input[type="text"]').forEach(function (i) { i.classList.remove('invalid'); });
-          trackedFields.forEach(function (fieldId) { fieldTracked[fieldId] = false; });
-          return;
-        }
-        if (this.dataset.source) {
-          document.getElementById('source').value = this.dataset.source;
-          trackFieldFill('source');
-        }
-        if (this.dataset.medium) {
-          document.getElementById('medium').value = this.dataset.medium;
-          trackFieldFill('medium');
-        }
-        updateChannelPreview();
-      });
-    });
-
-    document.getElementById('genBtn').addEventListener('click', function () {
-      var urlEl = document.getElementById('url');
-      var sourceEl = document.getElementById('source');
-      var mediumEl = document.getElementById('medium');
-      var campaignEl = document.getElementById('campaign');
-
-      var requiredFields = [urlEl, sourceEl, mediumEl, campaignEl];
-      var hasEmpty = false;
-      requiredFields.forEach(function (el) {
-        if (el.value.trim() === '') {
-          el.classList.add('invalid');
-          hasEmpty = true;
-        } else {
-          el.classList.remove('invalid');
-        }
-      });
-
-      var warningBox = document.getElementById('warningBox');
-      if (hasEmpty) {
-        warningBox.textContent = 'Please fill in the website URL, source, medium, and campaign name.';
-        warningBox.classList.add('show');
-        document.getElementById('output').classList.remove('show');
+        document.getElementById('channelPreview').classList.remove('show', 'warn');
+        document.querySelectorAll('#tool input[type="text"]').forEach(function(i){ i.classList.remove('invalid'); });
+        trackedFields.forEach(function(fieldId){ fieldTracked[fieldId] = false; });
         return;
       }
-
-      // Source/medium cross-check — block generation on a pair that can't attribute
-      // correctly (e.g. source=linkedin, medium=google) instead of only warning after
-      // the fact, since a link like that is wrong the moment it's created.
-      if (detectSwap(sourceEl.value, mediumEl.value)) {
-        sourceEl.classList.add('invalid');
-        mediumEl.classList.add('invalid');
-        warningBox.textContent = '"' + mediumEl.value.trim() + '" looks like a source, not a medium — check that source and medium aren\'t swapped.';
-        warningBox.classList.add('show');
-        document.getElementById('output').classList.remove('show');
-        return;
+      if(this.dataset.source){
+        document.getElementById('source').value = this.dataset.source;
+        trackFieldFill('source');
       }
-      warningBox.classList.remove('show');
-
-      // Duplicate query-string test — more than one literal "?" in the entered
-      // URL almost always means a paste error or an already-tagged URL pasted
-      // twice; a second "?" wouldn't start a new query string per URL syntax,
-      // it'd just sit inside the first one as a stray character, so catch it
-      // before generating instead of producing a confusing link.
-      var qMarkCount = (urlEl.value.match(/\?/g) || []).length;
-      if (qMarkCount > 1) {
-        urlEl.classList.add('invalid');
-        warningBox.textContent = 'The website URL has more than one "?" — check it only has a single query string.';
-        warningBox.classList.add('show');
-        document.getElementById('output').classList.remove('show');
-        return;
+      if(this.dataset.medium){
+        document.getElementById('medium').value = this.dataset.medium;
+        trackFieldFill('medium');
       }
+      updateChannelPreview();
+    });
+  });
 
-      var proto = document.getElementById('httpsBtn').classList.contains('active') ? 'https://' : 'http://';
-      var rawUrl = urlEl.value.replace(/^https?:\/\//, '');
-      var source = sourceEl.value;
-      var medium = mediumEl.value;
-      var campaign = campaignEl.value;
-      var term = document.getElementById('term').value;
-      var content = document.getElementById('content').value;
+  document.getElementById('genBtn').addEventListener('click', function(){
+    var urlEl = document.getElementById('url');
+    var sourceEl = document.getElementById('source');
+    var mediumEl = document.getElementById('medium');
+    var campaignEl = document.getElementById('campaign');
 
-      // Hash fragment test — split off the fragment first so UTM params never land after it
-      var fragment = '';
-      var hashIndex = rawUrl.indexOf('#');
-      if (hashIndex !== -1) {
-        fragment = rawUrl.slice(hashIndex);
-        rawUrl = rawUrl.slice(0, hashIndex);
+    var requiredFields = [urlEl, sourceEl, mediumEl, campaignEl];
+    var hasEmpty = false;
+    requiredFields.forEach(function(el){
+      if(el.value.trim() === ''){
+        el.classList.add('invalid');
+        hasEmpty = true;
+      } else {
+        el.classList.remove('invalid');
       }
-
-      // Query parameter test — split off any existing query string so we append with & instead of a second ?
-      var existingQuery = '';
-      var basePath = rawUrl;
-      var qIndex = rawUrl.indexOf('?');
-      if (qIndex !== -1) {
-        existingQuery = rawUrl.slice(qIndex + 1);
-        basePath = rawUrl.slice(0, qIndex);
-      }
-
-      // Stray-slash-in-query test — a "/" right after "?" (e.g. someone typed
-      // "?/" instead of just "?") isn't a real query parameter, it's noise.
-      // Strip leading slashes so it doesn't get glued onto the UTM string as
-      // "?/&utm_source=...". A real query never legitimately starts with "/".
-      existingQuery = existingQuery.replace(/^\/+/, '');
-
-      // Trailing slash test — a "/" right before "?" is redundant for a root
-      // URL (example.com/? and example.com? resolve identically) and, when
-      // present on a deeper path, still produces a working link on the vast
-      // majority of sites; strip it so the generated URL stays clean.
-      basePath = basePath.replace(/\/+$/, '');
-
-      var utmParams = [
-        'utm_source=' + cleanValue(source, SOURCE_ALIASES),
-        'utm_medium=' + cleanValue(medium, MEDIUM_ALIASES),
-        'utm_campaign=' + cleanValue(campaign)
-      ];
-      if (term) utmParams.push('utm_term=' + cleanValue(term));
-      if (content) utmParams.push('utm_content=' + cleanValue(content));
-      var utmString = utmParams.join('&');
-
-      // Combination test — existing query (if any) + UTM params, then the fragment goes last
-      var queryString = existingQuery ? existingQuery + '&' + utmString : utmString;
-      var link = proto + basePath + '?' + queryString + fragment;
-      link = link.toLowerCase();
-
-      document.getElementById('outputText').textContent = link;
-      document.getElementById('output').classList.add('show');
-
-      window.dataLayer.push({
-        event: 'form_fill',
-        event_action: 'generate_link_clicked',
-        utm_source: source.toLowerCase(),
-        utm_medium: medium.toLowerCase(),
-        utm_campaign: campaign.toLowerCase()
-      });
     });
 
-    document.getElementById('copyBtn').addEventListener('click', function () {
-      var text = document.getElementById('outputText').textContent;
-      navigator.clipboard.writeText(text);
-      this.textContent = 'Copied';
-      var self = this;
-      setTimeout(function () { self.textContent = 'Copy'; }, 1200);
+    var warningBox = document.getElementById('warningBox');
+    if(hasEmpty){
+      warningBox.textContent = 'Please fill in the website URL, source, medium, and campaign name.';
+      warningBox.classList.add('show');
+      document.getElementById('output').classList.remove('show');
+      return;
+    }
 
-      window.dataLayer.push({
-        event: 'form_fill',
-        event_action: 'copy_link_clicked'
-      });
-    });
+    // Source/medium cross-check — block generation on a pair that can't attribute
+    // correctly (e.g. source=linkedin, medium=google) instead of only warning after
+    // the fact, since a link like that is wrong the moment it's created.
+    if(detectSwap(sourceEl.value, mediumEl.value)){
+      sourceEl.classList.add('invalid');
+      mediumEl.classList.add('invalid');
+      warningBox.textContent = '"' + mediumEl.value.trim() + '" looks like a source, not a medium — check that source and medium aren\'t swapped.';
+      warningBox.classList.add('show');
+      document.getElementById('output').classList.remove('show');
+      return;
+    }
+    warningBox.classList.remove('show');
 
-    var faqs = [
-      { q: 'Is this UTM builder really free?', a: 'Yes — free to use, with no signup and no account required.' },
-      { q: 'What are UTM parameters?', a: 'UTM parameters are small tags added to the end of a URL — source, medium, campaign, term, and content — that tell Google Analytics 4 exactly where a click came from.' },
-      { q: 'Do UTM parameters affect my SEO or search rankings?', a: 'No. UTM parameters are only used for analytics tracking and have no effect on how a page ranks in search results.' },
-      { q: 'Should UTM values always be lowercase?', a: 'Yes. GA4 treats different capitalizations as different values, so keeping everything lowercase prevents a single channel from splitting into multiple rows.' },
-      { q: 'Can I use this for Instagram, Google Ads, Meta Ads, and email campaigns?', a: 'Yes — the built-in presets cover the most common sources and mediums, and you can enter any custom source or medium manually.' },
-      { q: 'Why does my traffic show as (not set) in GA4?', a: 'This usually means the link was shared without UTM parameters, or the parameters were malformed. Rebuilding the link with this tool prevents that.' },
-      { q: 'Are the links I build saved anywhere?', a: 'Not in this version — everything runs manually in your browser. A future version will add saved history and shared team presets.' }
+    // Duplicate query-string test — more than one literal "?" in the entered
+    // URL almost always means a paste error or an already-tagged URL pasted
+    // twice; a second "?" wouldn't start a new query string per URL syntax,
+    // it'd just sit inside the first one as a stray character, so catch it
+    // before generating instead of producing a confusing link.
+    var qMarkCount = (urlEl.value.match(/\?/g) || []).length;
+    if(qMarkCount > 1){
+      urlEl.classList.add('invalid');
+      warningBox.textContent = 'The website URL has more than one "?" — check it only has a single query string.';
+      warningBox.classList.add('show');
+      document.getElementById('output').classList.remove('show');
+      return;
+    }
+
+    var proto = document.getElementById('httpsBtn').classList.contains('active') ? 'https://' : 'http://';
+    var rawUrl = urlEl.value.replace(/^https?:\/\//,'');
+    var source = sourceEl.value;
+    var medium = mediumEl.value;
+    var campaign = campaignEl.value;
+    var term = document.getElementById('term').value;
+    var content = document.getElementById('content').value;
+
+    // Hash fragment test — split off the fragment first so UTM params never land after it
+    var fragment = '';
+    var hashIndex = rawUrl.indexOf('#');
+    if(hashIndex !== -1){
+      fragment = rawUrl.slice(hashIndex);
+      rawUrl = rawUrl.slice(0, hashIndex);
+    }
+
+    // Query parameter test — split off any existing query string so we append with & instead of a second ?
+    var existingQuery = '';
+    var basePath = rawUrl;
+    var qIndex = rawUrl.indexOf('?');
+    if(qIndex !== -1){
+      existingQuery = rawUrl.slice(qIndex + 1);
+      basePath = rawUrl.slice(0, qIndex);
+    }
+
+    // Stray-slash-in-query test — a "/" right after "?" (e.g. someone typed
+    // "?/" instead of just "?") isn't a real query parameter, it's noise.
+    // Strip leading slashes so it doesn't get glued onto the UTM string as
+    // "?/&utm_source=...". A real query never legitimately starts with "/".
+    existingQuery = existingQuery.replace(/^\/+/, '');
+
+    // Trailing slash test — a "/" right before "?" is redundant for a root
+    // URL (example.com/? and example.com? resolve identically) and, when
+    // present on a deeper path, still produces a working link on the vast
+    // majority of sites; strip it so the generated URL stays clean.
+    basePath = basePath.replace(/\/+$/, '');
+
+    var utmParams = [
+      'utm_source=' + cleanValue(source, SOURCE_ALIASES),
+      'utm_medium=' + cleanValue(medium, MEDIUM_ALIASES),
+      'utm_campaign=' + cleanValue(campaign)
     ];
-    var list = document.getElementById('faqList');
-    faqs.forEach(function (item) {
-      var el = document.createElement('div');
-      el.className = 'faq-item';
-      el.innerHTML = '<div class="faq-q"><span>' + item.q + '</span><span class="plus">+</span></div><div class="faq-a">' + item.a + '</div>';
-      el.querySelector('.faq-q').addEventListener('click', function () {
-        el.classList.toggle('open');
-        window.dataLayer.push({
-          event: 'faq',
-          event_action: el.classList.contains('open') ? 'expand' : 'shrink'
-        });
-      });
-      list.appendChild(el);
-    });
-  </script>
+    if(term) utmParams.push('utm_term=' + cleanValue(term));
+    if(content) utmParams.push('utm_content=' + cleanValue(content));
+    var utmString = utmParams.join('&');
 
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LT6PRVF" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+    // Combination test — existing query (if any) + UTM params, then the fragment goes last
+    var queryString = existingQuery ? existingQuery + '&' + utmString : utmString;
+    var link = proto + basePath + '?' + queryString + fragment;
+    link = link.toLowerCase();
+
+    document.getElementById('outputText').textContent = link;
+    document.getElementById('output').classList.add('show');
+
+    window.dataLayer.push({
+      event: 'form_fill',
+      event_action: 'generate_link_clicked',
+      utm_source: source.toLowerCase(),
+      utm_medium: medium.toLowerCase(),
+      utm_campaign: campaign.toLowerCase()
+    });
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', function(){
+    var text = document.getElementById('outputText').textContent;
+    navigator.clipboard.writeText(text);
+    this.textContent = 'Copied';
+    var self = this;
+    setTimeout(function(){ self.textContent = 'Copy'; }, 1200);
+
+    window.dataLayer.push({
+      event: 'form_fill',
+      event_action: 'copy_link_clicked'
+    });
+  });
+
+  var faqs = [
+    { q: 'Is this UTM builder really free?', a: 'Yes — free to use, with no signup and no account required.' },
+    { q: 'What are UTM parameters?', a: 'UTM parameters are small tags added to the end of a URL — source, medium, campaign, term, and content — that tell Google Analytics 4 exactly where a click came from.' },
+    { q: 'Do UTM parameters affect my SEO or search rankings?', a: 'No. UTM parameters are only used for analytics tracking and have no effect on how a page ranks in search results.' },
+    { q: 'Should UTM values always be lowercase?', a: 'Yes. GA4 treats different capitalizations as different values, so keeping everything lowercase prevents a single channel from splitting into multiple rows.' },
+    { q: 'Can I use this for Instagram, Google Ads, Meta Ads, and email campaigns?', a: 'Yes — the built-in presets cover the most common sources and mediums, and you can enter any custom source or medium manually.' },
+    { q: 'Why does my traffic show as (not set) in GA4?', a: 'This usually means the link was shared without UTM parameters, or the parameters were malformed. Rebuilding the link with this tool prevents that.' },
+    { q: 'Are the links I build saved anywhere?', a: 'Not in this version — everything runs manually in your browser. A future version will add saved history and shared team presets.' }
+  ];
+  var list = document.getElementById('faqList');
+  faqs.forEach(function(item){
+    var el = document.createElement('div');
+    el.className = 'faq-item';
+    el.innerHTML = '<div class="faq-q"><span>'+item.q+'</span><span class="plus">+</span></div><div class="faq-a">'+item.a+'</div>';
+    el.querySelector('.faq-q').addEventListener('click', function(){
+      el.classList.toggle('open');
+      window.dataLayer.push({
+        event: 'faq',
+        event_action: el.classList.contains('open') ? 'expand' : 'shrink'
+      });
+    });
+    list.appendChild(el);
+  });
+</script>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LT6PRVF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 </body>
-
 </html>
