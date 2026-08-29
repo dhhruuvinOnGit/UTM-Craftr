@@ -332,7 +332,8 @@
 
     /* BUILDER + OTHER PRODUCTS SPLIT */
     #tool {
-      max-width: 1040px;
+      max-width: none;
+      padding: 0 50px;
     }
 
     .window {
@@ -628,7 +629,7 @@
 
     /* BULK BUILDER */
     .bulk-card-wrap {
-      max-width: 780px;
+      max-width: none;
       margin: 50px auto 100px;
     }
 
@@ -668,7 +669,7 @@
 
     .param-table-head {
       display: grid;
-      grid-template-columns: 108px 1fr 1fr 1fr 1fr 1fr 26px;
+      grid-template-columns: 150px 1fr 1fr 1fr 1fr 1fr 70px;
       gap: 8px;
       padding: 0 4px 6px;
       font-size: 10.5px;
@@ -688,7 +689,7 @@
     .param-row-compact {
       position: relative;
       display: grid;
-      grid-template-columns: 108px 1fr 1fr 1fr 1fr 1fr 26px;
+      grid-template-columns: 150px 1fr 1fr 1fr 1fr 1fr 70px;
       gap: 8px;
       align-items: center;
       background: var(--sage);
@@ -714,28 +715,22 @@
       color: var(--ink);
       font-size: 12.5px;
       font-family: var(--font-secondary);
-      padding: 0 6px;
+      padding: 0 8px;
     }
 
     .remove-set-btn {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
       border: none;
-      background: var(--paper-card);
-      color: var(--ink-faint);
-      font-size: 15px;
-      line-height: 1;
+      background: none;
+      color: var(--error);
+      font-size: 12.5px;
+      font-weight: 600;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.15s ease, color 0.15s ease;
+      padding: 4px 6px;
+      white-space: nowrap;
     }
 
     .remove-set-btn:hover {
-      background: var(--error-bg);
-      color: var(--error);
+      text-decoration: underline;
     }
 
     .param-row-compact .set-channel-preview {
@@ -776,6 +771,10 @@
     }
 
     @media (max-width: 720px) {
+      #tool {
+        padding: 0 20px;
+      }
+
       .param-table-head {
         display: none;
       }
@@ -1477,7 +1476,7 @@
         <input type="text" class="set-campaign" placeholder="monsoon-drop-2026">
         <input type="text" class="set-term" placeholder="optional">
         <input type="text" class="set-content" placeholder="optional">
-        <button class="remove-set-btn" type="button" aria-label="Remove row" title="Remove row">&times;</button>
+        <button class="remove-set-btn" type="button">Remove</button>
         <div class="set-channel-preview"></div>
       </div>
     </template>
