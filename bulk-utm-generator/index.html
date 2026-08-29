@@ -284,6 +284,207 @@
       color: var(--ink);
     }
 
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown-trigger {
+      background: none;
+      border: none;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-bottom: 1.5px solid transparent;
+      padding: 0 0 2px;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .nav-dropdown-trigger:hover,
+    .nav-dropdown.open .nav-dropdown-trigger {
+      border-color: var(--forest);
+      color: var(--ink);
+    }
+
+    .nav-dropdown-trigger svg {
+      width: 11px;
+      height: 11px;
+      transition: transform 0.15s ease;
+    }
+
+    .nav-dropdown.open .nav-dropdown-trigger svg {
+      transform: rotate(180deg);
+    }
+
+    .nav-dropdown-menu {
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 0;
+      min-width: 240px;
+      background: var(--paper-card);
+      border: 1px solid var(--sage-border);
+      border-radius: 12px;
+      box-shadow: 0 20px 40px -18px rgba(31, 75, 63, 0.28), 0 4px 14px rgba(0, 0, 0, 0.06);
+      padding: 8px;
+      z-index: 60;
+    }
+
+    .nav-dropdown.open .nav-dropdown-menu {
+      display: flex;
+    }
+
+    .nav-dropdown-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 9px 12px;
+      border-radius: 9px;
+      white-space: nowrap;
+      transition: background 0.15s ease;
+    }
+
+    .nav-dropdown-item:hover {
+      background: var(--sage);
+    }
+
+    .ndi-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ink);
+      transition: color 0.15s ease;
+    }
+
+    .nav-dropdown-item:hover .ndi-title {
+      color: var(--forest);
+    }
+
+    .ndi-sub {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--ink-faint);
+    }
+
+    .nav-dropdown-divider {
+      height: 1px;
+      background: var(--line);
+      margin: 5px 6px;
+    }
+
+    /* ACCESS MODAL (Sheet UTM Builder only, reached from the nav dropdown) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 20, 28, 0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 20px;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-box {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      background: var(--paper-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px 28px 28px;
+      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.35);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 28px;
+      height: 28px;
+      border: none;
+      background: none;
+      color: var(--ink-faint);
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .modal-title {
+      font-family: var(--font-primary);
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .modal-sub {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      margin-bottom: 18px;
+    }
+
+    .modal-box .field-group {
+      margin-bottom: 14px;
+    }
+
+    .modal-box label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      margin-bottom: 6px;
+    }
+
+    .modal-box input {
+      width: 100%;
+      height: 40px;
+      padding: 0 12px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 14px;
+      font-family: var(--font-secondary);
+      outline: none;
+    }
+
+    .modal-box input:focus {
+      border-color: var(--forest);
+      box-shadow: 0 0 0 3px rgba(31, 75, 63, 0.12);
+    }
+
+    .modal-submit {
+      width: 100%;
+      height: 44px;
+      border: none;
+      border-radius: 9px;
+      background: var(--forest);
+      color: #fff;
+      font-size: 14.5px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: opacity 0.15s ease;
+    }
+
+    .modal-submit:hover {
+      opacity: 0.92;
+    }
+
+    .modal-submit:active {
+      opacity: 0.85;
+    }
+
+    .modal-submit:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+
     /* HERO */
     .hero {
       padding: 76px 24px 54px;
@@ -1368,7 +1569,31 @@
       <div class="brand"><img src="dark_mode_logo.png" alt="UTMCraftr logo" class="brand-mark">UTMCraftr</div>
       <div class="nav-right">
         <div class="nav-links">
-          <a href="#tool">Builder</a>
+          <div class="nav-dropdown" id="builderDropdown">
+            <button type="button" class="nav-dropdown-trigger" id="builderTrigger">
+              Builder
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a class="nav-dropdown-item" href="/#tool">
+                <span class="ndi-title">Single Link Builder</span>
+                <span class="ndi-sub">Free, no signup</span>
+              </a>
+              <div class="nav-dropdown-divider"></div>
+              <a class="nav-dropdown-item" href="#" data-product="Sheet UTM Builder"
+                data-redirect="https://docs.google.com/spreadsheets/d/1U9OtSK5Q2eKvWUbW_Hz-bYUeajluLJ0QmH4s_Jnd-EU/edit?usp=sharing">
+                <span class="ndi-title">Sheet UTM Builder</span>
+                <span class="ndi-sub">Google Sheets · access form</span>
+              </a>
+              <a class="nav-dropdown-item" href="#tool">
+                <span class="ndi-title">Bulk UTM Builder</span>
+                <span class="ndi-sub">You're already here ↓</span>
+              </a>
+            </div>
+          </div>
           <a href="#why">Why it helps</a>
           <a href="#ga4">GA4</a>
           <a href="#faq">FAQ</a>
@@ -1684,6 +1909,29 @@
     <a href="/sitemap.xml">Sitemap</a><span class="foot-sep">·</span>© 2026 UTMCraftr.
   </footer>
 
+  <div class="modal-overlay" id="accessModal">
+    <div class="modal-box">
+      <button type="button" class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      <h3 class="modal-title">Get access</h3>
+      <p class="modal-sub" id="modalSub">Enter your details to continue.</p>
+      <form id="accessForm">
+        <div class="field-group">
+          <label for="accessName">Name</label>
+          <input type="text" id="accessName" required>
+        </div>
+        <div class="field-group">
+          <label for="accessEmail">Email</label>
+          <input type="email" id="accessEmail" required>
+        </div>
+        <div class="field-group">
+          <label for="accessCompany">Company</label>
+          <input type="text" id="accessCompany" required>
+        </div>
+        <button type="submit" class="modal-submit" id="modalSubmitBtn">Submit</button>
+      </form>
+    </div>
+  </div>
+
   <script>
     window.dataLayer = window.dataLayer || [];
 
@@ -1697,9 +1945,10 @@
 
     document.querySelectorAll('.nav-links a').forEach(function (link) {
       link.addEventListener('click', function (e) {
+        var titleEl = this.querySelector('.ndi-title');
         window.dataLayer.push({
           event: 'top_nav',
-          event_action: this.textContent.trim()
+          event_action: titleEl ? titleEl.textContent.trim() : this.textContent.trim()
         });
         var href = this.getAttribute('href');
         if (href.charAt(0) !== '#') return;
@@ -1707,6 +1956,126 @@
         if (!target) return;
         e.preventDefault();
         scrollToCenter(target);
+      });
+    });
+
+    // ---- Builder nav dropdown ----
+    var builderDropdown = document.getElementById('builderDropdown');
+    var builderTrigger = document.getElementById('builderTrigger');
+
+    builderTrigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      builderDropdown.classList.toggle('open');
+    });
+
+    builderDropdown.querySelectorAll('.nav-dropdown-item').forEach(function (item) {
+      item.addEventListener('click', function () {
+        builderDropdown.classList.remove('open');
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!builderDropdown.contains(e.target)) {
+        builderDropdown.classList.remove('open');
+      }
+    });
+
+    // ---- Product access modal (Sheet UTM Builder only — mandatory, no skip) ----
+    var PRODUCT_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwXi-Yui13M0ui-RHhzoDXP5Xvo4ginxIDvwbQJdihIdFqXr3FozF3HIzQm-g_7qiJr/exec';
+
+    var accessModal = document.getElementById('accessModal');
+    var accessForm = document.getElementById('accessForm');
+    var modalSub = document.getElementById('modalSub');
+    var modalSubmitBtn = document.getElementById('modalSubmitBtn');
+    var modalCurrentProduct = null;
+    var modalCurrentRedirect = null;
+    var modalJustSubmitted = false;
+
+    function openAccessModal(product, redirectUrl) {
+      modalCurrentProduct = product;
+      modalCurrentRedirect = redirectUrl || null;
+      modalJustSubmitted = false;
+      modalSub.textContent = 'Enter your details to access ' + product + '.';
+      accessForm.reset();
+      accessModal.classList.add('show');
+      document.getElementById('accessName').focus();
+    }
+
+    function closeAccessModal(trackAsClosed) {
+      accessModal.classList.remove('show');
+      if (trackAsClosed && !modalJustSubmitted) {
+        window.dataLayer.push({
+          event: 'product_access_form',
+          event_action: 'Closed',
+          product_name: modalCurrentProduct
+        });
+      }
+    }
+
+    document.querySelectorAll('.product-card-cta, .nav-dropdown-item[data-product]').forEach(function (cta) {
+      cta.addEventListener('click', function (e) {
+        e.preventDefault();
+        var product = this.dataset.product;
+        window.dataLayer.push({
+          event: 'product_card_cta',
+          event_action: product
+        });
+        builderDropdown.classList.remove('open');
+        openAccessModal(product, this.dataset.redirect);
+      });
+    });
+
+    document.getElementById('modalClose').addEventListener('click', function () {
+      closeAccessModal(true);
+    });
+    accessModal.addEventListener('click', function (e) {
+      if (e.target === accessModal) closeAccessModal(true);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        builderDropdown.classList.remove('open');
+        if (accessModal.classList.contains('show')) closeAccessModal(true);
+      }
+    });
+
+    accessForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('accessName').value.trim();
+      var email = document.getElementById('accessEmail').value.trim();
+      var company = document.getElementById('accessCompany').value.trim();
+      if (!name || !email || !company) return;
+
+      modalSubmitBtn.disabled = true;
+      modalSubmitBtn.textContent = 'Submitting...';
+
+      var formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('company', company);
+      formData.append('product', modalCurrentProduct);
+
+      // no-cors: the Apps Script endpoint doesn't return CORS headers, so the
+      // response is opaque — we can't read it, but the request still reaches
+      // the script and appends the row.
+      fetch(PRODUCT_FORM_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      }).catch(function (err) {
+        console.error('Product access form submission error:', err);
+      }).finally(function () {
+        modalJustSubmitted = true;
+        window.dataLayer.push({
+          event: 'product_access_form',
+          event_action: 'Submit',
+          product_name: modalCurrentProduct
+        });
+        modalSubmitBtn.disabled = false;
+        modalSubmitBtn.textContent = 'Submit';
+        closeAccessModal(false);
+        if (modalCurrentRedirect) {
+          window.location.href = modalCurrentRedirect;
+        }
       });
     });
 
