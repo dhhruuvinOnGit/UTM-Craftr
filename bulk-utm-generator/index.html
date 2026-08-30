@@ -256,6 +256,54 @@
       color: var(--forest);
     }
 
+    .back-to-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid var(--sage-border);
+      background: var(--paper-card);
+      color: var(--forest);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 12px 30px -12px rgba(31, 75, 63, 0.35), 0 4px 10px rgba(0, 0, 0, 0.08);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease, border-color 0.15s ease;
+      z-index: 90;
+    }
+
+    .back-to-top svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      border-color: var(--forest);
+      background: var(--sage);
+    }
+
+    @media (max-width: 480px) {
+      .back-to-top {
+        right: 16px;
+        bottom: 16px;
+        width: 42px;
+        height: 42px;
+      }
+    }
+
+
     .theme-toggle svg {
       width: 17px;
       height: 17px;
@@ -1883,6 +1931,15 @@
     <a href="/sitemap.xml">Sitemap</a><span class="foot-sep">·</span>© 2026 UTMCraftr.
   </footer>
 
+  <button type="button" id="backToTop" class="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+      stroke-linejoin="round">
+      <line x1="12" y1="19" x2="12" y2="5"></line>
+      <polyline points="5 12 12 5 19 12"></polyline>
+    </svg>
+  </button>
+
+
   <div class="modal-overlay" id="accessModal">
     <div class="modal-box">
       <button type="button" class="modal-close" id="modalClose" aria-label="Close">&times;</button>
@@ -2058,6 +2115,16 @@
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('urchin-theme', next);
     });
+
+    var backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      backToTopBtn.classList.toggle('show', window.scrollY > 400);
+    });
+    backToTopBtn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.dataLayer.push({ event: 'back_to_top', event_action: 'clicked' });
+    });
+
 
     document.getElementById('httpsBtn').addEventListener('click', function () {
       this.classList.add('active');
