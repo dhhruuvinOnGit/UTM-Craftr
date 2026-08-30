@@ -321,16 +321,16 @@
     .nav-dropdown-menu {
       display: none;
       flex-direction: column;
-      gap: 2px;
+      gap: 4px;
       position: absolute;
       top: calc(100% + 12px);
       left: 0;
-      min-width: 240px;
+      min-width: 220px;
       background: var(--paper-card);
       border: 1px solid var(--sage-border);
       border-radius: 12px;
       box-shadow: 0 20px 40px -18px rgba(31, 75, 63, 0.28), 0 4px 14px rgba(0, 0, 0, 0.06);
-      padding: 8px;
+      padding: 10px;
       z-index: 60;
     }
 
@@ -340,39 +340,22 @@
 
     .nav-dropdown-item {
       display: flex;
-      flex-direction: column;
-      gap: 2px;
-      padding: 9px 12px;
+      align-items: center;
+      min-height: 42px;
+      padding: 0 14px;
       border-radius: 9px;
-      white-space: nowrap;
-      transition: background 0.15s ease;
-    }
-
-    .nav-dropdown-item:hover {
-      background: var(--sage);
-    }
-
-    .ndi-title {
       font-size: 13.5px;
       font-weight: 600;
       color: var(--ink);
-      transition: color 0.15s ease;
+      white-space: nowrap;
+      outline: none;
+      transition: background 0.15s ease, color 0.15s ease;
     }
 
-    .nav-dropdown-item:hover .ndi-title {
+    .nav-dropdown-item:hover,
+    .nav-dropdown-item:focus-visible {
+      background: var(--sage);
       color: var(--forest);
-    }
-
-    .ndi-sub {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--ink-faint);
-    }
-
-    .nav-dropdown-divider {
-      height: 1px;
-      background: var(--line);
-      margin: 5px 6px;
     }
 
     /* ACCESS MODAL (Sheet UTM Builder only, reached from the nav dropdown) */
@@ -1578,20 +1561,11 @@
               </svg>
             </button>
             <div class="nav-dropdown-menu">
-              <a class="nav-dropdown-item" href="/#tool">
-                <span class="ndi-title">Single Link Builder</span>
-                <span class="ndi-sub">Free, no signup</span>
-              </a>
-              <div class="nav-dropdown-divider"></div>
+              <a class="nav-dropdown-item" href="/#tool">Single Link Builder</a>
               <a class="nav-dropdown-item" href="#" data-product="Sheet UTM Builder"
-                data-redirect="https://docs.google.com/spreadsheets/d/1U9OtSK5Q2eKvWUbW_Hz-bYUeajluLJ0QmH4s_Jnd-EU/edit?usp=sharing">
-                <span class="ndi-title">Sheet UTM Builder</span>
-                <span class="ndi-sub">Google Sheets · access form</span>
-              </a>
-              <a class="nav-dropdown-item" href="#tool">
-                <span class="ndi-title">Bulk UTM Builder</span>
-                <span class="ndi-sub">You're already here ↓</span>
-              </a>
+                data-redirect="https://docs.google.com/spreadsheets/d/1U9OtSK5Q2eKvWUbW_Hz-bYUeajluLJ0QmH4s_Jnd-EU/edit?usp=sharing">Sheet
+                UTM Builder</a>
+              <a class="nav-dropdown-item" href="#tool">Bulk UTM Builder</a>
             </div>
           </div>
           <a href="#why">Why it helps</a>
@@ -1945,10 +1919,9 @@
 
     document.querySelectorAll('.nav-links a').forEach(function (link) {
       link.addEventListener('click', function (e) {
-        var titleEl = this.querySelector('.ndi-title');
         window.dataLayer.push({
           event: 'top_nav',
-          event_action: titleEl ? titleEl.textContent.trim() : this.textContent.trim()
+          event_action: this.textContent.trim()
         });
         var href = this.getAttribute('href');
         if (href.charAt(0) !== '#') return;
