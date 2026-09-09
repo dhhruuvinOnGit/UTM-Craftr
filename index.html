@@ -614,6 +614,24 @@
       transform: scale(0.98);
     }
 
+    .product-card-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+      flex-wrap: wrap;
+    }
+
+    .product-card-actions .product-card-cta {
+      flex: 1 1 0;
+      margin-top: 0;
+    }
+
+    .product-card-cta-secondary {
+      background: var(--forest);
+      color: var(--on-accent);
+      border: none;
+    }
+
     /* PRODUCT ACCESS MODAL */
     .modal-overlay {
       display: none;
@@ -1672,6 +1690,10 @@
       .product-card {
         padding: 20px;
       }
+
+      .product-card-actions {
+        flex-direction: column;
+      }
     }
 
     @media (max-width:720px) {
@@ -1902,10 +1924,13 @@
               </div>
 
               <div class="product-card">
-                <img class="product-card-icon utm-guard-icon" src="https://cdn-icons-png.flaticon.com/512/8442/8442654.png" alt="UTM Guard shield icon" title="Shield icon by SeyfDesigner via Flaticon">
+                <img class="product-card-icon utm-guard-icon" src="https://cdn-icons-png.flaticon.com/512/8442/8442654.png" alt="UTM Guard shield icon">
                 <div class="product-card-name">UTM Guard</div>
                 <p class="product-card-desc">Catch missing, inconsistent and malformed UTM data before it pollutes your reporting — with a custom monitoring layer built on top of your existing analytics data.</p>
-                <a class="product-card-cta" href="#" data-product="UTM Guard">Request setup</a>
+                <div class="product-card-actions">
+                  <a class="product-card-cta" href="#" data-product="UTM Guard">Request setup</a>
+                  <a class="product-card-cta product-card-cta-secondary" href="#" data-product="UTM Auditor" data-redirect="utm-auditor.html">Audit your UTMs</a>
+                </div>
               </div>
             </div>
           </div>

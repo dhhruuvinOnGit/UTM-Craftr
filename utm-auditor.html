@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        (function () {
+            var saved = localStorage.getItem('urchin-theme');
+            document.documentElement.setAttribute('data-theme', saved || 'dark');
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTM Auditor | Validate UTM Links | UTMCraftr</title>
+    <meta name="description"
+        content="Audit generated UTM links against UTMCraftr's standard UTM rules before using them in campaigns or reporting.">
+    <link rel="icon" type="image/png" href="light_mode_logo.png">
+    <link rel="apple-touch-icon" href="light_mode_logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --font-primary: 'PT Serif', Georgia, serif;
+            --font-secondary: 'Inter', sans-serif;
+            --paper: #F5F6F8;
+            --paper-card: #FFFFFF;
+            --ink: #1F2937;
+            --ink-soft: #64748B;
+            --ink-faint: #94A3B8;
+            --forest: #5B5BD6;
+            --forest-deep: #1F2937;
+            --sage: #EEF0F4;
+            --sage-border: #D5DAE2;
+            --line: #E2E6EC;
+            --on-accent: #FFFFFF;
+            --error: #D65A5A;
+            --error-bg: #FFF0F0;
+            --success: #25855A;
+            --success-bg: #ECFDF3;
+            --radius: 14px;
+        }
+
+        html[data-theme="dark"] {
+            --paper: #171D28;
+            --paper-card: #222B38;
+            --ink: #F8FAFC;
+            --ink-soft: #B4BFCE;
+            --ink-faint: #7E8A9A;
+            --forest: #7C78E8;
+            --forest-deep: #0F141C;
+            --sage: #2A3443;
+            --sage-border: #3B4758;
+            --line: #2A3442;
+            --on-accent: #FFFFFF;
+            --error: #FF7B7B;
+            --error-bg: #3A2730;
+            --success: #63D19A;
+            --success-bg: #20352C;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: var(--font-secondary);
+            color: var(--ink);
+            background: var(--paper);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        nav {
+            padding: 22px 0;
+            border-bottom: 1px solid var(--line)
+        }
+
+        nav .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 40px
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            font-family: var(--font-primary);
+            color: var(--forest-deep)
+        }
+
+        html[data-theme="dark"] .brand {
+            color: #fff
+        }
+
+        .brand-mark {
+            width: 30px;
+            height: 30px;
+            object-fit: cover
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 18px
+        }
+
+        .back-link {
+            font-size: 13px;
+            color: var(--ink-soft);
+            font-weight: 600
+        }
+
+        .back-link:hover {
+            color: var(--forest)
+        }
+
+        .theme-toggle {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            border: 1px solid var(--line);
+            background: var(--paper-card);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink-soft)
+        }
+
+        .theme-toggle svg {
+            width: 17px;
+            height: 17px
+        }
+
+        .theme-toggle .moon {
+            display: none
+        }
+
+        html[data-theme="dark"] .theme-toggle .sun {
+            display: none
+        }
+
+        html[data-theme="dark"] .theme-toggle .moon {
+            display: block
+        }
+
+        .hero {
+            text-align: center;
+            padding: 72px 24px 42px
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            background: var(--sage);
+            color: var(--forest);
+            border: 1px solid var(--sage-border);
+            padding: 7px 15px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 22px
+        }
+
+        .hero h1 {
+            font-family: var(--font-primary);
+            font-size: 44px;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 14px
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: var(--ink-soft);
+            font-size: 16px;
+            line-height: 1.65
+        }
+
+        .auditor-wrap {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 24px 90px
+        }
+
+        .window {
+            background: var(--paper-card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: 0 20px 50px -20px rgba(31, 75, 63, .18);
+            padding: 32px
+        }
+
+        .field-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 13.5px;
+            font-weight: 700;
+            margin-bottom: 8px
+        }
+
+        .field-help {
+            font-size: 12px;
+            color: var(--ink-faint);
+            font-weight: 500
+        }
+
+        .url-input {
+            width: 100%;
+            min-height: 180px;
+            resize: vertical;
+            padding: 14px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--paper);
+            color: var(--ink);
+            font: 14px/1.55 var(--font-secondary);
+            outline: none
+        }
+
+        .url-input:focus {
+            border-color: var(--forest);
+            box-shadow: 0 0 0 3px rgba(91, 91, 214, .12)
+        }
+
+        .audit-btn {
+            width: 100%;
+            height: 46px;
+            border: 0;
+            border-radius: 10px;
+            background: var(--forest);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 16px
+        }
+
+        .audit-btn:hover {
+            opacity: .92
+        }
+
+        .summary {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px
+        }
+
+        .summary.show {
+            display: grid
+        }
+
+        .summary-card {
+            background: var(--sage);
+            border: 1px solid var(--sage-border);
+            border-radius: 10px;
+            padding: 16px
+        }
+
+        .summary-card strong {
+            display: block;
+            font-family: var(--font-primary);
+            font-size: 27px;
+            margin-bottom: 3px
+        }
+
+        .summary-card span {
+            font-size: 12px;
+            color: var(--ink-soft);
+            font-weight: 600
+        }
+
+        .results {
+            display: none;
+            margin-top: 22px
+        }
+
+        .results.show {
+            display: block
+        }
+
+        .result {
+            border: 1px solid var(--line);
+            border-radius: 11px;
+            padding: 18px;
+            margin-bottom: 12px;
+            background: var(--paper-card)
+        }
+
+        .result-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px
+        }
+
+        .status {
+            font-size: 11px;
+            font-weight: 800;
+            padding: 5px 8px;
+            border-radius: 100px
+        }
+
+        .status.pass {
+            background: var(--success-bg);
+            color: var(--success)
+        }
+
+        .status.fail {
+            background: var(--error-bg);
+            color: var(--error)
+        }
+
+        .result-url {
+            font-size: 13px;
+            line-height: 1.5;
+            word-break: break-all;
+            color: var(--ink)
+        }
+
+        .checks {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 12px
+        }
+
+        .check {
+            font-size: 12.5px;
+            line-height: 1.45;
+            padding: 9px 10px;
+            border-radius: 8px;
+            background: var(--sage);
+            color: var(--ink-soft)
+        }
+
+        .check.ok {
+            color: var(--success)
+        }
+
+        .check.bad {
+            color: var(--error);
+            background: var(--error-bg)
+        }
+
+        .check strong {
+            color: var(--ink)
+        }
+
+        .recommendation {
+            margin-top: 12px;
+            font-size: 12.5px;
+            color: var(--ink-soft);
+            line-height: 1.55
+        }
+
+        .recommendation strong {
+            color: var(--ink)
+        }
+
+        .rules {
+            margin-top: 28px
+        }
+
+        .rules h2 {
+            font-family: var(--font-primary);
+            font-size: 25px;
+            font-weight: 400;
+            margin-bottom: 14px
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px
+        }
+
+        .rule {
+            padding: 13px 14px;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            background: var(--paper-card);
+            font-size: 12.5px;
+            color: var(--ink-soft);
+            line-height: 1.5
+        }
+
+        .rule strong {
+            color: var(--ink)
+        }
+
+        footer {
+            text-align: center;
+            padding: 28px 24px;
+            border-top: 1px solid var(--line);
+            font-size: 12px;
+            color: var(--ink-faint)
+        }
+
+        @media(max-width:720px) {
+            nav .wrap {
+                padding: 0 20px
+            }
+
+            .back-link {
+                display: none
+            }
+
+            .hero {
+                padding: 54px 20px 34px
+            }
+
+            .hero h1 {
+                font-size: 34px
+            }
+
+            .auditor-wrap {
+                padding: 0 16px 60px
+            }
+
+            .window {
+                padding: 20px
+            }
+
+            .summary {
+                grid-template-columns: 1fr
+            }
+
+            .checks,
+            .rules-grid {
+                grid-template-columns: 1fr
+            }
+
+            .field-help {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="wrap"><a class="brand" href="/"><img class="brand-mark" src="light_mode_logo.png"
+                    alt="UTMCraftr">UTMCraftr</a>
+            <div class="nav-right"><a class="back-link" href="/">Back to Builder</a><button class="theme-toggle"
+                    id="themeToggle" type="button" aria-label="Toggle theme"><svg class="sun" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="4" />
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                    </svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
+                        <path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z" />
+                    </svg></button></div>
+        </div>
+    </nav>
+    <header class="hero">
+        <div class="eyebrow">UTM AUDITOR</div>
+        <h1>Audit your UTM links before they go live.</h1>
+        <p>Paste one or multiple generated UTM links below. UTMCraftr checks them against the same standardization rules
+            used by the builder and highlights anything that needs attention.</p>
+    </header>
+    <main class="auditor-wrap">
+        <section class="window">
+            <label class="field-label" for="urls">UTM links <span class="field-help">One link per line</span></label>
+            <textarea id="urls" class="url-input" placeholder="https://example.com/landing?utm_source=instagram&utm_medium=social&utm_campaign=summer_sale
+https://example.com/shop?ref=abc&utm_source=google&utm_medium=cpc&utm_campaign=brand"></textarea>
+            <button class="audit-btn" id="auditBtn" type="button">Audit UTM Links</button>
+            <div class="summary" id="summary">
+                <div class="summary-card"><strong id="totalCount">0</strong><span>Total links</span></div>
+                <div class="summary-card"><strong id="passCount">0</strong><span>Passing links</span></div>
+                <div class="summary-card"><strong id="failCount">0</strong><span>Needs attention</span></div>
+            </div>
+            <div class="results" id="results"></div>
+        </section>
+        <section class="rules">
+            <h2>What the auditor checks</h2>
+            <div class="rules-grid">
+                <div class="rule"><strong>Required UTMs</strong> — utm_source, utm_medium and utm_campaign must be
+                    present.</div>
+                <div class="rule"><strong>Lowercase values</strong> — builder output standardizes UTM values to
+                    lowercase.</div>
+                <div class="rule"><strong>Spaces</strong> — spaces are standardized to underscores before encoding.
+                </div>
+                <div class="rule"><strong>Source / medium swap</strong> — known sources in the medium field, or known
+                    mediums in source, are flagged.</div>
+                <div class="rule"><strong>Query structure</strong> — only one <code>?</code>; UTM parameters belong in
+                    the query string.</div>
+                <div class="rule"><strong>Hash placement</strong> — UTM parameters must appear before any <code>#</code>
+                    fragment.</div>
+                <div class="rule"><strong>Existing query strings</strong> — existing parameters should remain intact and
+                    UTM parameters should use <code>&amp;</code>.</div>
+                <div class="rule"><strong>Standard aliases</strong> — known variants such as <code>ig</code> →
+                    <code>instagram</code> and <code>fb</code> → <code>facebook</code> are flagged as non-canonical.
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>Built for cleaner GA4 reporting — free to use, always.<br>© 2026 UTMCraftr.</footer>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        var MEDIUM_ALIASES = { 'email': 'email', 'e-mail': 'email', 'e mail': 'email', 'emails': 'email', 'mail': 'email', 'newsletter': 'email', 'social': 'social', 'social media': 'social', 'sm': 'social', 'organic social': 'social', 'paid social': 'paid_social', 'paid_social': 'paid_social', 'paidsocial': 'paid_social', 'social ads': 'paid_social', 'paid social media': 'paid_social', 'cpc': 'cpc', 'ppc': 'cpc', 'paid search': 'cpc', 'paid-search': 'cpc', 'sem': 'cpc', 'paidsearch': 'cpc', 'referral': 'referral', 'referrals': 'referral', 'affiliate': 'affiliate', 'affiliates': 'affiliate', 'display': 'display', 'banner': 'display', 'banners': 'display', 'display ads': 'display', 'organic': 'organic', 'seo': 'organic' };
+        var SOURCE_ALIASES = { 'facebook': 'facebook', 'fb': 'facebook', 'meta': 'facebook', 'instagram': 'instagram', 'ig': 'instagram', 'insta': 'instagram', 'google': 'google', 'google ads': 'google', 'adwords': 'google', 'google adwords': 'google', 'klaviyo': 'klaviyo', 'twitter': 'twitter', 'x': 'twitter', 'linkedin': 'linkedin', 'tiktok': 'tiktok', 'tik tok': 'tiktok', 'youtube': 'youtube', 'yt': 'youtube', 'whatsapp': 'whatsapp', 'whats app': 'whatsapp', 'bing': 'bing', 'yahoo': 'yahoo', 'duckduckgo': 'duckduckgo', 'duck duck go': 'duckduckgo', 'pinterest': 'pinterest', 'snapchat': 'snapchat' };
+        function normalizeAlias(v, map) { var key = v.trim().toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim(); return map[key] || null }
+        function detectSwap(source, medium) { var medLooks = normalizeAlias(medium, SOURCE_ALIASES) !== null && normalizeAlias(medium, MEDIUM_ALIASES) === null; var srcLooks = normalizeAlias(source, MEDIUM_ALIASES) !== null && normalizeAlias(source, SOURCE_ALIASES) === null; return medLooks || srcLooks }
+        function expectedValue(v, map) { var canonical = map ? normalizeAlias(v, map) : null; return canonical || v.trim().replace(/\s+/g, '_').toLowerCase() }
+        function check(label, ok, detail) { return { label: label, ok: ok, detail: detail } }
+        function auditUrl(raw) {
+            var checks = []; var trimmed = raw.trim();
+            var qCount = (trimmed.match(/\?/g) || []).length; var hashIndex = trimmed.indexOf('#'); var beforeHash = hashIndex === -1 ? trimmed : trimmed.slice(0, hashIndex);
+            var urlObj = null; try { urlObj = new URL(trimmed) } catch (e) { }
+            checks.push(check('Valid URL', !!urlObj && !!urlObj.hostname, !!urlObj ? 'Valid URL structure.' : 'This is not a valid absolute URL.'));
+            if (!urlObj) { return { url: trimmed, pass: false, checks: checks, recommendation: 'Use a complete URL such as https://example.com/page?utm_source=instagram&utm_medium=social&utm_campaign=summer_sale.' } }
+            var params = urlObj.searchParams;
+            var source = params.get('utm_source') || ''; var medium = params.get('utm_medium') || ''; var campaign = params.get('utm_campaign') || ''; var term = params.get('utm_term') || ''; var content = params.get('utm_content') || '';
+            checks.push(check('Required UTMs', !!source && !!medium && !!campaign, !!source && !!medium && !!campaign ? 'source, medium and campaign are present.' : 'utm_source, utm_medium and utm_campaign are all required.'));
+            var allVals = [['utm_source', source, SOURCE_ALIASES], ['utm_medium', medium, MEDIUM_ALIASES], ['utm_campaign', campaign, null], ['utm_term', term, null], ['utm_content', content, null]];
+            allVals.forEach(function (x) { if (!x[1]) return; var expected = expectedValue(x[1], x[2]); checks.push(check(x[0] + ' standardization', x[1] === expected, x[1] === expected ? 'Value follows builder standardization.' : 'Use “' + expected + '” instead of “' + x[1] + '”.')); });
+            checks.push(check('Source / medium pairing', !source || !medium || !detectSwap(source, medium), (!source || !medium || !detectSwap(source, medium)) ? 'Source and medium are in the expected fields.' : 'Source and medium appear to be swapped.'));
+            checks.push(check('Single query marker', qCount === 1, qCount === 1 ? 'Exactly one “?” is used.' : 'The URL should contain exactly one “?” query marker.'));
+            checks.push(check('UTMs before hash', hashIndex === -1 || beforeHash.indexOf('utm_') !== -1, hashIndex === -1 || beforeHash.indexOf('utm_') !== -1 ? 'UTM parameters are before the fragment.' : 'UTM parameters appear after the “#” fragment.'));
+            checks.push(check('Existing query structure', true, 'Existing query parameters are parsed separately from the UTM parameters.'));
+            var encodedSpace = /utm_(source|medium|campaign|term|content)=[^&#]*\s/.test(trimmed);
+            checks.push(check('No raw spaces in UTM values', !encodedSpace, !encodedSpace ? 'No raw spaces detected in UTM values.' : 'Raw spaces are present in a UTM value.'));
+            var pass = checks.every(function (c) { return c.ok }); var bad = checks.filter(function (c) { return !c.ok });
+            var recommendation = bad.length ? 'Fix: ' + bad.map(function (c) { return c.detail }).join(' ') : 'This link follows the current UTMCraftr UTM standardization rules.';
+            return { url: trimmed, pass: pass, checks: checks, recommendation: recommendation };
+        }
+        document.getElementById('auditBtn').addEventListener('click', function () {
+            var inputs = document.getElementById('urls').value.split(/\r?\n/).map(function (x) { return x.trim() }).filter(Boolean);
+            var results = document.getElementById('results'), summary = document.getElementById('summary'); results.innerHTML = '';
+            if (!inputs.length) { summary.classList.remove('show'); results.classList.remove('show'); return }
+            var audited = inputs.map(auditUrl), passes = audited.filter(function (x) { return x.pass }).length;
+            document.getElementById('totalCount').textContent = audited.length; document.getElementById('passCount').textContent = passes; document.getElementById('failCount').textContent = audited.length - passes; summary.classList.add('show');
+            audited.forEach(function (item, i) { var el = document.createElement('div'); el.className = 'result'; var checksHtml = item.checks.map(function (c) { return '<div class="check ' + (c.ok ? 'ok' : 'bad') + '"><strong>' + (c.ok ? '✓ ' : '✗ ') + c.label + '</strong><br>' + c.detail + '</div>' }).join(''); el.innerHTML = '<div class="result-head"><span class="status ' + (item.pass ? 'pass' : 'fail') + '">' + (item.pass ? 'PASS' : 'NEEDS ATTENTION') + '</span><span style="font-size:12px;color:var(--ink-faint)">Link ' + (i + 1) + '</span></div><div class="result-url">' + item.url.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div><div class="checks">' + checksHtml + '</div><div class="recommendation"><strong>Result:</strong> ' + item.recommendation + '</div>'; results.appendChild(el) }); results.classList.add('show'); window.dataLayer.push({ event: 'utm_audit', event_action: 'audit_links', link_count: audited.length, pass_count: passes, fail_count: audited.length - passes });
+        });
+        document.getElementById('themeToggle').addEventListener('click', function () { var current = document.documentElement.getAttribute('data-theme'); var next = current === 'dark' ? 'light' : 'dark'; document.documentElement.setAttribute('data-theme', next); localStorage.setItem('urchin-theme', next) });
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-5LT6PRVF');</script>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LT6PRVF" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+</body>
+
+</html>
