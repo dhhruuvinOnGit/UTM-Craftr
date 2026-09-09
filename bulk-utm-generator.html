@@ -2,14 +2,6 @@
 <html lang="en">
 
 <head>
-  <script>
-    // Runs before paint — reads saved preference, or defaults to dark
-    (function () {
-      var saved = localStorage.getItem('urchin-theme');
-      var theme = saved || 'dark';
-      document.documentElement.setAttribute('data-theme', theme);
-    })();
-  </script>
   <meta charset="UTF-8">
   <link rel="icon" type="image/png" href="light_mode_logo.png">
   <link rel="apple-touch-icon" href="light_mode_logo.png">
@@ -117,35 +109,34 @@
       --forest-deep: #1F2937;
       --sage: #EEF0F4;
       --sage-border: #D5DAE2;
-      --mustard: #8B86E8;
+      --mustard: #5B5BD6;
       --line: #E2E6EC;
       --on-accent: #FFFFFF;
       --panel-soft: #CBD1DB;
-      --error: #D65A5A;
-      --error-bg: #FFF0F0;
+      --error: #5B5BD6;
+      --error-bg: #EEF0F4;
       --radius: 14px;
-    }
-
-    html[data-theme="dark"] {
-      --paper: #171D28;
-      --paper-card: #222B38;
-      --ink: #F8FAFC;
-      --ink-soft: #B4BFCE;
-      --ink-faint: #7E8A9A;
-      --forest: #7C78E8;
-      --forest-deep: #0F141C;
-      --sage: #2A3443;
-      --sage-border: #3B4758;
-      --mustard: #A09CF2;
-      --line: #2A3442;
-      --on-accent: #FFFFFF;
-      --panel-soft: #AEB8C7;
-      --error: #FF7B7B;
-      --error-bg: #3A2730;
     }
 
     html {
       transition: background-color 0.25s ease;
+    }
+
+
+    button,
+    input,
+    textarea,
+    select {
+      font-family: var(--font-secondary);
+    }
+
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .display {
+      font-family: var(--font-primary);
     }
 
     body {
@@ -211,10 +202,6 @@
       color: var(--forest-deep);
     }
 
-    html[data-theme="dark"] .brand {
-      color: #FFFFFF;
-    }
-
     .brand-mark {
       width: 30px;
       height: 30px;
@@ -235,25 +222,6 @@
       display: flex;
       align-items: center;
       gap: 24px;
-    }
-
-    .theme-toggle {
-      width: 34px;
-      height: 34px;
-      border-radius: 9px;
-      border: 1px solid var(--line);
-      background: var(--paper-card);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--ink-soft);
-      transition: border-color 0.15s ease, color 0.15s ease;
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--forest);
-      color: var(--forest);
     }
 
     .back-to-top {
@@ -301,24 +269,6 @@
         width: 42px;
         height: 42px;
       }
-    }
-
-
-    .theme-toggle svg {
-      width: 17px;
-      height: 17px;
-    }
-
-    .theme-toggle .icon-moon {
-      display: none;
-    }
-
-    html[data-theme="dark"] .theme-toggle .icon-sun {
-      display: none;
-    }
-
-    html[data-theme="dark"] .theme-toggle .icon-moon {
-      display: block;
     }
 
     .nav-links a {
@@ -1021,12 +971,29 @@
         padding-right: 34px;
       }
 
-      .param-row-compact .set-preset-select { grid-area: preset; }
-      .param-row-compact .set-source { grid-area: source; }
-      .param-row-compact .set-medium { grid-area: medium; }
-      .param-row-compact .set-campaign { grid-area: campaign; }
-      .param-row-compact .set-term { grid-area: term; }
-      .param-row-compact .set-content { grid-area: content; }
+      .param-row-compact .set-preset-select {
+        grid-area: preset;
+      }
+
+      .param-row-compact .set-source {
+        grid-area: source;
+      }
+
+      .param-row-compact .set-medium {
+        grid-area: medium;
+      }
+
+      .param-row-compact .set-campaign {
+        grid-area: campaign;
+      }
+
+      .param-row-compact .set-term {
+        grid-area: term;
+      }
+
+      .param-row-compact .set-content {
+        grid-area: content;
+      }
 
       .param-row-compact .remove-set-btn {
         position: absolute;
@@ -1613,6 +1580,23 @@
       margin: 0;
     }
 
+    .product-card-actions {
+      display: flex;
+      gap: 10px;
+      flex: 0 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .product-card-actions .product-card-cta {
+      min-width: 130px;
+    }
+
+    .product-card-cta-secondary {
+      background: var(--forest);
+      color: var(--on-accent);
+      border: none;
+    }
+
     .product-card-cta {
       flex: 0 0 auto;
       display: inline-flex;
@@ -1636,18 +1620,6 @@
 
     .product-card-cta:active {
       transform: scale(0.98);
-    }
-
-    .product-card-attribution {
-      font-size: 10.5px;
-      color: var(--ink-faint);
-      margin-top: 8px;
-      text-align: right;
-    }
-
-    .product-card-attribution a {
-      text-decoration: underline;
-      text-underline-offset: 2px;
     }
 
     @media (max-width:720px) {
@@ -1674,10 +1646,17 @@
         margin-left: 72px;
         flex-basis: calc(100% - 72px);
       }
+    }
 
-      .product-card-attribution {
-        text-align: left;
-        margin-left: 72px;
+
+    @media (max-width:720px) {
+      .product-card-actions {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .product-card-actions .product-card-cta {
+        width: 100%;
       }
     }
 
@@ -1745,7 +1724,7 @@
 
   <nav>
     <div class="wrap">
-      <div class="brand"><img src="dark_mode_logo.png" alt="UTMCraftr logo" class="brand-mark">UTMCraftr</div>
+      <div class="brand"><img src="light_mode_logo.png" alt="UTMCraftr logo" class="brand-mark">UTMCraftr</div>
       <div class="nav-right">
         <div class="nav-links">
           <div class="nav-dropdown" id="builderDropdown">
@@ -1769,24 +1748,6 @@
           <a href="#ga4">GA4</a>
           <a href="#faq">FAQ</a>
         </div>
-        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
-          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="4"></circle>
-            <line x1="12" y1="2" x2="12" y2="4"></line>
-            <line x1="12" y1="20" x2="12" y2="22"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="2" y1="12" x2="4" y2="12"></line>
-            <line x1="20" y1="12" x2="22" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </button>
       </div>
     </div>
   </nav>
@@ -1837,7 +1798,8 @@
 
           <button class="add-set-btn" id="addSetBtn" type="button">+ Add another parameter row</button>
 
-          <div class="generate-count" id="generateCount">Enter at least one URL and one parameter row to generate links.</div>
+          <div class="generate-count" id="generateCount">Enter at least one URL and one parameter row to generate links.
+          </div>
 
           <button class="generate-btn" id="genBtn" type="button">Generate links</button>
 
@@ -1866,11 +1828,8 @@
         </div>
 
         <div class="product-card">
-          <img
-            class="product-card-icon utm-guard-icon"
-            src="https://cdn-icons-png.flaticon.com/512/8442/8442654.png"
-            alt="UTM Guard shield icon"
->
+          <img class="product-card-icon utm-guard-icon" src="https://cdn-icons-png.flaticon.com/512/8442/8442654.png"
+            alt="UTM Guard shield icon">
 
           <div class="product-card-body">
             <div class="product-card-name">UTM Guard</div>
@@ -1880,10 +1839,10 @@
             </p>
           </div>
 
-          <a class="product-card-cta" href="#" data-product="UTM Guard">Request setup</a>
-        </div>
-
-        <div class="product-card-attribution">
+          <div class="product-card-actions">
+            <a class="product-card-cta" href="#" data-product="UTM Guard">Request setup</a>
+            <a class="product-card-cta product-card-cta-secondary" href="#" data-product="UTM Guard">Access now</a>
+          </div>
         </div>
       </div>
     </section>
@@ -1957,12 +1916,14 @@
         <div class="param-row">
           <div class="param-name">utm_source</div>
           <div class="param-desc">Where the traffic is coming from — <em>instagram</em>, <em>google</em>,
-            <em>klaviyo</em>, <em>whatsapp</em>.</div>
+            <em>klaviyo</em>, <em>whatsapp</em>.
+          </div>
         </div>
         <div class="param-row">
           <div class="param-name">utm_medium</div>
           <div class="param-desc">What kind of channel it is — <em>social</em>, <em>email</em>, <em>cpc</em>,
-            <em>referral</em>.</div>
+            <em>referral</em>.
+          </div>
         </div>
         <div class="param-row">
           <div class="param-name">utm_campaign</div>
@@ -1975,7 +1936,8 @@
         <div class="param-row">
           <div class="param-name">utm_content<span class="tag"> (optional)</span></div>
           <div class="param-desc">Distinguishes between multiple links in the same campaign — <em>story-swipeup</em> vs
-            <em>bio-link</em>.</div>
+            <em>bio-link</em>.
+          </div>
         </div>
       </div>
     </section>
@@ -2038,7 +2000,8 @@
       <div class="test-grid">
         <div class="test-item">
           <p><strong>Query parameter test</strong> — if the URL already has a <code>?</code>, add UTM params with
-            <code>&amp;</code>, not a second <code>?</code>.</p>
+            <code>&amp;</code>, not a second <code>?</code>.
+          </p>
           <p class="test-ex bad">✗ <code>site.com/shop?ref=abc?utm_source=instagram</code></p>
           <p class="test-ex good">✓ <code>site.com/shop?ref=abc&amp;utm_source=instagram</code></p>
         </div>
@@ -2289,14 +2252,6 @@
         }
       });
     });
-
-    document.getElementById('themeToggle').addEventListener('click', function () {
-      var current = document.documentElement.getAttribute('data-theme');
-      var next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('urchin-theme', next);
-    });
-
     var backToTopBtn = document.getElementById('backToTop');
     window.addEventListener('scroll', function () {
       backToTopBtn.classList.toggle('show', window.scrollY > 400);

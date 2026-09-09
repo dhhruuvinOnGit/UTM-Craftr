@@ -2,12 +2,6 @@
 <html lang="en">
 
 <head>
-    <script>
-        (function () {
-            var saved = localStorage.getItem('urchin-theme');
-            document.documentElement.setAttribute('data-theme', saved || 'dark');
-        })();
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UTM Auditor | Validate UTM Links | UTMCraftr</title>
@@ -35,29 +29,11 @@
             --sage-border: #D5DAE2;
             --line: #E2E6EC;
             --on-accent: #FFFFFF;
-            --error: #D65A5A;
-            --error-bg: #FFF0F0;
-            --success: #25855A;
-            --success-bg: #ECFDF3;
+            --error: #5B5BD6;
+            --error-bg: #EEF0F4;
+            --success: #5B5BD6;
+            --success-bg: #EEF0F4;
             --radius: 14px;
-        }
-
-        html[data-theme="dark"] {
-            --paper: #171D28;
-            --paper-card: #222B38;
-            --ink: #F8FAFC;
-            --ink-soft: #B4BFCE;
-            --ink-faint: #7E8A9A;
-            --forest: #7C78E8;
-            --forest-deep: #0F141C;
-            --sage: #2A3443;
-            --sage-border: #3B4758;
-            --line: #2A3442;
-            --on-accent: #FFFFFF;
-            --error: #FF7B7B;
-            --error-bg: #3A2730;
-            --success: #63D19A;
-            --success-bg: #20352C;
         }
 
         * {
@@ -68,6 +44,20 @@
 
         html {
             scroll-behavior: smooth
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font-family: var(--font-secondary)
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-primary)
         }
 
         body {
@@ -106,10 +96,6 @@
             color: var(--forest-deep)
         }
 
-        html[data-theme="dark"] .brand {
-            color: #fff
-        }
-
         .brand-mark {
             width: 30px;
             height: 30px;
@@ -130,36 +116,6 @@
 
         .back-link:hover {
             color: var(--forest)
-        }
-
-        .theme-toggle {
-            width: 34px;
-            height: 34px;
-            border-radius: 9px;
-            border: 1px solid var(--line);
-            background: var(--paper-card);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--ink-soft)
-        }
-
-        .theme-toggle svg {
-            width: 17px;
-            height: 17px
-        }
-
-        .theme-toggle .moon {
-            display: none
-        }
-
-        html[data-theme="dark"] .theme-toggle .sun {
-            display: none
-        }
-
-        html[data-theme="dark"] .theme-toggle .moon {
-            display: block
         }
 
         .hero {
@@ -379,6 +335,32 @@
             color: var(--ink)
         }
 
+        .pdf-actions {
+            display: none;
+            margin-top: 16px
+        }
+
+        .pdf-actions.show {
+            display: flex;
+            justify-content: flex-end
+        }
+
+        .download-pdf-btn {
+            height: 42px;
+            padding: 0 18px;
+            border: 1px solid var(--forest);
+            border-radius: 9px;
+            background: var(--paper-card);
+            color: var(--forest);
+            font-size: 13.5px;
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        .download-pdf-btn:hover {
+            background: var(--sage)
+        }
+
         .rules {
             margin-top: 28px
         }
@@ -463,16 +445,7 @@
     <nav>
         <div class="wrap"><a class="brand" href="/"><img class="brand-mark" src="light_mode_logo.png"
                     alt="UTMCraftr">UTMCraftr</a>
-            <div class="nav-right"><a class="back-link" href="/">Back to Builder</a><button class="theme-toggle"
-                    id="themeToggle" type="button" aria-label="Toggle theme"><svg class="sun" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                        <circle cx="12" cy="12" r="4" />
-                        <path
-                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-                    </svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round">
-                        <path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z" />
-                    </svg></button></div>
+            <div class="nav-right"><a class="back-link" href="/">Back to Builder</a></div>
         </div>
     </nav>
     <header class="hero">
@@ -493,6 +466,8 @@ https://example.com/shop?ref=abc&utm_source=google&utm_medium=cpc&utm_campaign=b
                 <div class="summary-card"><strong id="failCount">0</strong><span>Needs attention</span></div>
             </div>
             <div class="results" id="results"></div>
+            <div class="pdf-actions" id="pdfActions"><button class="download-pdf-btn" id="downloadPdfBtn"
+                    type="button">Download PDF Report</button></div>
         </section>
         <section class="rules">
             <h2>What the auditor checks</h2>
@@ -518,6 +493,7 @@ https://example.com/shop?ref=abc&utm_source=google&utm_medium=cpc&utm_campaign=b
         </section>
     </main>
     <footer>Built for cleaner GA4 reporting — free to use, always.<br>© 2026 UTMCraftr.</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         var MEDIUM_ALIASES = { 'email': 'email', 'e-mail': 'email', 'e mail': 'email', 'emails': 'email', 'mail': 'email', 'newsletter': 'email', 'social': 'social', 'social media': 'social', 'sm': 'social', 'organic social': 'social', 'paid social': 'paid_social', 'paid_social': 'paid_social', 'paidsocial': 'paid_social', 'social ads': 'paid_social', 'paid social media': 'paid_social', 'cpc': 'cpc', 'ppc': 'cpc', 'paid search': 'cpc', 'paid-search': 'cpc', 'sem': 'cpc', 'paidsearch': 'cpc', 'referral': 'referral', 'referrals': 'referral', 'affiliate': 'affiliate', 'affiliates': 'affiliate', 'display': 'display', 'banner': 'display', 'banners': 'display', 'display ads': 'display', 'organic': 'organic', 'seo': 'organic' };
@@ -551,14 +527,94 @@ https://example.com/shop?ref=abc&utm_source=google&utm_medium=cpc&utm_campaign=b
             var inputs = document.getElementById('urls').value.split(/\r?\n/).map(function (x) { return x.trim() }).filter(Boolean);
             var results = document.getElementById('results'), summary = document.getElementById('summary'); results.innerHTML = '';
             if (!inputs.length) { summary.classList.remove('show'); results.classList.remove('show'); return }
-            var audited = inputs.map(auditUrl), passes = audited.filter(function (x) { return x.pass }).length;
-            document.getElementById('totalCount').textContent = audited.length; document.getElementById('passCount').textContent = passes; document.getElementById('failCount').textContent = audited.length - passes; summary.classList.add('show');
+            var audited = inputs.map(auditUrl), passes = audited.filter(function (x) { return x.pass }).length; window.lastAudited = audited;
+            document.getElementById('totalCount').textContent = audited.length; document.getElementById('passCount').textContent = passes; document.getElementById('failCount').textContent = audited.length - passes; summary.classList.add('show'); document.getElementById('pdfActions').classList.add('show');
             audited.forEach(function (item, i) { var el = document.createElement('div'); el.className = 'result'; var checksHtml = item.checks.map(function (c) { return '<div class="check ' + (c.ok ? 'ok' : 'bad') + '"><strong>' + (c.ok ? '✓ ' : '✗ ') + c.label + '</strong><br>' + c.detail + '</div>' }).join(''); el.innerHTML = '<div class="result-head"><span class="status ' + (item.pass ? 'pass' : 'fail') + '">' + (item.pass ? 'PASS' : 'NEEDS ATTENTION') + '</span><span style="font-size:12px;color:var(--ink-faint)">Link ' + (i + 1) + '</span></div><div class="result-url">' + item.url.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div><div class="checks">' + checksHtml + '</div><div class="recommendation"><strong>Result:</strong> ' + item.recommendation + '</div>'; results.appendChild(el) }); results.classList.add('show'); window.dataLayer.push({ event: 'utm_audit', event_action: 'audit_links', link_count: audited.length, pass_count: passes, fail_count: audited.length - passes });
         });
-        document.getElementById('themeToggle').addEventListener('click', function () { var current = document.documentElement.getAttribute('data-theme'); var next = current === 'dark' ? 'light' : 'dark'; document.documentElement.setAttribute('data-theme', next); localStorage.setItem('urchin-theme', next) });
     </script>
     <!-- Google Tag Manager -->
-    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-5LT6PRVF');</script>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-5LT6PRVF');
+
+        function drawPdfWrapped(doc, text, x, y, maxWidth, lineHeight) {
+            var lines = doc.splitTextToSize(String(text), maxWidth);
+            for (var i = 0; i < lines.length; i++) {
+                if (y > 275) { doc.addPage(); y = 18; }
+                doc.text(lines[i], x, y);
+                y += lineHeight;
+            }
+            return y;
+        }
+
+        document.getElementById('downloadPdfBtn').addEventListener('click', function () {
+            if (!window.lastAudited || !window.lastAudited.length) return;
+            var jsPDF = window.jspdf && window.jspdf.jsPDF;
+            if (!jsPDF) {
+                alert('The PDF generator could not be loaded. Please refresh the page and try again.');
+                return;
+            }
+
+            var doc = new jsPDF({ unit: 'mm', format: 'a4' });
+            var pageWidth = doc.internal.pageSize.getWidth();
+            var y = 18;
+            var margin = 16;
+            var contentWidth = pageWidth - margin * 2;
+            var audited = window.lastAudited;
+            var passes = audited.filter(function (x) { return x.pass; }).length;
+
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(20);
+            doc.text('UTMCraftr UTM Audit Report', margin, y);
+            y += 9;
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+            doc.setTextColor(100, 116, 139);
+            doc.text('Generated: ' + new Date().toLocaleString(), margin, y);
+            y += 10;
+
+            doc.setTextColor(31, 41, 55);
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Audit Summary', margin, y);
+            y += 7;
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10);
+            y = drawPdfWrapped(doc, 'Total links: ' + audited.length + '    Passing: ' + passes + '    Needs attention: ' + (audited.length - passes), margin, y, contentWidth, 5);
+            y += 5;
+
+            audited.forEach(function (item, index) {
+                if (y > 258) { doc.addPage(); y = 18; }
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(12);
+                doc.setTextColor(91, 91, 214);
+                doc.text('Link ' + (index + 1) + ' — ' + (item.pass ? 'PASS' : 'NEEDS ATTENTION'), margin, y);
+                y += 6;
+                doc.setTextColor(31, 41, 55);
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8.5);
+                y = drawPdfWrapped(doc, item.url, margin, y, contentWidth, 4.2);
+                y += 3;
+
+                item.checks.forEach(function (check) {
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(9);
+                    doc.setTextColor(check.ok ? 37 : 214, check.ok ? 133 : 90, check.ok ? 90 : 90);
+                    y = drawPdfWrapped(doc, (check.ok ? 'PASS: ' : 'FAIL: ') + check.label, margin + 2, y, contentWidth - 2, 4.5);
+                    doc.setFont('helvetica', 'normal');
+                    doc.setTextColor(100, 116, 139);
+                    y = drawPdfWrapped(doc, check.detail, margin + 5, y, contentWidth - 5, 4.2);
+                    y += 1;
+                });
+
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(31, 41, 55);
+                y = drawPdfWrapped(doc, 'Recommendation: ' + item.recommendation, margin + 2, y, contentWidth - 2, 4.5);
+                y += 7;
+            });
+
+            doc.save('utmcraftr-utm-audit-report.pdf');
+            window.dataLayer.push({ event: 'utm_audit', event_action: 'download_pdf_report', link_count: audited.length, pass_count: passes, fail_count: audited.length - passes });
+        });
+    </script>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LT6PRVF" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
 </body>
