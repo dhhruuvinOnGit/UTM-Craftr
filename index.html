@@ -10,7 +10,7 @@
 
   <title>Free UTM Builder for GA4 | Campaign URL Generator</title>
   <meta name="description"
-    content="Build clean UTM tracking links for Google Analytics 4 in seconds. Free UTM campaign URL builder — no signup, no catch.">
+    content="Build clean UTM tracking links for Google Analytics 4 in seconds. Free UTM campaign URL builder - no signup, no catch.">
   <meta name="keywords"
     content="utm builder, utm link generator, campaign url builder, ga4 utm tracking, utm parameters, free utm builder">
   <link rel="canonical" href="https://utm-craftr.vercel.app/">
@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
     rel="stylesheet">
 
   <script type="application/ld+json">
@@ -36,12 +36,12 @@
     {
       "@type": "Question",
       "name": "Is this UTM builder really free?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes — free to use, with no signup and no account required." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes - free to use, with no signup and no account required." }
     },
     {
       "@type": "Question",
       "name": "What are UTM parameters?",
-      "acceptedAnswer": { "@type": "Answer", "text": "UTM parameters are small tags added to the end of a URL — source, medium, campaign, term, and content — that tell Google Analytics 4 exactly where a click came from." }
+      "acceptedAnswer": { "@type": "Answer", "text": "UTM parameters are small tags added to the end of a URL - source, medium, campaign, term, and content - that tell Google Analytics 4 exactly where a click came from." }
     },
     {
       "@type": "Question",
@@ -56,7 +56,7 @@
     {
       "@type": "Question",
       "name": "Can I use this for Instagram, Google Ads, Meta Ads, and email campaigns?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes — the built-in presets cover the most common sources and mediums, and you can enter any custom source or medium manually." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes - the built-in presets cover the most common sources and mediums, and you can enter any custom source or medium manually." }
     },
     {
       "@type": "Question",
@@ -66,7 +66,7 @@
     {
       "@type": "Question",
       "name": "Are the links I build saved anywhere?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Not in this version — everything runs manually in your browser. A future version will add saved history and shared team presets." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Not in this version - everything runs manually in your browser. A future version will add saved history and shared team presets." }
     }
   ]
 }
@@ -81,7 +81,7 @@
   "applicationSubCategory": "UTM Builder",
   "operatingSystem": "Any (Web-based)",
   "url": "https://utm-craftr.vercel.app/",
-  "description": "Free UTM builder for Google Analytics 4. Generate campaign tracking links with utm_source, utm_medium, utm_campaign, utm_term, and utm_content — no signup required.",
+  "description": "Free UTM builder for Google Analytics 4. Generate campaign tracking links with utm_source, utm_medium, utm_campaign, utm_term, and utm_content - no signup required.",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -428,7 +428,8 @@
 
     .utm-guard-icon {
       object-fit: contain;
-      filter: invert(48%) sepia(91%) saturate(1450%) hue-rotate(215deg) brightness(102%) contrast(96%);
+      /* Match the Bulk UTM Builder icon: Cosmic Dust primary #6105E0 */
+      filter: invert(19%) sepia(99%) saturate(6644%) hue-rotate(262deg) brightness(83%) contrast(119%);
     }
 
     .product-card-name {
@@ -1623,7 +1624,1527 @@
         min-height: 0;
       }
     }
-  </style>
+  
+/* =========================================================
+   UTMCraftr - White Theme Refresh
+   Visual-only layer. Existing HTML structure, JS, dataLayer,
+   GTM container and tagging logic are intentionally untouched.
+   ========================================================= */
+
+:root {
+  --font-primary: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-secondary: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --paper: #F8FAFC;
+  --paper-card: #FFFFFF;
+  --ink: #111827;
+  --ink-soft: #64748B;
+  --ink-faint: #94A3B8;
+
+  --forest: #4F46E5;
+  --forest-deep: #111827;
+  --sage: #F1F5F9;
+  --sage-border: #E2E8F0;
+  --mustard: #4F46E5;
+  --line: #E5E7EB;
+  --on-accent: #FFFFFF;
+  --panel-soft: #E2E8F0;
+
+  --error: #DC2626;
+  --error-bg: #FEF2F2;
+  --success: #15803D;
+  --success-bg: #F0FDF4;
+
+  --radius: 16px;
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  font-family: var(--font-secondary);
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 50% -10%, rgba(79,70,229,.07), transparent 34%),
+    var(--paper);
+}
+
+h1, h2, h3, h4, .display,
+.brand, .window-title, .product-card-name {
+  font-family: var(--font-primary);
+}
+
+button, input, textarea, select {
+  font-family: var(--font-secondary);
+}
+
+/* Navigation */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 15px 0;
+  background: rgba(255,255,255,.90);
+  border-bottom: 1px solid rgba(226,232,240,.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+nav .wrap {
+  padding: 0 32px;
+}
+
+.brand {
+  font-family: var(--font-primary);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -.025em;
+}
+
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.nav-links {
+  gap: 24px;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.nav-links a:hover,
+.nav-dropdown-trigger:hover,
+.nav-dropdown.open .nav-dropdown-trigger {
+  color: var(--forest);
+  border-color: var(--forest);
+}
+
+.nav-dropdown-menu {
+  top: calc(100% + 14px);
+  min-width: 230px;
+  padding: 8px;
+  border: 1px solid var(--sage-border);
+  border-radius: 14px;
+  box-shadow: 0 22px 50px rgba(15,23,42,.12), 0 4px 14px rgba(15,23,42,.05);
+}
+
+.nav-dropdown-item {
+  min-height: 40px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.nav-dropdown-item:hover,
+.nav-dropdown-item:focus-visible {
+  background: #F5F3FF;
+  color: var(--forest);
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  padding: 78px 24px 42px;
+}
+
+.eyebrow {
+  background: #EEF2FF;
+  color: var(--forest);
+  border: 1px solid #C7D2FE;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+h1, .hero h1 {
+  font-family: var(--font-primary);
+  font-size: clamp(38px, 5vw, 54px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -.045em;
+  color: #0F172A;
+}
+
+.hero p {
+  font-size: 16px;
+  color: #64748B;
+  line-height: 1.7;
+}
+
+/* Main cards */
+.window {
+  background: rgba(255,255,255,.98);
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  box-shadow:
+    0 24px 70px rgba(15,23,42,.08),
+    0 3px 10px rgba(15,23,42,.03);
+  padding: 34px;
+}
+
+.window-title {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -.025em;
+}
+
+.field-label,
+.section-label,
+.presets-label {
+  color: #334155;
+  font-weight: 700;
+}
+
+input[type="text"],
+input[type="url"],
+textarea,
+select {
+  border-color: #DCE3EC !important;
+  background: #FFFFFF !important;
+  color: #111827 !important;
+  border-radius: 10px !important;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #818CF8 !important;
+  box-shadow: 0 0 0 4px rgba(99,102,241,.10) !important;
+  outline: none;
+}
+
+.proto-toggle {
+  background: #F1F5F9 !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 10px !important;
+  padding: 3px !important;
+}
+
+.proto-toggle button {
+  border-radius: 7px !important;
+  color: #64748B !important;
+}
+
+.proto-toggle button.active {
+  background: #FFFFFF !important;
+  color: #3730A3 !important;
+  box-shadow: 0 1px 4px rgba(15,23,42,.10) !important;
+}
+
+.preset-chip {
+  border: 1px solid #DDE4EE !important;
+  background: #FFFFFF !important;
+  color: #475569 !important;
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  transition: all .15s ease;
+}
+
+.preset-chip:hover,
+.preset-chip.active {
+  border-color: #A5B4FC !important;
+  background: #EEF2FF !important;
+  color: #4338CA !important;
+}
+
+.generate-btn,
+.audit-btn {
+  border-radius: 10px !important;
+  background: #4F46E5 !important;
+  box-shadow: 0 8px 20px rgba(79,70,229,.20);
+  font-weight: 700 !important;
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+
+.generate-btn:hover,
+.audit-btn:hover {
+  opacity: 1 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(79,70,229,.25);
+}
+
+.warning-box {
+  border-radius: 10px !important;
+  border: 1px solid #FECACA !important;
+  background: #FEF2F2 !important;
+  color: #B91C1C !important;
+}
+
+/* Home page layout */
+.builder-split {
+  gap: 28px;
+  margin-top: 38px;
+}
+
+.split-divider {
+  width: 1px;
+  background: #E2E8F0;
+}
+
+.products-panel {
+  top: 92px;
+  gap: 14px;
+}
+
+.products-panel .section-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #94A3B8;
+  font-weight: 800;
+}
+
+.products-grid {
+  gap: 14px;
+}
+
+.product-card {
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 20px;
+  background: #FFFFFF;
+  box-shadow: 0 10px 30px rgba(15,23,42,.045);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  border-color: #C7D2FE;
+  box-shadow: 0 16px 34px rgba(15,23,42,.08);
+}
+
+.product-card-name {
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+
+.product-card-desc {
+  color: #64748B;
+}
+
+.product-card-cta {
+  border-radius: 9px !important;
+  background: #4F46E5 !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+.product-card-cta-secondary {
+  background: #FFFFFF !important;
+  color: #4338CA !important;
+  border: 1px solid #C7D2FE !important;
+}
+
+/* Bulk generator */
+#tool {
+  max-width: 1160px;
+}
+
+.bulk-card-wrap {
+  max-width: 900px !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.param-table {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+.param-table-head {
+  background: #F8FAFC !important;
+  color: #64748B !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+}
+
+.param-row-compact {
+  border-bottom: 1px solid #EEF2F7 !important;
+}
+
+.add-set-btn {
+  border: 1px dashed #C7D2FE !important;
+  background: #F8FAFF !important;
+  color: #4338CA !important;
+  border-radius: 10px !important;
+}
+
+.bulk-output {
+  border: 1px solid #E2E8F0 !important;
+  background: #F8FAFC !important;
+  border-radius: 14px !important;
+}
+
+.copy-btn,
+.download-pdf-btn {
+  border-radius: 9px !important;
+}
+
+/* Content sections */
+.section,
+.product-section {
+  border-color: #E2E8F0 !important;
+}
+
+.section-head h2,
+.product-section-head h2,
+.rules h2 {
+  font-family: var(--font-primary);
+  font-weight: 800;
+  letter-spacing: -.035em;
+  color: #0F172A;
+}
+
+.prose,
+.rule,
+.check,
+.recommendation {
+  color: #64748B;
+}
+
+.anatomy,
+.rule,
+.summary-card {
+  border-color: #E2E8F0 !important;
+  background: #FFFFFF !important;
+}
+
+.summary-card {
+  box-shadow: 0 8px 24px rgba(15,23,42,.04);
+}
+
+.summary-card strong {
+  font-family: var(--font-primary);
+  font-weight: 800;
+}
+
+/* Auditor */
+.auditor-wrap {
+  max-width: 1040px;
+}
+
+.result {
+  border-color: #E2E8F0 !important;
+  border-radius: 13px !important;
+  box-shadow: 0 7px 22px rgba(15,23,42,.035);
+}
+
+.check {
+  background: #F8FAFC !important;
+}
+
+.check.ok {
+  color: #15803D !important;
+  background: #F0FDF4 !important;
+}
+
+.check.bad {
+  color: #B91C1C !important;
+  background: #FEF2F2 !important;
+}
+
+.rules {
+  margin-top: 34px !important;
+}
+
+.rule {
+  border-radius: 12px !important;
+  box-shadow: 0 5px 18px rgba(15,23,42,.025);
+}
+
+.download-pdf-btn {
+  border-color: #A5B4FC !important;
+  color: #4338CA !important;
+  background: #FFFFFF !important;
+}
+
+.download-pdf-btn:hover {
+  background: #EEF2FF !important;
+}
+
+/* Footer */
+footer {
+  background: #FFFFFF;
+  border-top: 1px solid #E2E8F0 !important;
+  color: #94A3B8 !important;
+}
+
+/* Floating back-to-top */
+.back-to-top {
+  border-color: #E2E8F0 !important;
+  background: #FFFFFF !important;
+  color: #4F46E5 !important;
+  box-shadow: 0 12px 30px rgba(15,23,42,.10) !important;
+}
+
+.back-to-top:hover {
+  background: #EEF2FF !important;
+  border-color: #C7D2FE !important;
+}
+
+/* Modal */
+.modal-overlay {
+  background: rgba(15,23,42,.42) !important;
+  backdrop-filter: blur(3px);
+}
+
+.modal-box {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 30px 80px rgba(15,23,42,.20) !important;
+}
+
+.modal-submit {
+  background: #4F46E5 !important;
+  border-radius: 10px !important;
+}
+
+/* Responsive cleanup */
+@media (max-width: 900px) {
+  nav .wrap {
+    padding: 0 22px;
+  }
+
+  .window {
+    padding: 26px 22px;
+  }
+
+  .builder-split {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 720px) {
+  nav {
+    position: relative;
+  }
+
+  nav .wrap {
+    padding: 0 16px;
+  }
+
+  .nav-links {
+    gap: 14px;
+  }
+
+  .hero {
+    padding: 56px 18px 32px;
+  }
+
+  h1, .hero h1 {
+    font-size: 36px;
+    letter-spacing: -.04em;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  .window {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+
+  .builder-split {
+    margin-top: 26px;
+  }
+}
+
+@media (max-width: 560px) {
+  .nav-links {
+    display: none;
+  }
+
+  .nav-right {
+    gap: 0 !important;
+  }
+
+  .builder-split {
+    display: block;
+  }
+
+  .split-divider {
+    display: none;
+  }
+
+  .products-col {
+    margin-top: 24px;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero {
+    padding-top: 46px;
+  }
+
+  h1, .hero h1 {
+    font-size: 32px;
+  }
+}
+
+
+/* =========================================================
+   UTMCraftr - Colorffy "Across" palette
+   Orange #FFA800 | Blue #0077CC | Light Blue #ADD8E6
+   Cream #F5F5DC | Charcoal #333333
+   ========================================================= */
+
+:root {
+  --paper: #F5F5DC;
+  --paper-card: #FFFFFF;
+  --ink: #333333;
+  --ink-soft: #4F6475;
+  --ink-faint: #71808C;
+
+  --forest: #0077CC;
+  --forest-deep: #333333;
+  --sage: #ADD8E6;
+  --sage-border: #B7DCE8;
+  --mustard: #FFA800;
+  --line: #D8E4EA;
+  --on-accent: #FFFFFF;
+  --panel-soft: #DCEFF5;
+
+  --error: #C62828;
+  --error-bg: #FFF1F1;
+  --success: #137333;
+  --success-bg: #EFF9F0;
+}
+
+/* Keep the white product surfaces, while using the palette for accents. */
+body {
+  color: #333333;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(0,119,204,.08), transparent 35%),
+    #F5F5DC;
+}
+
+nav {
+  background: rgba(255,255,255,.94);
+  border-bottom-color: #D8E4EA;
+}
+
+.brand,
+h1, h2, h3, h4,
+.window-title,
+.product-card-name {
+  color: #333333;
+}
+
+.nav-links,
+.hero p,
+.product-card-desc,
+.prose,
+.rule,
+.check,
+.recommendation {
+  color: #4F6475;
+}
+
+.nav-links a:hover,
+.nav-dropdown-trigger:hover,
+.nav-dropdown.open .nav-dropdown-trigger {
+  color: #0077CC;
+  border-color: #0077CC;
+}
+
+.nav-dropdown-menu {
+  background: #FFFFFF;
+  border-color: #B7DCE8;
+}
+
+.nav-dropdown-item:hover,
+.nav-dropdown-item:focus-visible {
+  background: #ADD8E6;
+  color: #333333;
+}
+
+.eyebrow {
+  background: #ADD8E6;
+  color: #333333;
+  border-color: #9FCFDF;
+}
+
+h1, .hero h1 {
+  color: #333333;
+}
+
+.window,
+.product-card,
+.result,
+.rule,
+.summary-card,
+.anatomy {
+  background: #FFFFFF !important;
+  border-color: #D8E4EA !important;
+}
+
+.window {
+  box-shadow:
+    0 24px 70px rgba(51,51,51,.10),
+    0 3px 10px rgba(51,51,51,.04);
+}
+
+input[type="text"],
+input[type="url"],
+textarea,
+select {
+  background: #FFFFFF !important;
+  border-color: #C9DCE5 !important;
+  color: #333333 !important;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #0077CC !important;
+  box-shadow: 0 0 0 4px rgba(0,119,204,.12) !important;
+}
+
+.preset-chip {
+  border-color: #C9DCE5 !important;
+  background: #FFFFFF !important;
+  color: #4F6475 !important;
+}
+
+.preset-chip:hover,
+.preset-chip.active {
+  border-color: #0077CC !important;
+  background: #ADD8E6 !important;
+  color: #333333 !important;
+}
+
+.generate-btn,
+.audit-btn {
+  background: #0077CC !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 20px rgba(0,119,204,.22);
+}
+
+.generate-btn:hover,
+.audit-btn:hover {
+  box-shadow: 0 12px 28px rgba(0,119,204,.28);
+}
+
+.add-set-btn {
+  border-color: #9FCFDF !important;
+  background: #F5FBFD !important;
+  color: #0077CC !important;
+}
+
+.param-table,
+.bulk-output {
+  border-color: #D8E4EA !important;
+  background: #FFFFFF !important;
+}
+
+.param-table-head {
+  background: #F5FBFD !important;
+  color: #4F6475 !important;
+  border-bottom-color: #D8E4EA !important;
+}
+
+.product-card:hover {
+  border-color: #9FCFDF !important;
+  box-shadow: 0 16px 34px rgba(0,119,204,.10);
+}
+
+.product-card-cta {
+  background: #0077CC !important;
+  color: #FFFFFF !important;
+}
+
+.product-card-cta-secondary {
+  background: #FFFFFF !important;
+  color: #0077CC !important;
+  border-color: #9FCFDF !important;
+}
+
+.split-divider {
+  background: #D8E4EA;
+}
+
+.summary-card {
+  box-shadow: 0 8px 24px rgba(51,51,51,.05);
+}
+
+.check.ok {
+  color: #137333 !important;
+  background: #EFF9F0 !important;
+}
+
+.check.bad {
+  color: #C62828 !important;
+  background: #FFF1F1 !important;
+}
+
+.download-pdf-btn {
+  border-color: #0077CC !important;
+  color: #0077CC !important;
+}
+
+.download-pdf-btn:hover {
+  background: #ADD8E6 !important;
+  color: #333333 !important;
+}
+
+.warning-box {
+  border-color: #FFD27A !important;
+  background: #FFF8E8 !important;
+  color: #8A5A00 !important;
+}
+
+.back-to-top {
+  border-color: #B7DCE8 !important;
+  background: #FFFFFF !important;
+  color: #0077CC !important;
+}
+
+.back-to-top:hover {
+  background: #ADD8E6 !important;
+  border-color: #0077CC !important;
+}
+
+footer {
+  background: #FFFFFF;
+  border-top-color: #D8E4EA !important;
+  color: #71808C !important;
+}
+
+.modal-overlay {
+  background: rgba(51,51,51,.48) !important;
+}
+
+.modal-box {
+  background: #FFFFFF !important;
+  border-color: #D8E4EA !important;
+}
+
+.modal-submit {
+  background: #0077CC !important;
+}
+
+/* Orange is reserved for highlights / secondary CTAs, not body text. */
+.secondary-accent,
+.highlight,
+.badge-accent {
+  color: #333333;
+  background: #FFA800;
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+  .nav-links { display: none; }
+  .builder-split { display: block; }
+  .split-divider { display: none; }
+  .products-col { margin-top: 24px; }
+  .products-grid { grid-template-columns: 1fr !important; }
+}
+
+
+/* =========================================================
+   UTMCraftr - Orange Primary Accent
+   Primary: #FFA800
+   Secondary: #0077CC
+   ========================================================= */
+
+:root {
+  --forest: #FFA800;
+  --mustard: #FFA800;
+  --forest-deep: #333333;
+  --accent-secondary: #0077CC;
+}
+
+.nav-links a:hover,
+.nav-dropdown-trigger:hover,
+.nav-dropdown.open .nav-dropdown-trigger {
+  color: #FFA800;
+  border-color: #FFA800;
+}
+
+.nav-dropdown-item:hover,
+.nav-dropdown-item:focus-visible {
+  background: #FFF3D6;
+  color: #333333;
+}
+
+.eyebrow {
+  background: #FFF3D6;
+  color: #333333;
+  border-color: #FFD27A;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #FFA800 !important;
+  box-shadow: 0 0 0 4px rgba(255,168,0,.14) !important;
+}
+
+.preset-chip:hover,
+.preset-chip.active {
+  border-color: #FFA800 !important;
+  background: #FFF3D6 !important;
+  color: #8A5A00 !important;
+}
+
+.generate-btn,
+.audit-btn {
+  background: #FFA800 !important;
+  color: #333333 !important;
+  box-shadow: 0 8px 20px rgba(255,168,0,.25);
+}
+
+.generate-btn:hover,
+.audit-btn:hover {
+  box-shadow: 0 12px 28px rgba(255,168,0,.32);
+}
+
+.add-set-btn {
+  border-color: #FFD27A !important;
+  background: #FFF9EA !important;
+  color: #8A5A00 !important;
+}
+
+.product-card:hover {
+  border-color: #FFD27A !important;
+  box-shadow: 0 16px 34px rgba(255,168,0,.12);
+}
+
+.product-card-cta {
+  background: #FFA800 !important;
+  color: #333333 !important;
+}
+
+.product-card-cta-secondary {
+  color: #8A5A00 !important;
+  border-color: #FFD27A !important;
+}
+
+.download-pdf-btn {
+  border-color: #FFA800 !important;
+  color: #8A5A00 !important;
+}
+
+.download-pdf-btn:hover {
+  background: #FFF3D6 !important;
+}
+
+.back-to-top {
+  color: #FFA800 !important;
+}
+
+.back-to-top:hover {
+  background: #FFF3D6 !important;
+  border-color: #FFD27A !important;
+}
+
+.modal-submit {
+  background: #FFA800 !important;
+  color: #333333 !important;
+}
+
+/* Keep blue available as the secondary informational/accent color. */
+.info-icon {
+  background: #ADD8E6 !important;
+  color: #0077CC !important;
+  border-color: #B7DCE8 !important;
+}
+
+
+/* =========================================================
+   UTMCraftr - New Colorffy Theme
+   #1e293b  Dark slate
+   #CBD0D6  Cool grey
+   #f9fafb  Off-white
+   #10b981  Emerald
+   ========================================================= */
+
+:root {
+  --paper: #f9fafb;
+  --paper-card: #ffffff;
+  --ink: #1e293b;
+  --ink-soft: #64748b;
+  --ink-faint: #94a3b8;
+
+  --forest: #10b981;
+  --forest-deep: #1e293b;
+  --sage: #f9fafb;
+  --sage-border: #CBD0D6;
+  --mustard: #10b981;
+  --line: #CBD0D6;
+  --on-accent: #ffffff;
+  --panel-soft: #E8EBEE;
+
+  --error: #DC2626;
+  --error-bg: #FEF2F2;
+  --success: #10b981;
+  --success-bg: #ECFDF5;
+}
+
+/* Base */
+html {
+  background: #f9fafb;
+}
+
+body {
+  color: #1e293b;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(16,185,129,.07), transparent 35%),
+    #f9fafb;
+}
+
+h1, h2, h3, h4,
+.window-title,
+.product-card-name {
+  color: #1e293b;
+}
+
+/* Navigation */
+nav {
+  background: rgba(255,255,255,.94);
+  border-bottom-color: #CBD0D6;
+}
+
+.brand {
+  color: #1e293b;
+}
+
+.nav-links {
+  color: #64748b;
+}
+
+.nav-links a:hover,
+.nav-dropdown-trigger:hover,
+.nav-dropdown.open .nav-dropdown-trigger {
+  color: #10b981;
+  border-color: #10b981;
+}
+
+.nav-dropdown-menu {
+  background: #ffffff;
+  border-color: #CBD0D6;
+  box-shadow: 0 22px 50px rgba(30,41,59,.12), 0 4px 14px rgba(30,41,59,.05);
+}
+
+.nav-dropdown-item:hover,
+.nav-dropdown-item:focus-visible {
+  background: #ECFDF5;
+  color: #047857;
+}
+
+/* Hero */
+.eyebrow {
+  background: #ECFDF5;
+  color: #047857;
+  border-color: #A7F3D0;
+}
+
+h1, .hero h1 {
+  color: #1e293b;
+}
+
+/* Main surfaces */
+.window,
+.product-card,
+.result,
+.rule,
+.summary-card,
+.anatomy {
+  background: #ffffff !important;
+  border-color: #CBD0D6 !important;
+}
+
+.window {
+  box-shadow:
+    0 24px 70px rgba(30,41,59,.08),
+    0 3px 10px rgba(30,41,59,.035);
+}
+
+/* Forms */
+input[type="text"],
+input[type="url"],
+textarea,
+select {
+  background: #ffffff !important;
+  border-color: #CBD0D6 !important;
+  color: #1e293b !important;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 4px rgba(16,185,129,.12) !important;
+}
+
+/* Presets / toggles */
+.preset-chip {
+  border-color: #CBD0D6 !important;
+  background: #ffffff !important;
+  color: #475569 !important;
+}
+
+.preset-chip:hover,
+.preset-chip.active {
+  border-color: #6EE7B7 !important;
+  background: #ECFDF5 !important;
+  color: #047857 !important;
+}
+
+.proto-toggle {
+  background: #f9fafb !important;
+  border-color: #CBD0D6 !important;
+}
+
+.proto-toggle button.active {
+  background: #ffffff !important;
+  color: #047857 !important;
+}
+
+/* Primary actions */
+.generate-btn,
+.audit-btn,
+.product-card-cta {
+  background: #10b981 !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 20px rgba(16,185,129,.20);
+}
+
+.generate-btn:hover,
+.audit-btn:hover {
+  box-shadow: 0 12px 28px rgba(16,185,129,.27);
+}
+
+.product-card-cta-secondary {
+  background: #ffffff !important;
+  color: #047857 !important;
+  border-color: #A7F3D0 !important;
+}
+
+/* Cards */
+.product-card:hover {
+  border-color: #A7F3D0 !important;
+  box-shadow: 0 16px 34px rgba(30,41,59,.08);
+}
+
+.split-divider {
+  background: #CBD0D6;
+}
+
+/* Bulk generator */
+.param-table,
+.bulk-output {
+  border-color: #CBD0D6 !important;
+  background: #ffffff !important;
+}
+
+.param-table-head {
+  background: #f9fafb !important;
+  color: #64748b !important;
+  border-bottom-color: #CBD0D6 !important;
+}
+
+.add-set-btn {
+  border-color: #A7F3D0 !important;
+  background: #F0FDF9 !important;
+  color: #047857 !important;
+}
+
+/* Auditor */
+.check {
+  background: #f9fafb !important;
+}
+
+.check.ok {
+  color: #047857 !important;
+  background: #ECFDF5 !important;
+}
+
+.check.bad {
+  color: #B91C1C !important;
+  background: #FEF2F2 !important;
+}
+
+.download-pdf-btn {
+  border-color: #10b981 !important;
+  color: #047857 !important;
+  background: #ffffff !important;
+}
+
+.download-pdf-btn:hover {
+  background: #ECFDF5 !important;
+}
+
+/* Info / supporting elements */
+.info-icon {
+  background: #f9fafb !important;
+  color: #10b981 !important;
+  border-color: #CBD0D6 !important;
+}
+
+.warning-box {
+  border-color: #CBD0D6 !important;
+  background: #f9fafb !important;
+}
+
+/* Footer */
+footer {
+  background: #ffffff;
+  border-top-color: #CBD0D6 !important;
+  color: #94a3b8 !important;
+}
+
+/* Floating button */
+.back-to-top {
+  border-color: #CBD0D6 !important;
+  background: #ffffff !important;
+  color: #10b981 !important;
+}
+
+.back-to-top:hover {
+  background: #ECFDF5 !important;
+  border-color: #A7F3D0 !important;
+}
+
+/* Modal */
+.modal-box {
+  background: #ffffff !important;
+  border-color: #CBD0D6 !important;
+}
+
+.modal-submit {
+  background: #10b981 !important;
+  color: #ffffff !important;
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+  .nav-links { display: none; }
+  .builder-split { display: block; }
+  .split-divider { display: none; }
+  .products-col { margin-top: 24px; }
+  .products-grid { grid-template-columns: 1fr !important; }
+}
+
+
+/* =========================================================
+   UTMCraftr - Colorffy "Cosmic Dust"
+   #6105e0 | #a882ff | #d8c6ff | #f0f8ff | #1c1d46
+   ========================================================= */
+
+:root {
+  --paper: #f0f8ff;
+  --paper-card: #ffffff;
+  --ink: #1c1d46;
+  --ink-soft: #52536f;
+  --ink-faint: #7d7f99;
+
+  --forest: #6105e0;
+  --forest-deep: #1c1d46;
+  --sage: #f0f8ff;
+  --sage-border: #d8c6ff;
+  --mustard: #6105e0;
+  --line: #d8c6ff;
+  --on-accent: #ffffff;
+  --panel-soft: #e9e2ff;
+
+  --error: #c62828;
+  --error-bg: #fff1f1;
+  --success: #15803d;
+  --success-bg: #effaf3;
+}
+
+/* Base */
+html {
+  background: #f0f8ff;
+}
+
+body {
+  color: #1c1d46;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(97,5,224,.09), transparent 35%),
+    #f0f8ff;
+}
+
+h1, h2, h3, h4,
+.window-title,
+.product-card-name {
+  color: #1c1d46;
+}
+
+/* Navigation */
+nav {
+  background: rgba(255,255,255,.94);
+  border-bottom-color: #d8c6ff;
+}
+
+.brand {
+  color: #1c1d46;
+}
+
+.nav-links {
+  color: #52536f;
+}
+
+.nav-links a:hover,
+.nav-dropdown-trigger:hover,
+.nav-dropdown.open .nav-dropdown-trigger {
+  color: #6105e0;
+  border-color: #6105e0;
+}
+
+.nav-dropdown-menu {
+  background: #ffffff;
+  border-color: #d8c6ff;
+  box-shadow: 0 22px 50px rgba(28,29,70,.13), 0 4px 14px rgba(28,29,70,.05);
+}
+
+.nav-dropdown-item:hover,
+.nav-dropdown-item:focus-visible {
+  background: #f0eaff;
+  color: #6105e0;
+}
+
+/* Hero */
+.eyebrow {
+  background: #f0eaff;
+  color: #6105e0;
+  border-color: #d8c6ff;
+}
+
+h1, .hero h1 {
+  color: #1c1d46;
+}
+
+/* Main surfaces */
+.window,
+.product-card,
+.result,
+.rule,
+.summary-card,
+.anatomy {
+  background: #ffffff !important;
+  border-color: #d8c6ff !important;
+}
+
+.window {
+  box-shadow:
+    0 24px 70px rgba(28,29,70,.09),
+    0 3px 10px rgba(28,29,70,.035);
+}
+
+/* Forms */
+input[type="text"],
+input[type="url"],
+textarea,
+select {
+  background: #ffffff !important;
+  border-color: #d8c6ff !important;
+  color: #1c1d46 !important;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #a882ff !important;
+  box-shadow: 0 0 0 4px rgba(168,130,255,.16) !important;
+}
+
+/* Presets */
+.preset-chip {
+  border-color: #d8c6ff !important;
+  background: #ffffff !important;
+  color: #52536f !important;
+}
+
+.preset-chip:hover,
+.preset-chip.active {
+  border-color: #a882ff !important;
+  background: #f0eaff !important;
+  color: #6105e0 !important;
+}
+
+.proto-toggle {
+  background: #f0f8ff !important;
+  border-color: #d8c6ff !important;
+}
+
+.proto-toggle button.active {
+  background: #ffffff !important;
+  color: #6105e0 !important;
+}
+
+/* Primary actions */
+.generate-btn,
+.audit-btn,
+.product-card-cta {
+  background: #6105e0 !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 20px rgba(97,5,224,.22);
+}
+
+.generate-btn:hover,
+.audit-btn:hover {
+  box-shadow: 0 12px 28px rgba(97,5,224,.30);
+}
+
+.product-card-cta-secondary {
+  background: #ffffff !important;
+  color: #6105e0 !important;
+  border-color: #a882ff !important;
+}
+
+/* Cards */
+.product-card:hover {
+  border-color: #a882ff !important;
+  box-shadow: 0 16px 34px rgba(97,5,224,.10);
+}
+
+.split-divider {
+  background: #d8c6ff;
+}
+
+/* Bulk generator */
+.param-table,
+.bulk-output {
+  border-color: #d8c6ff !important;
+  background: #ffffff !important;
+}
+
+.param-table-head {
+  background: #f0f8ff !important;
+  color: #52536f !important;
+  border-bottom-color: #d8c6ff !important;
+}
+
+.add-set-btn {
+  border-color: #a882ff !important;
+  background: #f7f3ff !important;
+  color: #6105e0 !important;
+}
+
+/* Auditor */
+.check {
+  background: #f0f8ff !important;
+}
+
+.check.ok {
+  color: #15803d !important;
+  background: #effaf3 !important;
+}
+
+.check.bad {
+  color: #b91c1c !important;
+  background: #fff1f1 !important;
+}
+
+.download-pdf-btn {
+  border-color: #a882ff !important;
+  color: #6105e0 !important;
+  background: #ffffff !important;
+}
+
+.download-pdf-btn:hover {
+  background: #f0eaff !important;
+}
+
+/* Supporting elements */
+.info-icon {
+  background: #f0f8ff !important;
+  color: #6105e0 !important;
+  border-color: #d8c6ff !important;
+}
+
+.warning-box {
+  border-color: #d8c6ff !important;
+  background: #f0f8ff !important;
+}
+
+/* Footer */
+footer {
+  background: #ffffff;
+  border-top-color: #d8c6ff !important;
+  color: #7d7f99 !important;
+}
+
+/* Floating button */
+.back-to-top {
+  border-color: #d8c6ff !important;
+  background: #ffffff !important;
+  color: #6105e0 !important;
+}
+
+.back-to-top:hover {
+  background: #f0eaff !important;
+  border-color: #a882ff !important;
+}
+
+/* Modal */
+.modal-box {
+  background: #ffffff !important;
+  border-color: #d8c6ff !important;
+}
+
+.modal-submit {
+  background: #6105e0 !important;
+  color: #ffffff !important;
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+  .nav-links { display: none; }
+  .builder-split { display: block; }
+  .split-divider { display: none; }
+  .products-col { margin-top: 24px; }
+  .products-grid { grid-template-columns: 1fr !important; }
+}
+
+
+    /* Improve GA4 reporting checklist visibility */
+    .check,
+    .checkmark,
+    .feature-check,
+    .benefit-check,
+    .tick {
+      color: #FFFFFF !important;
+      font-weight: 800 !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    /* Common pseudo-element tick styles */
+    .check::before,
+    .checkmark::before,
+    .feature-check::before,
+    .benefit-check::before,
+    .tick::before {
+      color: #FFFFFF !important;
+      opacity: 1 !important;
+    }
+
+    /* GA4 Reporting checklist - make the visible tick marks white */
+    .ga4-check {
+      color: #FFFFFF !important;
+      -webkit-text-fill-color: #FFFFFF !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+</style>
   <!-- Google Analytics 4 -->
   <!-- Replace G-XXXXXXXXXX below with your real Measurement ID from GA4 -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-BPD9QFCNNM"></script>
@@ -1685,7 +3206,7 @@
   <header class="hero">
     <div class="eyebrow">Free, no signup, no catch</div>
     <h1 class="display">Free UTM Builder for Clean GA4 Reporting</h1>
-    <p>Build campaign URLs with consistent UTM parameters — source, medium, campaign, term, and content — so every click
+    <p>Build campaign URLs with consistent UTM parameters - source, medium, campaign, term, and content - so every click
       shows up correctly in Google Analytics 4.</p>
   </header>
 
@@ -1725,7 +3246,7 @@
                   <div class="field-label">Source
                     <span class="info-wrap">
                       <span class="info-icon">?</span>
-                      <span class="info-tooltip">utm_source — where the traffic comes from, e.g. instagram,
+                      <span class="info-tooltip">utm_source - where the traffic comes from, e.g. instagram,
                         google</span>
                     </span>
                   </div>
@@ -1735,7 +3256,7 @@
                   <div class="field-label">Medium
                     <span class="info-wrap">
                       <span class="info-icon">?</span>
-                      <span class="info-tooltip">utm_medium — the channel type, e.g. social, email, cpc</span>
+                      <span class="info-tooltip">utm_medium - the channel type, e.g. social, email, cpc</span>
                     </span>
                   </div>
                   <input type="text" id="medium" placeholder="e.g. social">
@@ -1748,7 +3269,7 @@
                 <div class="field-label">Campaign name
                   <span class="info-wrap">
                     <span class="info-icon">?</span>
-                    <span class="info-tooltip">utm_campaign — the name of this push, e.g. monsoon-drop-2026</span>
+                    <span class="info-tooltip">utm_campaign - the name of this push, e.g. monsoon-drop-2026</span>
                   </span>
                 </div>
                 <input type="text" id="campaign" placeholder="monsoon-drop-2026">
@@ -1794,7 +3315,7 @@
                 <img class="product-card-icon" alt="Google Sheets"
                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAQAElEQVR4Aezda6xlZ1kH8HefGSpQIaEFS0UKkhKhiEG5xDLTpkC4Q4ROM9EoYqIJYIyXRhONfiioHzAqJSEIJorh8mV68QNyEVGbzrRVroktCCWUUMBQKEXa0trpnLNdu9PLmc6+73V53/f5NXt1zll7rfd9nt+z58x/zp5Ot5J/hhU4dM4p6cp9+9Pl570lXb7/nenK8/45XbH/v5vj5ubz25ofd5pj7NjP4AoGa/88eNc5N6RD5z5q2J/sdieQl4AAMMQ8Du07K11+3h80X8w+nvacdlsajw6n0fjdaZR+O43HL2tKekZzPLn5/HHNj6Pm8CBAYBOBu+95Vrr51huFgE0Q3VuXQEoCQF8T/egrfyRdvu+N6Yp9/5r2jL7W/IL/F83WL2+OU5vDgwCBrgXuvucnhICuka1fkoAA0PW03v+yU9Pl+38n3X3HV9No9A8pjV6ckuDVGHgQ6F9gEgK+cetX0nuf++j+N7cjgXwEJpUIABOFLo5Lml/kr9j3pnTqXc3v9tOlKaUnNYcHAQJDC9x1z5PSHbd/2dsBQw/C/kMLCABdTOAfX/ic9OzzjqQ0ek9K6QnN4UGAQE4CvhOQ0zTU0rvA8Q0FgOMO7fx7nEb3fbt/Z+tTKY3PbWdRqxAg0InA5DsBd95+o7cDOtG1aAECAkBbQ/rwBY9PV573T00EmHy7/xFtLWsdAgQ6FBACOsS1dK4CD9QlADwgscmPh87/yXR0+7rmd/2v2mQZ9xIgMICAEDAAui1zEBAANp3ClS/86bRnp3m/f3z2pku5nwCBgQSEgIHgbdu/wEM7CgAPWaz+0eX7npd2tq5pbvzx5vAgQKBkgUkI8F8HlDxBta8oIACsCPbg5YfOPTuNRpP3/B/74DkfECBQtoD/OqDs+al+ocDuCwSA3RrLfnzFeWemPVv/0lx+RnN4ECBQk4DvBNQ0Tb3MERAA5uBMfWryF/yMxh9IafTU5B8CBOoU8J2AOucavqsTAQSAEz0Wf/Yz+9+Wxukliy90BQECRQtMvhPg7wkoeoSKny8gAMz3OfHZy/Zf0Pzi/0cnnvQZAQLVCkxCgD8YWO14ozX28H4FgIeLzPr80DmnpK307uZpZg2CB4EwAt4OCDPqaI36xWzZie85/febS5/ZHB4ECEQTmHwnwNsB0aZeWb8ntyMAnGxy8plDFzwxpfEfn/yEMwQIhBGYhABvB4QZd4RGBYBlprz33oubyx7dHB4ECEQW8HZA5OkX3fu04gWAaSq7zx0697Q0Hr159ykfEyAQWGDynQBvBwR+AdTTugCwaJZbe97SXPKY5vAgQIDAcYFJCPB2wHEL/y5AYHqJAsB0l4fObqU3PPSJjwgQIHC/gLcD7ofwQ6kCAsC8yV12/gvTOP3UvEs8R4BAYIHJdwK8HRD4BVBG67OqFABmyUzOb+388uQHBwECBGYKTEKAtwNm8ngiXwEBYO5sRi+b+7QnCRAgMBHwdsBEwZGlwOyiBIBZNof2nZXS+OxZTztPgACBEwQm3wnwdsAJJD7JW0AAmDWfPVsvnvWU8wQIEJgqMAkB3g6YSuPkMALzdhUAZurs/NzMpzxBgACBWQLeDpgl43xmAgLArIGMtvzp/1k2zhMgMF9g8p0AbwfMN/JsDwLztxAAZvmMxwLALBvnCRBYLCAELDZyxaACAsA0/n+/YG9z+snN4UGAAIH1BSYhwJ8JWN/PnRsJLLpZAJgm9MNjk7/6l800G+cIEFhNwJ8JWM3L1b0J+EVuGvWxrR+ddto5AgQIrCUw+U6APxOwFp2b1hVYfJ8AMM3o6HjyHYBpzzhHgACB9QQmIcDbAevZuasTAQFgGuve8SOmnXaOAAECGwl4O2AjPjcvL7DMlQLAMkquIUCAQFsCk+8EeDugLU3rbCAgAGyA51YCBAisJSAErMXmpmUFlrtOAFjOyVUECBBoV0AIaNfTaisLCAArk7mBAAECLQkIAS1BWma3wLIfCwDLSrmOAAECXQgIAV2oWnMJAQFgCSSXECBAoFMBIaBT3liLL9+tALC8lSsJECDQnYAQ0J2tlacKCABTWZwkQIDAAAJCwADodW25SjcCwCpariVAgEDXAkJA18LWv19AALgfwg8ECBDIRkAIyGYUZRWyWrUCwGperiZAgEA/AkJAP86BdxEAAg9f6wQIZC4gBGQ+oLzKW7UaAWBVMdcTIECgTwEhoE/tUHsJAKHGrVkCBIoUEAKKHFu/Ra++mwCwupk7CBAg0L+AENC/eeU7CgCVD1h7BAhUJCAEVDTMdltZZzUBYB019xAgQGAoASFgKPnq9hUAqhuphggQqF5ACKh+xKs1uN7VAsB6bu4iQIDAsAJCwLD+FewuAFQwRC0QIBBUQAgIOvgT2173MwFgXTn3ESBAIAcBISCHKRRZgwBQ5NgUTYAAgV0CQsAujGgfrt+vALC+nTsJECCQj4AQkM8sCqlEAChkUMokQIDAQgEhYCFRbRds0o8AsImeewkQIJCbgBCQ20SyrUcAyHY0CiNAgMCaAkLAmnCl3bZZvQLAZn7uJkCAQJ4CQkCec8moKgEgo2EohQABAq0KCAGtcua22Kb1CACbCrqfAAECOQsIATlPZ9DaBIBB+W1OgACBHgSEgB6Q+95i8/0EgM0NrUCAAIH8BYSA/GfUc4UCQM/gtiNAgMBgAkLAYPRtb9zGegJAG4rWIECAQCkCQkApk+q8TgGgc2IbECBAIDMBISCzgaxaTjvXCwDtOFqFAAECZQkIAWXNq4NqBYAOUC1JgACBIgSEgCLG9PAi2/pcAGhL0joECBAoUUAIKHFqrdQsALTCaBECBAgULCAEFDS89koVANqztBIBAgTKFRACyp3dmpULAGvCuY0AAQLVCQgB2Y+0zQIFgDY1rUWAAIHSBYSA0ie4dP0CwNJULiRAgEAQASEg00G3W5YA0K6n1QgQIFCHgBBQxxzndCEAzMHxFAECBEILCAFZjb/tYgSAtkWtR4AAgZoEhICapnlCLwLACRw+IUCAAIGTBISAk0j6P9H+jgJA+6ZWJECAQH0CQkB1MxUAqhuphggQINCRgBDQEeziZbu4QgDoQtWaBAgQqFVACKhmsgJANaPUCAECBHoSEAJ6gn5gm25+FAC6cbUqAQIE6hYQAoqfrwBQ/Ag1QIAAgYEEhIBe4LvaRADoSta6BAgQiCAgBBQ7ZQGg2NEpnAABApkICAEdDqK7pQWA7mytTIAAgTgCQkBxsxYAihuZggkQIJCpgBDQ+mC6XFAA6FLX2gQIEIgmIAQUM3EBoJhRKZQAAQKFCAgBLQ2q22UEgG59rU6AAIGYAkJA9nMXALIfkQIJECBQqIAQsNHgur5ZAOha2PoECBCILCAEZDt9ASDb0SiMAAEClQgIAWsMsvtbBIDuje1AgAABAkJAdq8BASC7kSiIAAEClQoIAUsPto8LBYA+lO1BgAABAscFhIDjDhn8WwDIYAhKIECAQCgBIWDBuPt5WgDox9kuBAgQILBbQAjYrTHIxwLAIOw2JUCAAIEkBEx9EfR1UgDoS9o+BAgQIHCygBBwsklPZwSAnqBtQ4AAAQIzBISAXTD9fSgA9GdtJwIECBCYJSAEzJLp7LwA0BmthQkQIEBgJQEhIK3kteHFAsCGgG4nQIAAgRYFhIAWMecvJQDM9/EsAQIECPQtEDYE9AstAPTrbTcCBAgQWEZACFhGaaNrBICN+NxMgAABAp0JBAsBnTnOWFgAmAHjNAECBAhkICAEdDYEAaAzWgsTIECAQCsCIUJAK1IrLSIArMTlYgIECBAYREAIaJ1dAGid1IIECBAg0IlAxSGgE68FiwoAC4A8TYAAAQIZCQgBrQ1DAGiN0kIECBAg0ItAdSGgF7WTNhEATiJxggABAgSyFxACNh6RALAxoQUIECBAYBCBSkLAIHbNpgJAg+BBgAABAoUKCAFrD04AWJvOjQQIECCQhUDRIWA4QQFgOHs7EyBAgEBbAkLAypICwMpkbiBAgACBLAUKDAFDOgoAQ+rbmwABAgTaFRAClvYUAJamciEBAgQIFCFQTAgYVlMAGNbf7gQIECDQhYAQsFBVAFhI5AICBAgQKFIg8xAwtKkAMPQE7E+AQPcCTzszpXPOckQ0eOoZT0pPeNTTu3+RlbeDAFDezFRMgAABAsULDN+AADD8DFRAgAABAgR6FxAAeie3IQECBAhEF8ihfwEghymogQABAgQI9CwgAPQMbjsCBAgQiC6QR/8CQB5zUAUBAgQIEOhVQADoldtmBAgQIBBdIJf+BYBcJqEOAgQIECDQo4AA0CO2rQgQIEAgukA+/QsA+cxCJQQIECBAoDcBAaA3ahsRIECAQHSBnPoXAHKahloIECBAgEBPAgJAT9C2IUCAAIHoAnn1LwDkNQ/VECBAgACBXgQEgF6YbUKAAAEC0QVy618AyG0i6iFAgAABAj0ICAA9INuCAAECBKIL5Ne/AJDfTFREgAABAgQ6FxAAOie2AQECBAhEF8ixfwEgx6moiQABAgQIdCwgAHQMbHkCBAgQiC6QZ/8CQJ5zURUBAgQIEOhUQADolNfiBAgQIBBdINf+BYBcJ6MuAgQIECDQoYAA0CGupQkQIEAgukC+/QsA+c5GZQQIECBAoDMBAaAzWgsTIECAQHSBnPsXAHKejtoIECBAgEBHAgJAR7CWJUCAAIHoAnn3LwDkPR/VESBAgACBTgQEgE5YLUqAAAEC0QVy718AyH1C6iNAgAABAh0ICAAdoFqSAAECBKIL5N+/AJD/jFRIgAABAgRaFxAAWie1IAECBAhEFyihfwGghCmpkQABAgQItCwgALQMajkCBAgQiC5QRv8CQBlzUiUBAgQIEGhVQABoldNiBAgQIBBdoJT+BYBSJqVOAgQIECDQooAA0CKmpQgQIEAgukA5/QsA5cxKpQQIECBAoDUBAaA1SgsRIECAQHSBkvoXAEqalloJECBAgEBLAgJAS5CWIUCAAIHoAmX1LwCUNS/VEiBAgACBVgQEgFYYLUKAAAEC0QVK618AKG1i6iVAgAABAi0ICAAtIFqCAAECBKILlNe/AFDezFRMgAABAgQ2FhAANia0AAECBAhEFyixfwGgxKmpmQABAgQIbCggAGwI6HYCBAgQiC5QZv8CQJlzUzUBAgQIENhIQADYiM/NBAgQIBBdoNT+BYBSJ6duAgQIECCwgYAAsAGeWwkQIEAgukC5/QsA5c5O5QQIECBAYG0BAWBtOjcSIECAQHSBkvsXAEqentoJECBAgMCaAgLAmnBuI0CAAIHoAmX3LwCUPT/VEyBAgACBtQQEgLXY3ESAAAEC0QVK718AKH2C6idAgAABAmsICABroLmFAAECBKILlN+/AFD+DHVAgAABAgRWFhAAViZzAwECBAhEF6ihfwGghinqgQABAgQIrCggAKwI5nICBAgQiC5QR/8CQB1z1AUBAgQIEFhJQABYicvF3nE68wAAEABJREFUBAgQIBBdoJb+BYBaJtlDH2c+8vT00jNe4GDgNZDpa2Dyc7SHLwW2qERAAKhkkH208ZIfe1766L6/cjDwGsj0NTD5OdrH14LYe9TTvQBQzyx1QoAAAQIElhYQAJamciEBAgQIRBeoqX8BoKZp6oUAAQIECCwpIAAsCeUyAgQIEIguUFf/AkBd89QNAQIECBBYSkAAWIrJRQQIECAQXaC2/gWA2iaqHwIECBAgsISAALAEkksIECBAILpAff0LAPXNVEcECBAgQGChgACwkMgFBAgQIBBdoMb+BYAap6onAgQIECCwQEAAWADkaQIECBCILlBn/wJAnXPVFQECBAgQmCsgAMzl8SQBAgQIRBeotX8BoNbJ6osAAQIECMwREADm4HiKAAECBKIL1Nu/AFDvbHVGgAABAgRmCggAM2k8QYAAAQLRBWruXwCoebp6I0CAAAECMwQEgBkwThMgQIBAdIG6+xcA6p6v7ggQIECAwFQBAWAqi5MECBAgEF2g9v4FgNonrD8CBAgQIDBFQACYguIUAQIECEQXqL9/AaD+GeuQAAECBAicJCAAnETiBAECBAhEF4jQvwAQYcp6JECAAAECDxMQAB4G4tO8BO48dne64fabHHMMbj36g96HNtnTXOa/Liev3d4HY8OWBGIsIwDEmHOxXf7HbTekn/3kGx1zDD7w9Y/1Pt/JnuYy/3U5ee32PhgbElhBQABYAculBAgQIFC/QJQOBYAok9YnAQIECBDYJSAA7MLwIQECBAhEF4jTvwAQZ9Y6JUCAAAECDwoIAA9S+IAAAQIEogtE6l8AiDRtvRIgQIAAgfsFBID7IfxAgAABAtEFYvUvAMSat24JECBAgMB9AgLAfQz+RYAAAQLRBaL1LwBEm7h+CRAgQIBAIyAANAgeBAgQIBBdIF7/AkC8meuYAAECBAgkAcCLgAABAgTCC0QEEAAiTl3PBAgQIBBeQAAI/xIAQIAAgegCMfsXAGLOXdcECBAgEFxAAAj+AtA+AQIEogtE7V8AiDp5fRMgQIBAaAEBIPT4NU+AAIHoAnH7FwDizl7nBAgQIBBYQAAIPHytEyBAILpA5P4FgMjT1zsBAgQIhBUQAMKOXuMECBCILhC7fwEg9vx1T4AAAQJBBQSAoIPXNgECBKILRO9fAIj+CtA/AQIECIQUEABCjl3TBAgQiC6gfwHAa4AAAQIECAQUEAACDl3LBAgQiC6g/5QEAK8CAgQIECAQUEAACDh0LRMgQCC2gO4nAgLARMFBgAABAgSCCQgAwQauXQIECEQX0P9xAQHguIN/EyBAgACBUAICQKhxa5YAAQLRBfT/gIAA8ICEHwkQIECAQCABASDQsEts9cxHnp5+5ayXO+YYPPOxT+19tJM9zWX+63Ly2u19MDZcKOCChwQEgIcsfJShwLMe+7T0vuf9iWOOwSvO+PneJzfZ01zmvy4nr93eB2NDAisICAArYLmUAAECBEoWUPtuAQFgt4aPCRAgQIBAEAEBIMigtUmAAIHoAvo/UUAAONHDZwQIECBAIISAABBizJokQIBAdAH9P1xAAHi4iM8JECBAgEAAAQEgwJC1SIAAgegC+j9ZQAA42cQZAgQIECBQvYAAUP2INUiAAIHoAvqfJiAATFNxjgABAgQIVC4gAFQ+YO0RIEAguoD+pwsIANNdnCVAgAABAlULCABVj1dzBAgQiC6g/1kCAsAsGecJECBAgEDFAgJAxcPVGgECBKIL6H+2gAAw28YzBAgQIECgWgEBoNrRaowAAQLRBfQ/T0AAmKfjOQIECBAgUKmAAFDpYLVFgACB6AL6ny8gAMz38SwBAgQIEKhSQACocqyaIkCAQHQB/S8SEAAWCXmeAAECBAhUKCAAVDhULREgQCC6gP4XCwgAi41cQYAAAQIEqhMQAKobqYYIECAQXUD/ywgIAMsouYYAAQIECFQmIABUNlDtECBAILqA/pcTEACWc3LVQALfO/qD9MnvfNoxx+Drd3279+lM9jSX+a/LyWu398HYkMAKAgLAClgu7V/g8/97Y3rlkYsdcwyu/NZVvQ9msqe5zH9dTl67vQ/GhiklCMsKCADLSrmOAAECBAhUJCAAVDRMrRAgQCC6gP6XFxAAlrdyJQECBAgQqEZAAKhmlBohQIBAdAH9ryIgAKyi5VoCBAgQIFCJgABQySC1QYAAgegC+l9NQABYzcvVBAgQIECgCgEBoIoxaoIAAQLRBfS/qoAAsKqY6wkQIECAQAUCAkAFQ9QCAQIEogvof3UBAWB1M3cQIECAAIHiBQSA4keoAQIECEQX0P86AgLAOmruIUCAAAEChQsIAIUPUPkECBCILqD/9QQEgPXc3EWAAAECBIoWEACKHp/iCRAgEF1A/+sKCADryrmPAAECBAgULCAAFDw8pRMgQCC6gP7XFxAA1rdzJwECBAgQKFZAACh2dAonQIBAdAH9byIgAGyi514CBAgQIFCogABQ6OCUTYAAgegC+t9MQADYzM/dBAgQIECgSAEBoMixKZoAAQLRBfS/qYAAsKmg+wkQIECAQIECAkCBQ1MyAQIEogvof3MBAWBzQysQIECAAIHiBASA4kamYAIECEQX0H8bAgJAG4rWIECAAAEChQkIAIUNTLkECBCILqD/dgQEgHYcrUKAAAECBIoSEACKGpdiCRAgEF1A/20JCABtSVqHAAECBAgUJCAAFDQspRIgQCC6gP7bExAA2rO0EgECBAgQKEZAAChmVAolQIBAdAH9tykgALSpaa3WBZ7y6Cemi5/+S445Bs993DNad1+04GRPc5n/upy8dhc5ep7AkAICwJD69l4o8PQffXJ6+7N/0zHH4PzHP2ehY9sXTPY0l/mvy8lrt2336Ovpv10BAaBdT6sRIECAAIEiBASAIsakSAIECEQX0H/bAgJA26LWI0CAAAECBQgIAAUMSYkECBCILqD/9gUEgPZNrUiAAAECBLIXEACyH5ECCRAgEF1A/10ICABdqFqTAAECBAhkLiAAZD4g5REgQCC6gP67ERAAunG1KgECBAgQyFpAAMh6PIojQIBAdAH9dyUgAHQla10CBAgQIJCxgACQ8XCURoAAgegC+u9OQADoztbKBAgQIEAgWwEBINvRKIwAAQLRBfTfpYAA0KWutQkQIECAQKYCAkCmg1EWAQIEogvov1sBAaBbX6sTIECAAIEsBQSALMeiKAIECEQX0H/XAgJA18LWJ0CAAAECGQoIABkORUkECBCILqD/7gUEgO6N7UCAAAECBLITEACyG4mCCBAgEF1A/30ICAB9KNuDAAECBAhkJiAAZDYQ5RAgQCC6gP77ERAA+nG2CwECBAgQyEpAAMhqHIohQIBAdAH99yUgAPQlbR8CBAgQIJCRgACQ0TByL+WmH/5P+tDNn3Aw8BrI9DUw+Tma+9eRRfV5vj8BAaA/6+J3uvZ716df+8yfOhh4DWT6Gpj8HC3+C40GehMQAHqjthEBAgQIzBfwbJ8CAkCf2vYiQIAAAQKZCAgAmQxCGQQIEIguoP9+BQSAfr3tRoAAAQIEshAQALIYgyIIECAQXUD/fQsIAH2L248AAQIECGQgIABkMAQlECBAILqA/vsXEAD6N7cjAQIECBAYXEAAGHwECiBAgEB0Af0PISAADKFuTwIECBAgMLCAADDwAGxPgACB6AL6H0ZAABjG3a4ECBAgQGBQAQFgUH6bEyBAILqA/ocSEACGkrcvAQIECBAYUEAAGBDf1gQIEIguoP/hBASA4eztTIAAAQIEBhMQAAajtzEBAgSiC+h/SAEBYEh9exMgQIAAgYEEBICB4G1LgACB6AL6H1ZAABjW3+4ECBAgQGAQAQFgEHabEiBAILqA/ocWEACGnoD9CRAgQIDAAAICwADotiRAgEB0Af0PLyAADD8DFRAgQIAAgd4FBIDeyW1IgACB6AL6z0FAAMhhCmogQIAAAQI9CwgAPYPbjgABAtEF9J+HgACQxxxUQYAAAQIEehUQAHrlthkBAgSiC+g/FwEBIJdJqIMAAQIECPQoIAD0iG0rAgQIRBfQfz4CAkA+s1AJAQIECBDoTUAA6I3aRgQIEIguoP+cBASAnKahFgIECBAg0JOAANATtG0IECAQXUD/eQkIAHnNQzUECBAgQKAXAQGgF2abECBAILqA/nMTEABym4h6CBAgQIBADwICQA/ItiBAgEB0Af3nJyAA5DcTFREgQIAAgc4FBIDOiW1AgACB6AL6z1FAAMhxKmoiQIAAAQIdCwgAHQNbngABAtEF9J+ngACQ51xURYAAAQIEOhUQADrltTgBAgSiC+g/VwEBINfJqIsAAQIECHQoIAB0iGtpAgQIRBfQf74CAkC+s1EZAQIECBDoTEAA6IzWwgQIEIguoP+cBQSAnKejNgIECBAg0JGAANARrGUJECAQXUD/eQsIAHnPR3UECBAgQKATAQGgE1aLEiBAILqA/nMXEAByn5D6CBAgQIBABwICQAeoliRAgEB0Af3nLyAA5D8jFRIgQIAAgdYFBIDWSS1IgACB6AL6L0FAAChhSmokQIAAAQItCwgALYNajgABAtEF9F+GgABQxpxUSYAAAQIEWhUQAFrltBgBAgSiC+i/FAEBoJRJqZMAAQIECLQoIAC0iGkpAgQIRBfQfzkCAkA5s1IpAQIECBBoTUAAaI3SQgQIEIguoP+SBASAkqalVgIECBAg0JKAANASpGUIECAQXUD/ZQkIAGXNS7UECBAgQKAVAQGgFUaLECBAILqA/ksTEABKm5h6CRAgQIBACwICQAuIliBAgEB0Af2XJyAAlDczFRMgQIAAgY0FBICNCS1AgACB6AL6L1FAAChxamomQIAAAQIbCggAGwK6nQABAtEF9F+mgABQ5txUTYAAAQIENhIQADbiczMBAgSiC+i/VAEBoNTJqZsAAQIECGwgIABsgOdWAgQIRBfQf7kCAkC5s1M5AQIECBBYW0AAWJvOjQQIEIguoP+SBQSAkqendgIECBAgsKaAALAmnNsIECAQXUD/ZQsIAGXPT/UECBAgQGAtAQFgLTY3ESBAILqA/ksXEABKn6D6CRAgQIDAGgICwBpobiFAgEB0Af2XLyAAlD9DHRAgQIAAgZUFBICVydxAgACB6AL6r0FAAKhhinogQIAAAQIrCggAK4K5nAABAtEF9F+HgABQxxx1QYAAAQIEVhIQAFbicjEBAgSiC+i/FgEBoJZJ6oMAAQIECKwgIACsgOVSAgQIRBfQfz0CAkA9s9QJAQIECBBYWkAAWJrKhQQIEIguoP+aBASAmqapFwIECBAgsKSAALAklMsIECAQXUD/dQkIAHXNUzcECBAgQGApAQFgKSYXESBAILqA/msTEABqm6h+CBAgQIDAEgICwBJILiFAgEB0Af3XJyAA1DdTHREgQIAAgYUCAsBCIhcQIEAguoD+axQQAGqcqp4IECBAgI/AatAAAAWbSURBVMACAQFgAZCnCRAgEF1A/3UKCAB1zlVXBAgQIEBgroAAMJfHkwQIEIguoP9aBQSAWierLwIECBAgMEdAAJiD4ykCBAhEF9B/vQICQL2z1RkBAgQIEJgpIABMozk2unfaaecIECAQS6CWbreO1tJJm30IANM0TxndMe20cwQIECBQoMCxe28vsOrOSxYAphHv3blz2mnnCBAgEEmgml6P7vhN3ZRhCgBTUNKpeycvlp1pTzlHgAABAkUJbKdTzvphURX3VKwAMA36RVcda05/ozk8CBAgEFSgmra/ng5etl1NNy02IgDMwhyNvjzrKecJECBAoBCBcfK1fMaoBIAZMGln/KVZTzlPgACB2gXq6c/X8lmzFABmyaTx52Y+5QkCBAgQKENgNPp8GYX2X6UAMMt8755/m/WU8wQIEKhboKLutrd9LZ8xTgFgBkx63dWTPwT4lVlPO0+AAAEC2Qt8KR287lvZVzlQgQLAPPhx+sS8pz1HgACBGgWq6cnX8LmjFADm8WztfGje054jQIAAgYwFRjsfzLi6wUsTAOaN4MJrr0sj/wnJPCLPESBQm0A1/dyYDlz76Wq66aARAWAR6nj0/kWXeJ4AAQIEMhMYj9+XWUXZlSMALBrJ9rH3NJfc0RweBAgQqF6gigbH6fb0yNF7q+ilwyYEgEW4B6+7rbnkb5rDgwABAgRKEBiN35Vec+T7JZQ6ZI0CwDL6e+/96+Yy/zOJBsGDAIGaBaro7c60vXVpFZ103MRWx+vXsfwv/OctaTz+szqa0QUBAgQqFhiN35oOHv5uxR221poAsCzl6Y/4yzRO1y97uesIECBQmkAF9X4hfff/3llBH720IAAsy/yiq46l0dZvNZfvNIcHAQIECOQlsJ1G4zenN3323rzKyrcaAWCV2Ry4+uqURn+e/EOAAIHqBApvaDx6W7rwmiOFd9Fr+QLAqtzXH76kueWTzeFBgAABAjkIjNJVaeeJfnOWVvtHAFjNK6VL0k7a3vuGlNLXmsODAAECVQgU3MRNac+9v5gOXrZdcA+DlC4ArMN+8Kpvp62dlza33tIcHgQIECAwjMB30/b4VWnyX2oNs3/RuwoA647v9dd+NW2lV6c0/sG6S7iPAAECeQiUWMXka+/oFengNV8usfocahYANpnC6498No3G+5slvtUcHgQIECDQj8C303jPi9KBw5/rZ7s6dxEANp3rhdfekLa3zmuW+UpzeBAgQKA4gcIKvimNt85PF139+cLqzq5cAaCNkRy8+mtpdPTcZqmPNIcHAQIECHQj8OG0vf385hd/v+FqwVcAaAHxviUu/NT30oVHXpvG6XdTSkebw4MAAQIFCBRR4rGmyrem64+8Lh3/H7Q1n3psKiAAbCq4+/5R88v/RUfemcaj5zenr20ODwIECBDYTOAzaTw+Nx04ckma/GfYyT9tCQgAbUnuXueiw//VfDdgf0rj32hOf6c5PAgQIJClQMZF3ZLG6debr6UvSBdd85mM6yy2NAGgq9FNvhtw4Jq/S496zFnNi/hNzTbfbA4PAgQIEJgvcEsapT9Mp9z9tHTRkb9vPh7Pv9yz6woIAOvKLXvfqz52T/Mi/tsmCJzd3PKrzTH5a4T9D4UaCA8CBIYWyGb/7TQafSKNR29I27ed1fyu/+3ptZ+9K5vqKi1EAOhrsJMgcODIB5r3sV6a0t6nNC/2i1MafTSldGdzeBAgQCCawORr30eat0p/L21vPyVdePjl6aLDH0wHv+gPUff0StjqaR/b7BY4cNU3mxf7O9KBw69Ot959WtrZ2pdG47ekNLo0pfTxNEpfbH68OY3T95sfffurQfAgQKB9gY5XHKfjX8Nubvb5QvPxx9J4/I7mF/w33/c177S9j2t+Q/SadOCaS9PB6/xlag1S34//BwAA//8UXODzAAAABklEQVQDABwnYS9GmLSTAAAAAElFTkSuQmCC">
                 <div class="product-card-name">Sheet UTM Builder</div>
-                <p class="product-card-desc">Generate and manage UTM links in bulk, right inside Google Sheets — built
+                <p class="product-card-desc">Generate and manage UTM links in bulk, right inside Google Sheets - built
                   for
                   teams creating dozens of links at once.</p>
                 <a class="product-card-cta" href="#" data-product="Sheet UTM Builder"
@@ -1807,7 +3328,7 @@
                   aria-label="Bulk UTM Builder"></span>
                 <div class="product-card-name">Bulk UTM Builder</div>
                 <p class="product-card-desc">Enter multiple landing pages and campaign parameters and generate every
-                  tagged URL in one pass — built for large-scale campaign launches.</p>
+                  tagged URL in one pass - built for large-scale campaign launches.</p>
                 <a class="product-card-cta" href="#" data-product="Bulk UTM Builder"
                   data-redirect="https://utm-craftr.vercel.app/bulk-utm-generator" data-skippable="true">Access now</a>
               </div>
@@ -1817,7 +3338,7 @@
                   src="https://cdn-icons-png.flaticon.com/512/8442/8442654.png" alt="UTM Guard shield icon">
                 <div class="product-card-name">UTM Guard</div>
                 <p class="product-card-desc">Catch missing, inconsistent and malformed UTM data before it pollutes your
-                  reporting — with a custom monitoring layer built on top of your existing analytics data.</p>
+                  reporting - with a custom monitoring layer built on top of your existing analytics data.</p>
                 <div class="product-card-actions">
                   <a class="product-card-cta" href="#" data-product="UTM Guard">Request setup</a>
                   <a class="product-card-cta product-card-cta-secondary" href="#" data-product="UTM Auditor"
@@ -1837,7 +3358,7 @@
           <h2 class="display">What is a UTM Builder?</h2>
         </div>
         <div class="prose">
-          <p>A UTM builder is a free tool that adds tracking parameters — called UTM parameters — to the end of a URL.
+          <p>A UTM builder is a free tool that adds tracking parameters - called UTM parameters - to the end of a URL.
             When someone clicks that link, Google Analytics 4 reads the parameters and logs exactly where the traffic
             came from: which platform, which campaign, and which specific post, email, or ad.</p>
           <p>Without UTM parameters, GA4 can only guess at traffic source using referrer data, which is unreliable for
@@ -1870,7 +3391,7 @@
           <span><i style="background:var(--ink-faint1)"></i>Fragment</span>
         </div>
         <p class="anatomy-caption">A URL breaks down into a protocol, host, and path, followed by an optional query
-          string that starts after the first <code>?</code> and chains additional parameters with <code>&amp;</code> —
+          string that starts after the first <code>?</code> and chains additional parameters with <code>&amp;</code> -
           this is where UTM parameters live. Anything after a <code>#</code> is a fragment and is never sent to the
           server.</p>
       </div>
@@ -1878,19 +3399,19 @@
       <div class="param-grid">
         <div class="param-row">
           <div class="param-name">utm_source</div>
-          <div class="param-desc">Where the traffic is coming from — <em>instagram</em>, <em>google</em>,
+          <div class="param-desc">Where the traffic is coming from - <em>instagram</em>, <em>google</em>,
             <em>klaviyo</em>, <em>whatsapp</em>.
           </div>
         </div>
         <div class="param-row">
           <div class="param-name">utm_medium</div>
-          <div class="param-desc">What kind of channel it is — <em>social</em>, <em>email</em>, <em>cpc</em>,
+          <div class="param-desc">What kind of channel it is - <em>social</em>, <em>email</em>, <em>cpc</em>,
             <em>referral</em>.
           </div>
         </div>
         <div class="param-row">
           <div class="param-name">utm_campaign</div>
-          <div class="param-desc">The name of the specific push this link belongs to — <em>monsoon-drop-2026</em>.</div>
+          <div class="param-desc">The name of the specific push this link belongs to - <em>monsoon-drop-2026</em>.</div>
         </div>
         <div class="param-row">
           <div class="param-name">utm_term<span class="tag"> (optional)</span></div>
@@ -1898,7 +3419,7 @@
         </div>
         <div class="param-row">
           <div class="param-name">utm_content<span class="tag"> (optional)</span></div>
-          <div class="param-desc">Distinguishes between multiple links in the same campaign — <em>story-swipeup</em> vs
+          <div class="param-desc">Distinguishes between multiple links in the same campaign - <em>story-swipeup</em> vs
             <em>bio-link</em>.
           </div>
         </div>
@@ -1936,14 +3457,14 @@
       <div class="ga4-panel">
         <div>
           <h2 class="display">Why UTM Parameters Matter for <strong>GA4 Reporting</strong></h2>
-          <p>GA4 groups all incoming traffic into channels — Organic Social, Paid Social, Email, Organic Search, and so
-            on — based entirely on the source and medium values it receives. When a link is missing UTM parameters, or
+          <p>GA4 groups all incoming traffic into channels - Organic Social, Paid Social, Email, Organic Search, and so
+            on - based entirely on the source and medium values it receives. When a link is missing UTM parameters, or
             uses inconsistent values, GA4 either mis-groups that traffic or shows it as <strong>(not set)</strong> in
             acquisition reports.</p>
         </div>
         <div class="ga4-list">
           <div class="ga4-item"><span class="ga4-check">✓</span>
-            <p>Accurate channel attribution — knowing whether a sale came from a story or a paid ad, not just "social"
+            <p>Accurate channel attribution - knowing whether a sale came from a story or a paid ad, not just "social"
             </p>
           </div>
           <div class="ga4-item"><span class="ga4-check">✓</span>
@@ -1962,26 +3483,26 @@
       </div>
       <div class="test-grid">
         <div class="test-item">
-          <p><strong>Query parameter test</strong> — if the URL already has a <code>?</code>, add UTM params with
+          <p><strong>Query parameter test</strong> - if the URL already has a <code>?</code>, add UTM params with
             <code>&amp;</code>, not a second <code>?</code>.
           </p>
           <p class="test-ex bad">✗ <code>site.com/shop?ref=abc?utm_source=instagram</code></p>
           <p class="test-ex good">✓ <code>site.com/shop?ref=abc&amp;utm_source=instagram</code></p>
         </div>
         <div class="test-item">
-          <p><strong>Hash fragment test</strong> — UTM params must sit before any <code>#</code>, since browsers never
+          <p><strong>Hash fragment test</strong> - UTM params must sit before any <code>#</code>, since browsers never
             send fragments to the server.</p>
           <p class="test-ex bad">✗ <code>site.com/shop#featured?utm_source=instagram</code></p>
           <p class="test-ex good">✓ <code>site.com/shop?utm_source=instagram#featured</code></p>
         </div>
         <div class="test-item">
-          <p><strong>Combination hash + query test</strong> — with both, order is path → existing query → UTM params →
+          <p><strong>Combination hash + query test</strong> - with both, order is path → existing query → UTM params →
             fragment.</p>
           <p class="test-ex bad">✗ <code>site.com/shop#featured?ref=abc&amp;utm_source=instagram</code></p>
           <p class="test-ex good">✓ <code>site.com/shop?ref=abc&amp;utm_source=instagram#featured</code></p>
         </div>
         <div class="test-item">
-          <p><strong>Space test</strong> — spaces in values must be encoded, or the link can break or truncate.</p>
+          <p><strong>Space test</strong> - spaces in values must be encoded, or the link can break or truncate.</p>
           <p class="test-ex bad">✗ <code>utm_campaign=summer sale</code></p>
           <p class="test-ex good">✓ <code>utm_campaign=summer%20sale</code></p>
           <p class="test-ex good">✓ <code>utm_campaign=summer_sale</code> or <code>summer-sale</code></p>
@@ -1996,27 +3517,27 @@
       <div class="checklist">
         <div class="checklist-item">
           <div class="checklist-num">1</div>
-          <p><strong>Mixed casing</strong> — <em>Instagram</em> and <em>instagram</em> are treated as two different
+          <p><strong>Mixed casing</strong> - <em>Instagram</em> and <em>instagram</em> are treated as two different
             sources in GA4. Keep every value lowercase.</p>
         </div>
         <div class="checklist-item">
           <div class="checklist-num">2</div>
-          <p><strong>More than one <code>?</code> in the URL</strong> — only the first one starts the query string; a
+          <p><strong>More than one <code>?</code> in the URL</strong> - only the first one starts the query string; a
             second one breaks the parameters after it.</p>
         </div>
         <div class="checklist-item">
           <div class="checklist-num">3</div>
-          <p><strong>Unescaped spaces and special characters</strong> — these need to be URL-encoded, or the link can
+          <p><strong>Unescaped spaces and special characters</strong> - these need to be URL-encoded, or the link can
             silently fail to pass parameters through.</p>
         </div>
         <div class="checklist-item">
           <div class="checklist-num">4</div>
-          <p><strong>Inconsistent source/medium naming</strong> — <em>insta</em> one week and <em>instagram</em> the
+          <p><strong>Inconsistent source/medium naming</strong> - <em>insta</em> one week and <em>instagram</em> the
             next fragments a single channel into multiple rows.</p>
         </div>
         <div class="checklist-item">
           <div class="checklist-num">5</div>
-          <p><strong>Missing utm_campaign</strong> — without it, GA4 still shows source and medium, but you lose the
+          <p><strong>Missing utm_campaign</strong> - without it, GA4 still shows source and medium, but you lose the
             ability to measure that specific push on its own.</p>
         </div>
       </div>
@@ -2032,7 +3553,7 @@
   </main>
 
   <footer>
-    Built for cleaner GA4 reporting — free to use, always.<br>
+    Built for cleaner GA4 reporting - free to use, always.<br>
     <a href="/sitemap.xml">Sitemap</a><span class="foot-sep">·</span>© 2026 UTMCraftr.
   </footer>
 
@@ -2073,7 +3594,7 @@
   <script>
     window.dataLayer = window.dataLayer || [];
 
-    // Smooth scroll from the top nav — target section lands centered in the viewport
+    // Smooth scroll from the top nav - target section lands centered in the viewport
     function scrollToCenter(target) {
       var rect = target.getBoundingClientRect();
       var absoluteTop = rect.top + window.pageYOffset;
@@ -2173,7 +3694,7 @@
       if (!modalCurrentSkippable && (!name || !email || !company)) return;
 
       if (modalCurrentSkippable && !name && !email && !company) {
-        // Nothing entered on a skippable form — treat it the same as Skip, no row to log.
+        // Nothing entered on a skippable form - treat it the same as Skip, no row to log.
         modalJustSubmitted = true;
         window.dataLayer.push({
           event: 'product_access_form',
@@ -2197,7 +3718,7 @@
       formData.append('product', modalCurrentProduct);
 
       // no-cors: the Apps Script endpoint doesn't return CORS headers, so the
-      // response is opaque — we can't read it, but the request still reaches
+      // response is opaque - we can't read it, but the request still reaches
       // the script and appends the row.
       fetch(PRODUCT_FORM_ENDPOINT, {
         method: 'POST',
@@ -2263,7 +3784,7 @@
   </script>
 
   <script>
-    // Standardization rule — map common spelling/casing variants of source & medium
+    // Standardization rule - map common spelling/casing variants of source & medium
     // to one canonical value, so the same channel never gets split across reports.
     var MEDIUM_ALIASES = {
       'email': 'email', 'e-mail': 'email', 'e mail': 'email', 'emails': 'email', 'mail': 'email', 'newsletter': 'email',
@@ -2292,7 +3813,7 @@
       'snapchat': 'snapchat'
     };
 
-    // Source pools — which platform "type" a canonical source belongs to. This is what
+    // Source pools - which platform "type" a canonical source belongs to. This is what
     // actually drives GA4-style channel attribution: the medium says HOW (paid/organic/email),
     // the source's pool says WHICH surface (search/social/video), and the two combine into
     // one channel. This mirrors GA4's own default channel grouping logic instead of hardcoding
@@ -2309,7 +3830,7 @@
       return map[key] || null;
     }
 
-    // Space test — replace whitespace with underscores before encoding.
+    // Space test - replace whitespace with underscores before encoding.
     // aliasMap (optional) applies the standardization rule for source & medium.
     function cleanValue(v, aliasMap) {
       var canonical = aliasMap ? normalizeAlias(v, aliasMap) : null;
@@ -2317,7 +3838,7 @@
       return encodeURIComponent(base);
     }
 
-    // Source/medium cross-selection — derives the GA4 channel a given pair would resolve to,
+    // Source/medium cross-selection - derives the GA4 channel a given pair would resolve to,
     // and flags pairs that don't make sense together so a bad entry gets caught before it
     // ever reaches a report. mediumCanonical decides the "how", the source pool decides the
     // "where"; unrecognized combinations fall through to null (treated as custom/Unassigned)
@@ -2356,7 +3877,7 @@
     }
 
     // Catches the specific mistake this whole feature exists to prevent: a known source
-    // typed into the medium field (or vice versa) — e.g. source=linkedin, medium=google.
+    // typed into the medium field (or vice versa) - e.g. source=linkedin, medium=google.
     // "google" is a real source, not a real medium, so this pair can never attribute
     // correctly no matter what channel logic runs on top of it.
     function detectSwap(source, medium) {
@@ -2376,7 +3897,7 @@
       }
 
       if (detectSwap(source, medium)) {
-        box.textContent = '"' + medium.trim() + '" looks like a source, not a medium — check that source and medium aren\'t swapped.';
+        box.textContent = '"' + medium.trim() + '" looks like a source, not a medium - check that source and medium aren\'t swapped.';
         box.classList.add('show', 'warn');
         return;
       }
@@ -2390,7 +3911,7 @@
         box.classList.remove('warn');
         box.classList.add('show');
       } else {
-        box.textContent = 'Custom medium — GA4 will likely report this as "Unassigned".';
+        box.textContent = 'Custom medium - GA4 will likely report this as "Unassigned".';
         box.classList.add('show', 'warn');
       }
     }
@@ -2414,7 +3935,7 @@
       document.getElementById('httpsBtn').classList.remove('active');
     });
 
-    // form_fill tracking — fires once per distinct fill, not on every blur.
+    // form_fill tracking - fires once per distinct fill, not on every blur.
     // fieldTracked/trackFieldFill are shared (not per-field closures) so the
     // preset-chip handler below can also mark a field as tracked when it fills
     // source/medium programmatically, not just on manual blur.
@@ -2496,20 +4017,20 @@
         return;
       }
 
-      // Source/medium cross-check — block generation on a pair that can't attribute
+      // Source/medium cross-check - block generation on a pair that can't attribute
       // correctly (e.g. source=linkedin, medium=google) instead of only warning after
       // the fact, since a link like that is wrong the moment it's created.
       if (detectSwap(sourceEl.value, mediumEl.value)) {
         sourceEl.classList.add('invalid');
         mediumEl.classList.add('invalid');
-        warningBox.textContent = '"' + mediumEl.value.trim() + '" looks like a source, not a medium — check that source and medium aren\'t swapped.';
+        warningBox.textContent = '"' + mediumEl.value.trim() + '" looks like a source, not a medium - check that source and medium aren\'t swapped.';
         warningBox.classList.add('show');
         document.getElementById('output').classList.remove('show');
         return;
       }
       warningBox.classList.remove('show');
 
-      // Duplicate query-string test — more than one literal "?" in the entered
+      // Duplicate query-string test - more than one literal "?" in the entered
       // URL almost always means a paste error or an already-tagged URL pasted
       // twice; a second "?" wouldn't start a new query string per URL syntax,
       // it'd just sit inside the first one as a stray character, so catch it
@@ -2517,7 +4038,7 @@
       var qMarkCount = (urlEl.value.match(/\?/g) || []).length;
       if (qMarkCount > 1) {
         urlEl.classList.add('invalid');
-        warningBox.textContent = 'The website URL has more than one "?" — check it only has a single query string.';
+        warningBox.textContent = 'The website URL has more than one "?" - check it only has a single query string.';
         warningBox.classList.add('show');
         document.getElementById('output').classList.remove('show');
         return;
@@ -2531,7 +4052,7 @@
       var term = document.getElementById('term').value;
       var content = document.getElementById('content').value;
 
-      // Hash fragment test — split off the fragment first so UTM params never land after it
+      // Hash fragment test - split off the fragment first so UTM params never land after it
       var fragment = '';
       var hashIndex = rawUrl.indexOf('#');
       if (hashIndex !== -1) {
@@ -2539,7 +4060,7 @@
         rawUrl = rawUrl.slice(0, hashIndex);
       }
 
-      // Query parameter test — split off any existing query string so we append with & instead of a second ?
+      // Query parameter test - split off any existing query string so we append with & instead of a second ?
       var existingQuery = '';
       var basePath = rawUrl;
       var qIndex = rawUrl.indexOf('?');
@@ -2548,13 +4069,13 @@
         basePath = rawUrl.slice(0, qIndex);
       }
 
-      // Stray-slash-in-query test — a "/" right after "?" (e.g. someone typed
+      // Stray-slash-in-query test - a "/" right after "?" (e.g. someone typed
       // "?/" instead of just "?") isn't a real query parameter, it's noise.
       // Strip leading slashes so it doesn't get glued onto the UTM string as
       // "?/&utm_source=...". A real query never legitimately starts with "/".
       existingQuery = existingQuery.replace(/^\/+/, '');
 
-      // Trailing slash test — a "/" right before "?" is redundant for a root
+      // Trailing slash test - a "/" right before "?" is redundant for a root
       // URL (example.com/? and example.com? resolve identically) and, when
       // present on a deeper path, still produces a working link on the vast
       // majority of sites; strip it so the generated URL stays clean.
@@ -2569,7 +4090,7 @@
       if (content) utmParams.push('utm_content=' + cleanValue(content));
       var utmString = utmParams.join('&');
 
-      // Combination test — existing query (if any) + UTM params, then the fragment goes last
+      // Combination test - existing query (if any) + UTM params, then the fragment goes last
       var queryString = existingQuery ? existingQuery + '&' + utmString : utmString;
       var link = proto + basePath + '?' + queryString + fragment;
       link = link.toLowerCase();
@@ -2600,13 +4121,13 @@
     });
 
     var faqs = [
-      { q: 'Is this UTM builder really free?', a: 'Yes — free to use, with no signup and no account required.' },
-      { q: 'What are UTM parameters?', a: 'UTM parameters are small tags added to the end of a URL — source, medium, campaign, term, and content — that tell Google Analytics 4 exactly where a click came from.' },
+      { q: 'Is this UTM builder really free?', a: 'Yes - free to use, with no signup and no account required.' },
+      { q: 'What are UTM parameters?', a: 'UTM parameters are small tags added to the end of a URL - source, medium, campaign, term, and content - that tell Google Analytics 4 exactly where a click came from.' },
       { q: 'Do UTM parameters affect my SEO or search rankings?', a: 'No. UTM parameters are only used for analytics tracking and have no effect on how a page ranks in search results.' },
       { q: 'Should UTM values always be lowercase?', a: 'Yes. GA4 treats different capitalizations as different values, so keeping everything lowercase prevents a single channel from splitting into multiple rows.' },
-      { q: 'Can I use this for Instagram, Google Ads, Meta Ads, and email campaigns?', a: 'Yes — the built-in presets cover the most common sources and mediums, and you can enter any custom source or medium manually.' },
+      { q: 'Can I use this for Instagram, Google Ads, Meta Ads, and email campaigns?', a: 'Yes - the built-in presets cover the most common sources and mediums, and you can enter any custom source or medium manually.' },
       { q: 'Why does my traffic show as (not set) in GA4?', a: 'This usually means the link was shared without UTM parameters, or the parameters were malformed. Rebuilding the link with this tool prevents that.' },
-      { q: 'Are the links I build saved anywhere?', a: 'Not in this version — everything runs manually in your browser. A future version will add saved history and shared team presets.' }
+      { q: 'Are the links I build saved anywhere?', a: 'Not in this version - everything runs manually in your browser. A future version will add saved history and shared team presets.' }
     ];
     var list = document.getElementById('faqList');
     faqs.forEach(function (item) {
